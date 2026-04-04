@@ -39,6 +39,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(6,10,13,0.95
 .nav-link{background:none;border:none;color:var(--muted);font-family:var(--font-body);font-size:12px;padding:5px 11px;border-radius:5px;cursor:pointer;transition:all .2s;white-space:nowrap;}
 .nav-link:hover,.nav-link.active{color:var(--text);background:rgba(255,255,255,0.06);}
 .nav-badge{background:var(--accent);color:#000;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:6px;}
+.nav-toggle{display:none;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-size:16px;line-height:1;padding:6px 10px;cursor:pointer;}
 
 /* SECTIONS */
 .section{display:none;padding-top:54px;min-height:100vh;}
@@ -74,7 +75,57 @@ h1.hero-title .line2{display:block;color:var(--accent);}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}.nav-links{display:none;}}
+@media(max-width:768px){
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+  nav{height:56px;padding:0 14px;}
+  .nav-logo{font-size:18px;}
+  .nav-logo span[style]{font-size:12px !important;}
+  .nav-toggle{display:block;}
+  .nav-links{
+    position:fixed;
+    top:56px;
+    left:0;
+    right:0;
+    display:flex;
+    gap:8px;
+    padding:12px 14px;
+    background:rgba(6,10,13,0.98);
+    border-bottom:1px solid var(--border);
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    pointer-events:none;
+    transition:max-height .25s ease, opacity .2s ease;
+  }
+  nav.open .nav-links{
+    max-height:70vh;
+    overflow-y:auto;
+    opacity:1;
+    pointer-events:auto;
+  }
+  .nav-link{font-size:12px;padding:8px 10px;border:1px solid var(--border);background:rgba(255,255,255,0.02);}
+  .section{padding-top:56px;}
+  .hero{min-height:auto;padding:56px 16px 38px;}
+  h1.hero-title{font-size:clamp(34px,14vw,58px);}
+  .hero-sub{font-size:14px;margin-bottom:30px;}
+  .hero-metrics{gap:18px;margin-bottom:26px;}
+  .hero-metric .val{font-size:30px;}
+  .section-inner{padding:28px 16px;}
+  .section-head{margin-bottom:24px;}
+  .card,.phase-card,.team-card,.special-note,.removed-card,.delta-card{padding:16px;}
+  .map-container{height:280px;}
+  .map-stats{top:10px;right:10px;}
+  .map-legend{left:10px;bottom:10px;padding:8px 10px;}
+  .digipin-field{flex-direction:column;}
+  .digipin-btn{width:100%;}
+  .demo-step{flex-direction:column;gap:10px;}
+  .demo-step-num{width:32px;height:32px;font-size:16px;}
+  .rev-bar-row{flex-wrap:wrap;gap:6px;}
+  .rev-bar-label{width:100%;}
+  .rev-bar-val{width:auto;}
+  .notif{left:12px;right:12px;bottom:12px;max-width:none;transform:translateY(120%);}
+  .notif.show{transform:translateY(0);}
+}
 
 /* CARDS */
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;}
@@ -317,18 +368,19 @@ h1.hero-title .line2{display:block;color:var(--accent);}
 <!-- NAV -->
 <nav>
   <div class="nav-logo">RIDER<span>SHIELD</span> <span style="color:var(--accent);font-size:14px;">AI</span></div>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">☰</button>
   <div class="nav-links">
-    <button class="nav-link active" onclick="showSection('overview')">Overview</button>
-    <button class="nav-link" onclick="showSection('delta')">What Changed<span class="nav-badge">NEW</span></button>
-    <button class="nav-link" onclick="showSection('hardware')">Hardware</button>
-    <button class="nav-link" onclick="showSection('software')">Software</button>
-    <button class="nav-link" onclick="showSection('helmet')">Helmet AI<span class="nav-badge">NEW</span></button>
-    <button class="nav-link" onclick="showSection('dashboard')">Dashboard</button>
-    <button class="nav-link" onclick="showSection('journey')">Rider Journey<span class="nav-badge">NEW</span></button>
-    <button class="nav-link" onclick="showSection('demo')">Demo Script<span class="nav-badge">NEW</span></button>
-    <button class="nav-link" onclick="showSection('impl')">60hr Plan<span class="nav-badge">NEW</span></button>
-    <button class="nav-link" onclick="showSection('startup')">Startup</button>
-    <button class="nav-link" onclick="showSection('team')">Team</button>
+    <button class="nav-link active" onclick="showSection('overview', this)">Overview</button>
+    <button class="nav-link" onclick="showSection('delta', this)">What Changed<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('hardware', this)">Hardware</button>
+    <button class="nav-link" onclick="showSection('software', this)">Software</button>
+    <button class="nav-link" onclick="showSection('helmet', this)">Helmet AI<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('dashboard', this)">Dashboard</button>
+    <button class="nav-link" onclick="showSection('journey', this)">Rider Journey<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('demo', this)">Demo Script<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('impl', this)">60hr Plan<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('startup', this)">Startup</button>
+    <button class="nav-link" onclick="showSection('team', this)">Team</button>
   </div>
 </nav>
 
@@ -1063,11 +1115,11 @@ h1.hero-title .line2{display:block;color:var(--accent);}
   </div>
 
   <div class="dash-tab-nav">
-    <button class="dash-tab-btn active" onclick="switchDashTab('flood')">🌊 Flood Surface</button>
-    <button class="dash-tab-btn" onclick="switchDashTab('fatigue')">💪 Fatigue Monitor</button>
-    <button class="dash-tab-btn" onclick="switchDashTab('helmet-events')">🪖 Helmet Events</button>
-    <button class="dash-tab-btn" onclick="switchDashTab('peer')">📡 Peer Hazard Mesh</button>
-    <button class="dash-tab-btn" onclick="switchDashTab('digipin')">📍 DIGIPIN</button>
+    <button class="dash-tab-btn active" onclick="switchDashTab('flood', this)">🌊 Flood Surface</button>
+    <button class="dash-tab-btn" onclick="switchDashTab('fatigue', this)">💪 Fatigue Monitor</button>
+    <button class="dash-tab-btn" onclick="switchDashTab('helmet-events', this)">🪖 Helmet Events</button>
+    <button class="dash-tab-btn" onclick="switchDashTab('peer', this)">📡 Peer Hazard Mesh</button>
+    <button class="dash-tab-btn" onclick="switchDashTab('digipin', this)">📍 DIGIPIN</button>
   </div>
 
   <!-- FLOOD TAB -->
@@ -1830,22 +1882,26 @@ h1.hero-title .line2{display:block;color:var(--accent);}
 
 <script>
 // ── SECTION NAV ──
-function showSection(id) {
+function showSection(id, sourceEl) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
   const sec = document.getElementById('section-' + id);
   if (sec) sec.classList.add('active');
-  event.target.classList.add('active');
+  const activeBtn = sourceEl || document.querySelector(`.nav-link[onclick*="showSection('${id}'"]`);
+  if (activeBtn) activeBtn.classList.add('active');
+  const nav = document.querySelector('nav');
+  if (nav) nav.classList.remove('open');
   window.scrollTo(0, 0);
 }
 
 // ── DASH TABS ──
-function switchDashTab(id) {
+function switchDashTab(id, sourceEl) {
   document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.dash-tab-btn').forEach(b => b.classList.remove('active'));
   const tab = document.getElementById('dash-' + id);
   if (tab) tab.classList.add('active');
-  event.target.classList.add('active');
+  const activeBtn = sourceEl || document.querySelector(`.dash-tab-btn[onclick*="switchDashTab('${id}'"]`);
+  if (activeBtn) activeBtn.classList.add('active');
 }
 
 // ── NOTIFICATION ──
@@ -1900,6 +1956,11 @@ function updateStats() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.querySelector('nav');
+  const navToggle = document.getElementById('nav-toggle');
+  if (nav && navToggle) {
+    navToggle.addEventListener('click', () => nav.classList.toggle('open'));
+  }
   setInterval(updateSurface, 1000);
   setInterval(updateStats, 4000);
   setTimeout(() => showNotification('🚀', 'RiderShield AI', 'Hackathon edition loaded. 5 members. 60 hours. Let\'s go.'), 1500);
