@@ -394,7 +394,8 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     <span class="line1">RIDERSHIELD</span>
     <span class="line2">AI</span>
   </h1>
-  <p class="hero-sub">Smart Delivery Safety & Urban Sensing Network. Every rider is a living sensor. Every helmet is an AI guardian. Every pothole and flood is mapped before the next rider hits it.</p>
+  <p class="hero-sub">We built a real-time hazard network where one rider's experience protects the next rider instantly.</p>
+  <p style="font-size:14px;color:var(--accent);margin-top:-30px;margin-bottom:32px;font-weight:600;letter-spacing:.03em;">The road learns from every rider.</p>
   <div class="hero-metrics">
     <div class="hero-metric"><span class="val">3600×</span><span class="lbl">Spatial resolution vs IMD</span></div>
     <div class="hero-metric"><span class="val">24/7</span><span class="lbl">AI helmet surveillance</span></div>
@@ -411,14 +412,15 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     <span class="pill">Accident prevention</span>
     <span class="pill">Rider compliance monitor</span>
   </div>
+  <p style="margin-top:16px;font-size:13px;color:var(--muted);">From isolated riders to a connected safety network.</p>
 </div>
 
 <div class="section-inner">
-  <!-- 3 Gaps -->
+  <!-- Gaps -->
   <div class="section-head">
     <div class="accent-line"></div>
-    <h2>The Three Gaps We Close</h2>
-    <p>No existing system solves all three. RiderShield is the only platform that does — built from edge hardware to city infrastructure.</p>
+    <h2>The Four Gaps We Close</h2>
+    <p>No existing system closes all four together. RiderShield connects rider safety, road intelligence, and verified hazard truth in one system.</p>
   </div>
   <div class="grid-3" style="margin-bottom:40px;">
     <div class="card card-accent">
@@ -434,8 +436,15 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     <div class="card card-accent3">
       <div style="font-size:24px;margin-bottom:8px;">🪖</div>
       <h3>Gap 3 — Helmet = Just Safety Gear</h3>
-      <p>Every rider wears a helmet. No platform uses it. RiderShield turns the helmet into a <strong style="color:var(--text);">24/7 AI edge-compute node</strong> — streaming surround threat detection, voice navigation, dashcam recording, and pothole mapping continuously, without touching the rider's phone.</p>
+      <p>Every rider wears a helmet. No platform uses it for active safety. RiderShield turns the helmet into a <strong style="color:var(--text);">real-time awareness node</strong> — forward/rear collision alerts, voice navigation, and smart dashcam event tagging, without touching the rider's phone.</p>
     </div>
+  </div>
+
+  <div class="card card-accent" style="margin-bottom:32px;">
+    <div style="font-size:24px;margin-bottom:8px;">✅</div>
+    <h3>Gap 4 — No Verifiable Ground Truth</h3>
+    <p>Today, when a rider reports a hazard (pothole, flood, blocked road), platforms rely on manual judgment or reject claims due to lack of proof. RiderShield introduces a simplified Proof-of-Hazard system — combining sensor signals (IMU, water depth, GPS) with cross-validation from nearby riders. Every hazard is not just detected, but verified through multiple independent signals.</p>
+    <div style="margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);">We don't just detect hazards — we prove them.</div>
   </div>
 
   <!-- Core Concept -->
@@ -443,11 +452,18 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     <h3 style="margin-bottom:16px;font-size:22px;">The Core Idea — Peer Hazard Mesh</h3>
     <div class="grid-2">
       <div>
-        <p style="margin-bottom:12px;">When Rider A hits a pothole or flood, their sensors detect and classify the hazard. This gets published (anonymously) to the RiderShield backend. Within <strong style="color:var(--text);">5 seconds</strong>, every rider approaching that GPS segment receives a voice alert — before they reach it.</p>
-        <p style="font-size:13px;color:var(--muted);">The more riders on the platform, the denser the hazard mesh. Potholes found today are pre-warned tomorrow. Floods detected at 6:45 PM are rerouted around at 6:40 PM for the next batch.</p>
+        <p style="margin-bottom:10px;"><strong style="color:var(--text);">1. Detection</strong> Rider A encounters a hazard — pothole, flood, or rough patch.</p>
+        <p style="margin-bottom:10px;"><strong style="color:var(--text);">2. Validation</strong> The system cross-checks with sensor confidence + nearby rider signals.</p>
+        <p style="margin-bottom:10px;"><strong style="color:var(--text);">3. Propagation</strong> Within <strong style="color:var(--text);">5 seconds</strong>, riders approaching that segment are alerted.</p>
+        <p style="margin-bottom:12px;"><strong style="color:var(--text);">4. Prevention</strong> Rider B slows down before reaching the hazard.</p>
+        <p style="font-size:13px;color:var(--accent);font-weight:700;">This is not navigation. This is collective intelligence.</p>
         <div style="margin-top:16px;padding:12px;background:rgba(0,229,184,0.05);border-radius:8px;border-left:2px solid var(--accent);">
           <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px;">Special Note — Helmet Compliance as a Feature</div>
-          <div style="font-size:12px;color:var(--muted);">All riders wear helmets — this is already mandated and monitored by companies. RiderShield converts this mandate into a value generator: every helmet is a sensor node that maps the city. Companies can also verify ride quality and detect discrepancies (e.g., a "completed" delivery where the rider never moved) through the continuous GPS + camera log.</div>
+          <div style="font-size:12px;color:var(--muted);">All riders wear helmets — this is already mandated and monitored by companies. RiderShield converts this mandate into a value generator: the helmet protects riders in motion, while bike + cloud intelligence verifies road truth and prevents repeat incidents.</div>
+        </div>
+        <div style="margin-top:12px;padding:12px;background:rgba(77,166,255,0.05);border-radius:8px;border-left:2px solid var(--blue);">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:6px;">Proof-of-Hazard Flow</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.7;">Sensor detects anomaly<br>GPS + IMU + water depth combined<br>Cross-rider validation<br>Hazard marked as <strong style="color:var(--text);">VERIFIED</strong><br>Alert propagated</div>
         </div>
       </div>
       <div>
@@ -512,7 +528,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         <tr><td>Peer hazard alert</td><td class="cross">None</td><td class="cross">None</td><td class="partial">Manual tap</td><td class="check">Automatic, 5s latency</td></tr>
         <tr><td>Pothole mapping</td><td class="cross">None</td><td class="cross">None</td><td class="partial">Manual report</td><td class="check">Automatic via IMU jerk</td></tr>
         <tr><td>Rider fatigue detection</td><td class="cross">None</td><td class="cross">None</td><td class="cross">None</td><td class="check">4-level index, 50 Hz</td></tr>
-        <tr><td>AI helmet surround view</td><td class="cross">None</td><td class="cross">None</td><td class="cross">None</td><td class="check">360° threat detection</td></tr>
+        <tr><td>Helmet safety awareness</td><td class="cross">None</td><td class="cross">None</td><td class="cross">None</td><td class="check">Forward + rear alerts</td></tr>
         <tr><td>Voice navigation (hands-free)</td><td class="partial">Phone GPS only</td><td class="partial">Phone GPS only</td><td class="partial">Phone GPS only</td><td class="check">Bone-conduction, helmet</td></tr>
         <tr><td>DIGIPIN precision delivery</td><td class="cross">None</td><td class="cross">None</td><td class="cross">None</td><td class="check">3.8m accuracy</td></tr>
         <tr><td>Rider compliance monitoring</td><td class="partial">App ping</td><td class="cross">None</td><td class="cross">None</td><td class="check">GPS + cam continuous log</td></tr>
@@ -527,39 +543,38 @@ h1.hero-title .line2{display:block;color:var(--accent);}
   <div class="card">
     <div class="grid-3">
       <div style="border-right:1px solid var(--border);padding-right:20px;">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent2);margin-bottom:14px;">Layer 1 — Edge Hardware (ECE)</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent2);margin-bottom:14px;">Layer 1 — Smart Helmet (Human Safety)</div>
         <div style="font-size:13px;color:var(--muted);line-height:1.8;">
-          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Bike Sensor Node (ESP32)</div>
-          Rain + ultrasonic depth + GPS + IMU accelerometer. TFLite anomaly fires on hazard. Hazard Feature Vector transmitted.<br><br>
           <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Smart Helmet (Raspberry Pi Zero 2W)</div>
-          Pi cam module + bone-conduction speaker + BLE. 24/7 AI threat detection, pothole logging, voice nav, dashcam.<br><br>
+          Pi cam module + bone-conduction speaker + BLE. Rear vehicle detection, forward collision alerts, voice navigation, and dashcam recording.<br><br>
+          <div style="font-size:12px;color:var(--accent);font-weight:700;">The helmet protects the rider from dynamic threats — vehicles, collisions, and navigation overload.</div><br>
           <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Fatigue Handlebar Unit (ESP32)</div>
           FSR grip array + triaxial accelerometer. 50 Hz. BLE relay to rider app.
         </div>
       </div>
       <div style="border-right:1px solid var(--border);padding:0 20px;">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:14px;">Layer 2 — Intelligence Engine (CSE)</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:14px;">Layer 2 — Bike Sensor Node (Road Intelligence)</div>
         <div style="font-size:13px;color:var(--muted);line-height:1.8;">
-          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Flood Surface Model</div>
-          Gaussian Process spatial interpolation. 50m resolution, 30s update. 15–20 min impassability forecast.<br><br>
-          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Hazard Peer Mesh</div>
-          Pothole + flood events from riders aggregated and redistributed. Sub-5s alert propagation to approaching riders.<br><br>
-          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Helmet AI Pipeline</div>
-          MobileNet-based threat detection, pothole classifier, fatigue LSTM, DIGIPIN resolver.
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Bike Sensor Node (ESP32)</div>
+          Rain + ultrasonic depth + GPS + IMU accelerometer. Detects potholes, flood depth, rough roads, and sudden jerk events. Hazard Feature Vector transmitted in real time.<br><br>
+          <div style="font-size:12px;color:var(--accent);font-weight:700;">The bike understands the road surface — not the helmet.</div>
         </div>
       </div>
       <div style="padding-left:20px;">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent3);margin-bottom:14px;">Layer 3 — Decision Outputs (CSE)</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent3);margin-bottom:14px;">Layer 3 — Cloud Layer (Network + Proof)</div>
         <div style="font-size:13px;color:var(--muted);line-height:1.8;">
-          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Rider App (React Native)</div>
-          Live flood risk, predictive rerouting, voice alerts, DIGIPIN, fatigue status, peer hazard feed.<br><br>
-          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Ops Dashboard (React + Mapbox)</div>
-          Real-time flood heatmap, fleet fatigue overview, helmet cam feed, rider compliance log, NGO food redirect.<br><br>
-          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Municipal Open API</div>
-          Anonymised 50m flood + pothole tiles. BMC/BBMP/GCC subscription. Civic data revenue.
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Hazard Verification Engine</div>
+          Multi-rider confirmation combines IMU + water depth + GPS + nearby rider corroboration to mark hazards as VERIFIED.<br><br>
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Peer Hazard Propagation</div>
+          Verified hazards are broadcast through the peer mesh in under 5 seconds to approaching riders.<br><br>
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Decision Outputs</div>
+          Rider app + ops dashboard + municipal API consume the same verified hazard stream.
+          <br><br>
+          <div style="font-size:12px;color:var(--accent3);font-weight:700;">The cloud ensures every hazard is verified and shared instantly.</div>
         </div>
       </div>
     </div>
+    <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:13px;font-weight:700;color:var(--accent);text-align:center;">Helmet protects the rider. Bike understands the road. Cloud verifies the truth.</div>
   </div>
 </div>
 </div>
@@ -645,7 +660,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       </div>
       <div class="delta-item">
         <div class="delta-badge added">+</div>
-        <div><div class="delta-text">360° AI surround threat detection</div><div class="delta-sub">MobileNetV2 + Pi Cam detects vehicles, potholes, obstacles. Voice alert via bone-conduction speaker.</div></div>
+        <div><div class="delta-text">AI-assisted rider awareness</div><div class="delta-sub">MobileNetV2 + Pi Cam detects dynamic traffic threats and triggers low-latency voice alerts via bone-conduction speaker.</div></div>
       </div>
       <div class="delta-item">
         <div class="delta-badge added">+</div>
@@ -854,7 +869,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         <tr><td>Python 3 + TFLite Runtime</td><td>tflite-runtime</td><td>MobileNetV2 inference on Pi Cam frames — threat detection, pothole classification</td><td>Full Python on Linux. No custom SDK. Team already knows it.</td></tr>
         <tr><td>OpenCV</td><td>opencv-python</td><td>Camera capture, frame preprocessing, TTC estimation, dashcam loop buffer</td><td>Standard. Fast. Headless mode on Pi Zero.</td></tr>
         <tr><td>pyttsx3 + aplay</td><td>TTS + audio</td><td>Voice alert synthesis and output to bone-conduction speaker</td><td>Offline TTS, no API key, works without internet.</td></tr>
-        <tr><td>BLE via BlueZ</td><td>bluepy</td><td>Transmit helmet events (threats, potholes) to bike node → backend</td><td>Native Linux BLE stack. Reliable at 5m range.</td></tr>
+        <tr><td>BLE via BlueZ</td><td>bluepy</td><td>Transmit helmet safety events (collision-risk, alert state) to bike node → backend</td><td>Native Linux BLE stack. Reliable at 5m range.</td></tr>
         <tr><td>DIGIPIN resolver</td><td>REST API call</td><td>Resolve delivery address to 3.8m precision pinpoint</td><td>Free IIT-India Post open API. No auth needed.</td></tr>
 
         <tr class="hw-group-header"><td colspan="4">BACKEND — FastAPI Server</td></tr>
@@ -1018,7 +1033,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
   <div class="section-head">
     <div class="accent-line"></div>
     <h2>Helmet AI — 24/7 Edge Intelligence</h2>
-    <p>The Raspberry Pi Zero 2W turns a standard ISI helmet into a full-time AI safety system. No phone needed. No cloud latency.</p>
+    <p>The Raspberry Pi Zero 2W turns a standard ISI helmet into a real-time rider safety system with practical, demo-ready AI.</p>
   </div>
 
   <div class="special-note" style="margin-bottom:28px;">
@@ -1031,15 +1046,15 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       <div class="section-head" style="margin-bottom:16px;"><h2 style="font-size:22px;">What the Helmet AI Does</h2></div>
 
       <div class="card" style="margin-bottom:12px;border:1px solid rgba(255,71,87,0.2);">
-        <h3 style="color:var(--accent2);">🚗 Threat Detection</h3>
-        <p>Pi Camera captures frames at 15 fps. MobileNetV2 (TFLite) classifies each frame: vehicle-approaching, pedestrian, obstacle, or safe. When a vehicle is detected within the danger zone, time-to-collision (TTC) is estimated from bounding box growth rate. If TTC &lt; 3 seconds → bone-conduction speaker fires: <em style="color:var(--accent);">"Warning — vehicle approaching from rear."</em></p>
-        <div style="margin-top:10px;"><div class="feat-tag red">Rear camera view</div><div class="feat-tag orange">TTC &lt; 3s = alert</div><div class="feat-tag green">15 fps on Pi Zero</div></div>
+        <h3 style="color:var(--accent2);">🚗 Forward + Rear Awareness System</h3>
+        <p>Pi Camera captures frames at 15 fps. A lightweight MobileNetV2 (TFLite) model identifies approaching vehicles and collision risk cues. When risk crosses threshold, the bone-conduction speaker issues immediate warnings for forward or rear danger.</p>
+        <div style="margin-top:10px;"><div class="feat-tag red">Forward + rear awareness</div><div class="feat-tag orange">TTC &lt; 3s = alert</div><div class="feat-tag green">15 fps on Pi Zero</div></div>
       </div>
 
       <div class="card" style="margin-bottom:12px;border:1px solid rgba(0,229,184,0.2);">
-        <h3 style="color:var(--accent);">🕳️ Pothole Detection + Peer Sharing</h3>
-        <p>The IMU on the bike node detects a jerk event (acceleration spike > threshold). The helmet cam simultaneously captures the road surface frame. The backend combines both signals: IMU jerk + visual pothole classification = high-confidence pothole event. This is published to the peer hazard mesh — all riders within 500m receive a voice alert within 5 seconds.</p>
-        <div style="margin-top:10px;"><div class="feat-tag green">IMU + camera fusion</div><div class="feat-tag blue">Peer broadcast 5s</div></div>
+        <h3 style="color:var(--accent);">⚠️ AI-Assisted Collision Alerts</h3>
+        <p>The helmet prioritizes collision prevention, not road-surface interpretation. It continuously monitors dynamic motion threats and sends spoken warnings so the rider reacts earlier under traffic stress.</p>
+        <div style="margin-top:10px;"><div class="feat-tag green">Collision-first logic</div><div class="feat-tag blue">Low-latency alerts</div></div>
       </div>
 
       <div class="card" style="margin-bottom:12px;border:1px solid rgba(77,166,255,0.2);">
@@ -1049,10 +1064,11 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       </div>
 
       <div class="card" style="border:1px solid rgba(255,210,77,0.2);">
-        <h3 style="color:var(--accent4);">🎥 Continuous Dashcam</h3>
-        <p>Pi Cam records a rolling 2-minute buffer. When a hazard or delivery event occurs, the preceding 30 seconds are saved with GPS + DIGIPIN metadata. Companies can review dashcam clips to verify delivery completion, detect route deviations, and investigate incidents. This is the compliance monitoring layer.</p>
+        <h3 style="color:var(--accent4);">🎥 Smart Dashcam with Event Tagging</h3>
+        <p>Pi Cam records a rolling 2-minute buffer. When a risk event, route deviation, or delivery milestone occurs, key clips are auto-tagged with GPS + DIGIPIN metadata. This keeps incident review practical for operations teams.</p>
         <div style="margin-top:10px;"><div class="feat-tag yellow">2-min rolling buffer</div><div class="feat-tag blue">GPS + DIGIPIN tagged</div><div class="feat-tag green">Company viewable</div></div>
       </div>
+      <div style="margin-top:10px;padding:12px;background:rgba(0,229,184,0.05);border-radius:8px;border-left:2px solid var(--accent);font-size:12px;color:var(--muted);">This prototype uses a single wide-angle camera and lightweight MobileNet model for real-time inference on Raspberry Pi Zero 2W.</div>
     </div>
 
     <div>
@@ -1061,7 +1077,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         <div style="display:flex;flex-direction:column;gap:12px;">
           <div>
             <div style="font-size:12px;font-weight:700;color:var(--accent3);margin-bottom:4px;">Model: MobileNetV2 (TFLite Int8 Quantised)</div>
-            <div style="font-size:12px;color:var(--muted);">Classes: vehicle-approaching · pedestrian · pothole · obstacle · safe-road</div>
+            <div style="font-size:12px;color:var(--muted);">Classes: vehicle-approaching · collision-risk · obstacle · safe-road</div>
             <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
               <div><div class="card-label">Model size</div><div style="font-family:var(--font-mono);font-size:14px;color:var(--accent);">~3.4 MB</div></div>
               <div><div class="card-label">Inference time (Pi Zero)</div><div style="font-family:var(--font-mono);font-size:14px;color:var(--green);">65ms</div></div>
@@ -1470,60 +1486,56 @@ h1.hero-title .line2{display:block;color:var(--accent);}
   <div class="demo-step">
     <div class="demo-step-num">1</div>
     <div class="demo-step-body">
-      <div class="demo-step-title">⛑️ Hold up the helmet — 15 seconds (ECE)</div>
+      <div class="demo-step-title">1) Rider A hits pothole (simulate bump) — 15 seconds</div>
       <div class="demo-step-sub">
-        Pick up the prototype helmet. Show the 3D-printed camera housing on the back. Show the Pi Zero 2W board mounted inside. Show the bone-conduction speaker on the sides. Power it on — Pi Zero boots in ~15s. LED flickers as it starts inference.
-        <br>Wave your hand in front of the camera. Show the terminal: class = "obstacle" → alert fires from speaker.
+        Simulate a road bump using the ESP32 demo board or mounted bike node. Trigger a sharp IMU jerk event to represent Rider A hitting a pothole.
+        <br>Call out the live timestamp so judges can track latency end to end.
       </div>
-      <div class="demo-quote">"This helmet — ₹2,710 prototype — runs a full AI model at 15 frames per second. Detecting threats. Recording everything. Navigating by voice. No phone, no cloud."</div>
+      <div class="demo-quote">"Rider A experienced the hazard first. The system noticed it immediately."</div>
     </div>
   </div>
 
   <div class="demo-step">
     <div class="demo-step-num">2</div>
     <div class="demo-step-body">
-      <div class="demo-step-title">🌊 Flood appears on the map — 20 seconds (CSE)</div>
+      <div class="demo-step-title">2) Sensor detects spike — 15 seconds</div>
       <div class="demo-step-sub">
-        Open the admin dashboard on laptop. Drop 3 simulated HFVs for the same GPS zone (simulate 3 riders detecting water). Watch the Gaussian Process flood probability heatmap update in real-time on the Leaflet map — a red zone spreads outward. The GP surface age timer resets to 0s.
-        <br><br>
-        Simultaneously, the rider app on phone shows a popup: "⚠ Flood zone ahead. Rerouting."
+        Show the serial monitor or event feed: IMU spike detected, GPS segment tagged, hazard packet published. Mention that confidence is enriched by road context and nearby rider signals.
       </div>
-      <div class="demo-quote">"Three riders. One flooded underpass. Detected in 30 seconds. Zero municipal sensors. Zero human reporting."</div>
+      <div class="demo-quote">"No manual reporting. The sensor created the hazard event."</div>
     </div>
   </div>
 
   <div class="demo-step">
     <div class="demo-step-num">3</div>
     <div class="demo-step-body">
-      <div class="demo-step-title">📡 Peer pothole alert fires — 15 seconds (CSE + ECE)</div>
+      <div class="demo-step-title">3) Hazard appears on dashboard — 15 seconds</div>
       <div class="demo-step-sub">
-        On the live ESP32 demo board: tilt or shake it sharply (simulate a pothole jerk). Show the serial monitor — IMU jerk detected, HFV published via MQTT. Within 3–4 seconds, the rider app on the second phone shows: "⚠ Pothole — 140m ahead. Detected by Rider R-211." Speaker plays: <em>"Caution — pothole ahead."</em>
+        Open the ops dashboard and point to the new marker. Explain that the cloud validates this event using sensor confidence + nearby riders before marking it VERIFIED.
       </div>
-      <div class="demo-quote">"That rider never had to report anything. The sensor did it automatically. The next rider was warned before they got there."</div>
+      <div class="demo-quote">"Detected, validated, and now visible to the fleet."</div>
     </div>
   </div>
 
   <div class="demo-step">
     <div class="demo-step-num">4</div>
     <div class="demo-step-body">
-      <div class="demo-step-title">🔊 Voice navigation + DIGIPIN — 15 seconds (CSE)</div>
+      <div class="demo-step-title">4) Rider B gets alert BEFORE reaching — 20 seconds</div>
       <div class="demo-step-sub">
-        On the rider app, show the current delivery screen. Point to the DIGIPIN code displayed. Tap "Navigate" — the app speaks: <em>"Route loaded. In 400 metres, turn left at the signal."</em>
-        <br><br>
-        Then show the DIGIPIN resolver tool: enter coordinates. The 10-character code appears instantly. "That's 3.8 metres accuracy. A standard Swiggy pin is 80 metres off."
+        On a second phone (Rider B), show the incoming warning: <em>"Caution: pothole ahead."</em> Make clear this rider has not reached the location yet. The network is preventative, not reactive.
       </div>
-      <div class="demo-quote">"Hands on the handlebar. Eyes on the road. The helmet tells you where to go."</div>
+      <div class="demo-quote">"Rider B is warned before the impact point."</div>
     </div>
   </div>
 
   <div class="demo-step">
     <div class="demo-step-num">5</div>
     <div class="demo-step-body">
-      <div class="demo-step-title">💪 Fatigue — orders gated — 10 seconds (ECE + CSE)</div>
+      <div class="demo-step-title">5) Voice alert plays — 10 seconds</div>
       <div class="demo-step-sub">
-        Show the admin dashboard fatigue tab. Rider R-891 — 13 hours active, Fatigue Level 4, gauge showing red. Orders tab shows this rider has no new orders assigned — gated by the system automatically. No manager intervention.
+        Let the phone/helmet play the spoken warning. Pause briefly and deliver the final line clearly.
       </div>
-      <div class="demo-quote">"This rider has been working 13 hours. The system already knows. No manager needed to notice."</div>
+      <div class="demo-quote">"The road learned from Rider A... and protected Rider B."</div>
     </div>
   </div>
 
@@ -1534,7 +1546,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       <div class="demo-step-sub">
         Stand back. Let the dashboard run. Speak slowly and clearly.
       </div>
-      <div class="demo-quote">"We did not build a safer app. We built the sensing infrastructure Indian cities are missing — paid for by delivery logistics. Three patents. Five students. Zero existing systems doing this."</div>
+      <div class="demo-quote">"From isolated riders to a connected safety network."</div>
     </div>
   </div>
 
@@ -1868,7 +1880,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Raspberry Pi helmet with cam</div><div class="alert-sub">Pi Zero 2W + Pi Camera Module 3 Wide. Full AI on helmet, 24/7.</div></div></div>
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">What was in doc + what was added</div><div class="alert-sub">Full "Delta" section covering kept / removed / added with cost breakdown.</div></div></div>
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Clear demo workflow</div><div class="alert-sub">6-step 90-second demo script with exact things to say and show. Prepared judge Q&A.</div></div></div>
-      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">24/7 full-time AI smart cam + security + voice nav + DIGIPIN + accident prevention</div><div class="alert-sub">Helmet AI section covers all: threat detection, TTC, dashcam, voice nav, pothole detection, peer sharing.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">24/7 AI smart cam + voice nav + DIGIPIN + accident prevention</div><div class="alert-sub">Helmet AI section covers collision awareness, TTC alerts, dashcam event tagging, and voice guidance. Road hazards are validated by bike sensors + cloud.</div></div></div>
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Software requirements minimal but functional</div><div class="alert-sub">Stack reduced to: ESP-IDF + TFLite Micro + FastAPI + Scikit GP + Expo React Native + Leaflet. No heavy infra.</div></div></div>
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Peer hazard mesh explained</div><div class="alert-sub">Rider A detects → GP update → Rider B warned. Core mechanic explained with diagram and demo.</div></div></div>
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Helmet compliance note</div><div class="alert-sub">Special note: all riders wear helmets; companies can verify rides and detect discrepancies via GPS + dashcam log.</div></div></div>
