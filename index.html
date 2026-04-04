@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RiderShield AI — Startup Hackathon Edition v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060a0d;
+  --bg2: #0b1118;
+  --bg3: #0f161e;
+  --card: #111923;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #dce8f0;
+  --muted: #6b7e8e;
+  --dim: #354454;
+  --accent: #00e5b8;
+  --accent2: #ff6b35;
+  --accent3: #7c6fff;
+  --accent4: #ffd24d;
+  --red: #ff4757;
+  --blue: #4da6ff;
+  --green: #00d4aa;
+  --font-display: 'Rajdhani', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(6,10,13,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:54px;}
+.nav-logo{font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--accent);letter-spacing:1px;}
+.nav-logo span{color:var(--text);font-weight:400;}
+.nav-links{display:flex;gap:2px;flex-wrap:wrap;}
+.nav-link{background:none;border:none;color:var(--muted);font-family:var(--font-body);font-size:12px;padding:5px 11px;border-radius:5px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.nav-link:hover,.nav-link.active{color:var(--text);background:rgba(255,255,255,0.06);}
+.nav-badge{background:var(--accent);color:#000;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:6px;}
+
+/* SECTIONS */
+.section{display:none;padding-top:54px;min-height:100vh;}
+.section.active{display:block;}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 32px 60px;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,184,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,184,0.03) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);}
+.hero-glow{position:absolute;top:25%;left:50%;transform:translateX(-50%);width:700px;height:350px;background:radial-gradient(ellipse,rgba(0,229,184,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(0,229,184,0.08);border:1px solid rgba(0,229,184,0.2);border-radius:20px;padding:6px 16px;font-size:12px;font-weight:600;color:var(--accent);letter-spacing:0.05em;margin-bottom:32px;}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+h1.hero-title{font-family:var(--font-display);font-size:clamp(44px,7.5vw,90px);font-weight:700;line-height:0.92;letter-spacing:1px;margin-bottom:24px;}
+h1.hero-title .line1{display:block;color:var(--text);}
+h1.hero-title .line2{display:block;color:var(--accent);}
+.hero-sub{font-size:17px;color:var(--muted);max-width:640px;margin:0 auto 48px;line-height:1.7;}
+.hero-metrics{display:flex;gap:48px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;}
+.hero-metric{text-align:center;}
+.hero-metric .val{font-family:var(--font-display);font-size:38px;font-weight:700;color:var(--accent);display:block;line-height:1;}
+.hero-metric .lbl{font-size:11px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}
+.hero-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.pill{background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:20px;padding:6px 16px;font-size:12px;color:var(--muted);font-weight:500;}
+.pill.hot{border-color:rgba(0,229,184,0.3);color:var(--accent);}
+
+/* SECTION INNER */
+.section-inner{max-width:1200px;margin:0 auto;padding:48px 32px;}
+.section-head{margin-bottom:40px;}
+.section-head h2{font-family:var(--font-display);font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:.5px;margin-bottom:8px;}
+.section-head p{color:var(--muted);font-size:15px;max-width:640px;}
+.accent-line{display:inline-block;width:40px;height:3px;background:var(--accent);border-radius:2px;margin-bottom:14px;}
+
+/* GRIDS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}.nav-links{display:none;}}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;}
+.card-sm{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;}
+.card-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:6px;}
+.card-value{font-family:var(--font-display);font-size:28px;font-weight:700;line-height:1;}
+.card-sub{font-size:11px;color:var(--muted);margin-top:4px;}
+.card-accent{border-left:3px solid var(--accent);}
+.card-accent2{border-left:3px solid var(--accent2);}
+.card-accent3{border-left:3px solid var(--accent3);}
+.card h3{font-family:var(--font-display);font-size:19px;font-weight:700;margin-bottom:8px;letter-spacing:.3px;}
+.card p{color:var(--muted);font-size:13px;line-height:1.7;}
+
+/* HW TABLE */
+.hw-table{width:100%;border-collapse:collapse;}
+.hw-table th{text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--border);}
+.hw-table td{padding:11px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top;}
+.hw-table tr:last-child td{border-bottom:none;}
+.hw-table td:first-child{font-weight:600;color:var(--text);width:190px;}
+.hw-table td:nth-child(2){font-family:var(--font-mono);font-size:11px;color:var(--accent);width:150px;}
+.hw-table td:nth-child(3){color:var(--muted);}
+.hw-table td:last-child{color:var(--accent4);font-weight:700;text-align:right;white-space:nowrap;}
+.hw-group-header td{background:rgba(0,229,184,0.05);color:var(--accent);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;}
+
+/* TAGS */
+.feat-tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 10px;border-radius:12px;margin:2px 2px 2px 0;}
+.feat-tag.green{background:rgba(0,212,170,0.1);color:var(--green);}
+.feat-tag.orange{background:rgba(255,107,53,0.1);color:var(--accent2);}
+.feat-tag.purple{background:rgba(124,111,255,0.1);color:var(--accent3);}
+.feat-tag.yellow{background:rgba(255,210,77,0.1);color:var(--accent4);}
+.feat-tag.blue{background:rgba(77,166,255,0.1);color:var(--blue);}
+.feat-tag.red{background:rgba(255,71,87,0.1);color:var(--red);}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:1px;background:var(--border2);}
+.tl-item{position:relative;margin-bottom:28px;}
+.tl-dot{position:absolute;left:-28px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);}
+.tl-date{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px;}
+.tl-title{font-weight:600;margin-bottom:3px;font-size:14px;}
+.tl-body{font-size:12px;color:var(--muted);}
+
+/* COMPARISON TABLE */
+.comp-table{width:100%;border-collapse:collapse;}
+.comp-table th{padding:12px 14px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);border-bottom:1px solid var(--border);}
+.comp-table th.us{color:var(--accent);}
+.comp-table td{padding:11px 14px;border-bottom:1px solid var(--border);font-size:13px;text-align:center;}
+.comp-table td:first-child{text-align:left;color:var(--muted);}
+.check{color:var(--green);}
+.cross{color:var(--red);}
+.partial{color:var(--accent4);}
+
+/* TEAM CARDS */
+.team-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;}
+.team-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:8px;}
+.team-role.ece{background:rgba(255,107,53,0.12);color:var(--accent2);}
+.team-role.cse{background:rgba(0,229,184,0.1);color:var(--accent);}
+.team-member{font-size:11px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.team-owns{font-size:12px;color:var(--muted);margin-top:6px;}
+.team-owns li{margin-left:14px;margin-bottom:2px;}
+
+/* ALERT PANEL */
+.alert-item{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:10px;margin-bottom:8px;border:1px solid;}
+.alert-item.critical{background:rgba(255,71,87,0.05);border-color:rgba(255,71,87,0.18);}
+.alert-item.warning{background:rgba(255,210,77,0.05);border-color:rgba(255,210,77,0.18);}
+.alert-item.ok{background:rgba(0,212,170,0.05);border-color:rgba(0,212,170,0.18);}
+.alert-item.info{background:rgba(77,166,255,0.05);border-color:rgba(77,166,255,0.18);}
+.alert-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.alert-item.critical .alert-icon{background:rgba(255,71,87,0.12);}
+.alert-item.warning .alert-icon{background:rgba(255,210,77,0.12);}
+.alert-item.ok .alert-icon{background:rgba(0,212,170,0.12);}
+.alert-item.info .alert-icon{background:rgba(77,166,255,0.12);}
+.alert-text{flex:1;}
+.alert-title{font-size:13px;font-weight:600;margin-bottom:2px;}
+.alert-sub{font-size:11px;color:var(--muted);}
+.alert-time{font-size:10px;color:var(--dim);font-family:var(--font-mono);}
+
+/* DASHBOARD */
+.dash-tab-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;}
+.dash-tab-btn{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s;font-family:var(--font-body);}
+.dash-tab-btn.active{background:rgba(0,229,184,0.1);border-color:rgba(0,229,184,0.3);color:var(--accent);}
+.dash-tab{display:none;}
+.dash-tab.active{display:block;}
+.live-badge{display:flex;align-items:center;gap:6px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.22);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--green);font-weight:600;}
+.live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 1.5s infinite;}
+.dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:8px;}
+.dash-title{font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:.3px;}
+
+/* MAP */
+.map-container{position:relative;background:linear-gradient(135deg,#08152a 0%,#0c1e38 100%);border:1px solid var(--border);border-radius:14px;overflow:hidden;height:360px;}
+.map-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(77,166,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(77,166,255,0.04) 1px,transparent 1px);background-size:30px 30px;}
+.flood-zone{position:absolute;border-radius:50%;animation:floodPulse 3s ease-in-out infinite;}
+@keyframes floodPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.85;transform:scale(1.07)}}
+.rider-dot{position:absolute;width:12px;height:12px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;}
+.rider-dot::before{content:'';width:22px;height:22px;border-radius:50%;border:1px solid;position:absolute;animation:ripple 2s ease-out infinite;opacity:0;}
+@keyframes ripple{0%{transform:scale(.5);opacity:.6}100%{transform:scale(2);opacity:0}}
+.map-stats{position:absolute;top:14px;right:14px;display:flex;flex-direction:column;gap:7px;}
+.map-stat{background:rgba(8,12,16,0.88);border:1px solid var(--border);border-radius:8px;padding:7px 11px;text-align:right;}
+.map-stat .ms-val{font-family:var(--font-mono);font-size:15px;font-weight:600;}
+.map-stat .ms-lbl{font-size:9px;color:var(--muted);}
+.map-legend{position:absolute;bottom:14px;left:14px;background:rgba(8,12,16,0.88);border:1px solid var(--border);border-radius:9px;padding:9px 13px;}
+.map-legend div{display:flex;align-items:center;gap:7px;font-size:10px;color:var(--muted);margin-bottom:3px;}
+.map-legend div:last-child{margin:0;}
+.legend-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+
+/* GAUGES */
+.fatigue-gauge{position:relative;width:110px;height:110px;margin:0 auto 10px;}
+.fatigue-gauge svg{transform:rotate(-90deg);}
+.gauge-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.gauge-val{font-family:var(--font-display);font-size:26px;font-weight:700;line-height:1;}
+.gauge-unit{font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* DIGIPIN */
+.digipin-box{background:linear-gradient(135deg,rgba(0,212,170,0.05),rgba(77,166,255,0.03));border:1px solid rgba(0,212,170,0.18);border-radius:12px;padding:18px;}
+.digipin-code{font-family:var(--font-display);font-size:30px;font-weight:700;color:var(--accent);letter-spacing:4px;margin:10px 0;}
+.digipin-field{display:flex;gap:8px;margin-top:10px;}
+.digipin-input{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:7px;padding:9px 13px;color:var(--text);font-family:var(--font-body);font-size:13px;outline:none;}
+.digipin-input:focus{border-color:var(--accent);}
+.digipin-btn{background:var(--accent);color:#000;border:none;border-radius:7px;padding:9px 16px;font-weight:700;font-size:13px;cursor:pointer;font-family:var(--font-body);}
+
+/* PHASE CARDS */
+.phase-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px;}
+.phase-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:6px;}
+.phase-num{font-family:var(--font-display);font-size:18px;font-weight:700;letter-spacing:.3px;}
+.phase-duration{font-size:11px;font-weight:700;color:var(--accent);background:rgba(0,229,184,0.1);border:1px solid rgba(0,229,184,0.2);padding:3px 10px;border-radius:12px;}
+.phase-features{display:flex;flex-wrap:wrap;gap:8px;}
+.phase-feat{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:7px;padding:6px 12px;font-size:12px;color:var(--muted);}
+
+/* CHART */
+.chart-bars{display:flex;align-items:flex-end;gap:4px;height:100px;padding:0 4px;}
+.chart-bar{flex:1;border-radius:3px 3px 0 0;min-height:4px;cursor:pointer;transition:opacity .2s;}
+.chart-bar:hover{opacity:1!important;}
+.chart-labels{display:flex;gap:4px;padding:0 4px;}
+.chart-label{flex:1;text-align:center;font-size:9px;color:var(--dim);overflow:hidden;}
+
+/* DEMO SCRIPT */
+.demo-step{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:14px;display:flex;gap:16px;align-items:flex-start;}
+.demo-step-num{width:36px;height:36px;border-radius:9px;background:rgba(0,229,184,0.1);border:1px solid rgba(0,229,184,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--accent);flex-shrink:0;}
+.demo-step-body{}
+.demo-step-title{font-weight:700;margin-bottom:4px;font-size:14px;}
+.demo-step-sub{font-size:12px;color:var(--muted);line-height:1.7;}
+.demo-quote{font-family:var(--font-mono);font-size:12px;color:var(--accent);background:rgba(0,229,184,0.06);border-left:2px solid var(--accent);padding:8px 12px;border-radius:0 6px 6px 0;margin-top:8px;}
+
+/* IMPL TIMELINE */
+.impl-row{display:flex;gap:0;margin-bottom:0;}
+.impl-member{width:120px;flex-shrink:0;font-size:12px;font-weight:700;padding:10px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;}
+.impl-blocks{display:flex;flex:1;border-bottom:1px solid var(--border);overflow-x:auto;}
+.impl-block{flex-shrink:0;font-size:10px;padding:8px 10px;border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3;}
+.impl-header{display:flex;gap:0;background:rgba(0,229,184,0.05);border-radius:10px 10px 0 0;border:1px solid var(--border);}
+.impl-rows{border-left:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border);border-radius:0 0 10px 10px;overflow:hidden;}
+
+/* PROGRESS BAR */
+.prog-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;margin-top:6px;}
+.prog-fill{height:100%;border-radius:3px;}
+
+/* NOTIFICATION */
+.notif{position:fixed;bottom:24px;right:24px;background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:14px 18px;max-width:320px;z-index:9999;transform:translateX(400px);transition:transform .4s cubic-bezier(.34,1.56,.64,1);}
+.notif.show{transform:translateX(0);}
+.notif-header{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.notif-icon{font-size:16px;}
+.notif-title{font-size:13px;font-weight:700;}
+.notif-body{font-size:11px;color:var(--muted);}
+
+/* HAR CARD */
+.har-card{background:linear-gradient(135deg,rgba(0,229,184,0.05),rgba(0,0,0,0));border:1px solid rgba(0,229,184,0.18);border-radius:12px;padding:18px;}
+.har-field{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);}
+.har-field:last-child{border:none;}
+.har-key{font-size:12px;color:var(--muted);}
+.har-val{font-family:var(--font-mono);font-size:11px;color:var(--accent);}
+
+/* SPECIAL NOTE */
+.special-note{background:linear-gradient(135deg,rgba(255,107,53,0.06),rgba(124,111,255,0.04));border:2px solid rgba(255,107,53,0.25);border-radius:14px;padding:20px 24px;}
+.special-note-header{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--accent2);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+
+/* SENSOR ROWS */
+.sensor-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.sensor-row:last-child{border:none;}
+.sensor-icon{width:30px;height:30px;border-radius:7px;background:rgba(0,229,184,0.08);border:1px solid rgba(0,229,184,0.18);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.sensor-name{font-size:13px;font-weight:600;}
+.sensor-spec{font-size:11px;color:var(--muted);font-family:var(--font-mono);}
+
+/* SW FLOW */
+.sw-node{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:13px;}
+.sw-node-title{font-weight:700;font-size:13px;margin-bottom:4px;}
+.sw-node-sub{font-size:11px;color:var(--muted);}
+.sw-arrow{display:flex;justify-content:center;align-items:center;color:var(--accent);font-size:18px;padding:4px;}
+
+/* WHAT WE KEPT / WHAT WE ADDED */
+.delta-card{border-radius:12px;padding:18px;}
+.delta-card.kept{background:rgba(0,212,170,0.04);border:1px solid rgba(0,212,170,0.2);}
+.delta-card.added{background:rgba(124,111,255,0.04);border:1px solid rgba(124,111,255,0.25);}
+.delta-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;}
+.delta-item:last-child{margin-bottom:0;}
+.delta-badge{width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px;}
+.delta-badge.kept{background:rgba(0,212,170,0.15);color:var(--green);}
+.delta-badge.added{background:rgba(124,111,255,0.15);color:var(--accent3);}
+.delta-text{font-size:13px;}
+.delta-sub{font-size:11px;color:var(--muted);}
+
+/* REMOVED */
+.removed-card{background:rgba(255,71,87,0.03);border:1px solid rgba(255,71,87,0.15);border-radius:12px;padding:18px;}
+.removed-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;opacity:.8;}
+.removed-badge{width:20px;height:20px;border-radius:5px;background:rgba(255,71,87,0.12);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px;}
+
+/* REV BAR */
+.rev-bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.rev-bar-label{width:200px;font-size:12px;color:var(--text);}
+.rev-bar-track{flex:1;height:7px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden;}
+.rev-bar-fill{height:100%;border-radius:4px;}
+.rev-bar-val{width:70px;text-align:right;font-size:12px;font-weight:600;font-family:var(--font-mono);}
+
+/* RIDER JOURNEY */
+.journey-step{display:flex;gap:14px;margin-bottom:0;position:relative;}
+.journey-step::before{content:'';position:absolute;left:17px;top:40px;bottom:-16px;width:2px;background:var(--border2);}
+.journey-step:last-child::before{display:none;}
+.journey-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;border:2px solid;}
+.journey-content{flex:1;padding-bottom:24px;}
+.journey-time{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;}
+.journey-title{font-weight:700;font-size:14px;margin-bottom:4px;}
+.journey-detail{font-size:12px;color:var(--muted);line-height:1.7;}
+.journey-sensors{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+
+/* IMPL GANTT */
+.gantt-row{display:grid;grid-template-columns:140px repeat(12,1fr);border-bottom:1px solid var(--border);min-height:42px;}
+.gantt-label{padding:10px 12px;font-size:12px;font-weight:600;display:flex;align-items:center;border-right:1px solid var(--border);background:rgba(255,255,255,0.02);}
+.gantt-cell{border-right:1px solid var(--border);display:flex;align-items:center;padding:4px;}
+.gantt-block{border-radius:5px;height:26px;width:100%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;text-align:center;line-height:1.2;padding:2px 4px;}
+.gantt-header{display:grid;grid-template-columns:140px repeat(12,1fr);border-bottom:1px solid var(--border);background:rgba(0,229,184,0.04);}
+.gantt-header-cell{text-align:center;font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;padding:7px 2px;border-right:1px solid var(--border);}
+</style>
+</head>
+<body>
+
+<!-- NOTIFICATION -->
+<div class="notif" id="notif">
+  <div class="notif-header"><div class="notif-icon" id="notif-icon">🌊</div><div class="notif-title" id="notif-title">Flood Zone Detected</div></div>
+  <div class="notif-body" id="notif-body">GP confidence 91% · 3 riders alerted.</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">RIDER<span>SHIELD</span> <span style="color:var(--accent);font-size:14px;">AI</span></div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showSection('overview')">Overview</button>
+    <button class="nav-link" onclick="showSection('delta')">What Changed<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('hardware')">Hardware</button>
+    <button class="nav-link" onclick="showSection('software')">Software</button>
+    <button class="nav-link" onclick="showSection('helmet')">Helmet AI<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('dashboard')">Dashboard</button>
+    <button class="nav-link" onclick="showSection('journey')">Rider Journey<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('demo')">Demo Script<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('impl')">60hr Plan<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('startup')">Startup</button>
+    <button class="nav-link" onclick="showSection('team')">Team</button>
+  </div>
+</nav>
+
+<!-- ═══ OVERVIEW ═══ -->
+<div id="section-overview" class="section active">
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-tag">National Hackathon · Patent-Ready · Startup Blueprint</div>
+  <h1 class="hero-title">
+    <span class="line1">RIDERSHIELD</span>
+    <span class="line2">AI</span>
+  </h1>
+  <p class="hero-sub">Smart Delivery Safety & Urban Sensing Network. Every rider is a living sensor. Every helmet is an AI guardian. Every pothole and flood is mapped before the next rider hits it.</p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><span class="val">3600×</span><span class="lbl">Spatial resolution vs IMD</span></div>
+    <div class="hero-metric"><span class="val">24/7</span><span class="lbl">AI helmet surveillance</span></div>
+    <div class="hero-metric"><span class="val">₹850</span><span class="lbl">Total prototype cost/rider</span></div>
+    <div class="hero-metric"><span class="val">5 sec</span><span class="lbl">Peer hazard alert latency</span></div>
+  </div>
+  <div class="hero-pills">
+    <span class="pill hot">Peer-to-peer hazard mesh</span>
+    <span class="pill hot">Raspberry Pi AI helmet</span>
+    <span class="pill hot">DIGIPIN navigation</span>
+    <span class="pill">Voice alerts hands-free</span>
+    <span class="pill">Flood surface GP model</span>
+    <span class="pill">Fatigue detection</span>
+    <span class="pill">Accident prevention</span>
+    <span class="pill">Rider compliance monitor</span>
+  </div>
+</div>
+
+<div class="section-inner">
+  <!-- 3 Gaps -->
+  <div class="section-head">
+    <div class="accent-line"></div>
+    <h2>The Three Gaps We Close</h2>
+    <p>No existing system solves all three. RiderShield is the only platform that does — built from edge hardware to city infrastructure.</p>
+  </div>
+  <div class="grid-3" style="margin-bottom:40px;">
+    <div class="card card-accent">
+      <div style="font-size:24px;margin-bottom:8px;">🗺️</div>
+      <h3>Gap 1 — No Hyperlocal Ground Truth</h3>
+      <p>IMD cells = 3 km resolution, 6-hour lag. Google Maps gets road closure data 45–90 min after a flood. Zero real-time sensing exists at 50-metre resolution. RiderShield generates a continuous flood probability surface at <strong style="color:var(--text);">50m resolution, updated every 30s</strong> — from riders already on the road.</p>
+    </div>
+    <div class="card card-accent2">
+      <div style="font-size:24px;margin-bottom:8px;">⛑️</div>
+      <h3>Gap 2 — Rider Physical State Invisible</h3>
+      <p>A rider on hour 14 is assigned the same orders as a rested rider. No fatigue signal exists anywhere. No platform has pre-accident biomechanical data for two-wheelers. RiderShield adds a <strong style="color:var(--text);">4-level fatigue index</strong> via grip asymmetry and handlebar micro-tremor.</p>
+    </div>
+    <div class="card card-accent3">
+      <div style="font-size:24px;margin-bottom:8px;">🪖</div>
+      <h3>Gap 3 — Helmet = Just Safety Gear</h3>
+      <p>Every rider wears a helmet. No platform uses it. RiderShield turns the helmet into a <strong style="color:var(--text);">24/7 AI edge-compute node</strong> — streaming surround threat detection, voice navigation, dashcam recording, and pothole mapping continuously, without touching the rider's phone.</p>
+    </div>
+  </div>
+
+  <!-- Core Concept -->
+  <div class="card" style="margin-bottom:32px;background:linear-gradient(135deg,rgba(0,229,184,0.05),rgba(0,0,0,0));border-color:rgba(0,229,184,0.2);">
+    <h3 style="margin-bottom:16px;font-size:22px;">The Core Idea — Peer Hazard Mesh</h3>
+    <div class="grid-2">
+      <div>
+        <p style="margin-bottom:12px;">When Rider A hits a pothole or flood, their sensors detect and classify the hazard. This gets published (anonymously) to the RiderShield backend. Within <strong style="color:var(--text);">5 seconds</strong>, every rider approaching that GPS segment receives a voice alert — before they reach it.</p>
+        <p style="font-size:13px;color:var(--muted);">The more riders on the platform, the denser the hazard mesh. Potholes found today are pre-warned tomorrow. Floods detected at 6:45 PM are rerouted around at 6:40 PM for the next batch.</p>
+        <div style="margin-top:16px;padding:12px;background:rgba(0,229,184,0.05);border-radius:8px;border-left:2px solid var(--accent);">
+          <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px;">Special Note — Helmet Compliance as a Feature</div>
+          <div style="font-size:12px;color:var(--muted);">All riders wear helmets — this is already mandated and monitored by companies. RiderShield converts this mandate into a value generator: every helmet is a sensor node that maps the city. Companies can also verify ride quality and detect discrepancies (e.g., a "completed" delivery where the rider never moved) through the continuous GPS + camera log.</div>
+        </div>
+      </div>
+      <div>
+        <div style="background:#0a1422;border-radius:10px;padding:20px;position:relative;overflow:hidden;">
+          <svg width="100%" viewBox="0 0 320 220" style="display:block;">
+            <!-- Road -->
+            <line x1="160" y1="20" x2="160" y2="200" stroke="rgba(255,255,255,0.06)" stroke-width="24"/>
+            <line x1="160" y1="20" x2="160" y2="200" stroke="rgba(255,255,255,0.02)" stroke-width="22" stroke-dasharray="8 6"/>
+            <!-- Flood zone -->
+            <ellipse cx="160" cy="140" rx="40" ry="22" fill="rgba(255,71,87,0.2)" stroke="rgba(255,71,87,0.5)" stroke-width="1.5"/>
+            <text x="160" y="144" text-anchor="middle" font-size="9" fill="rgba(255,71,87,0.8)" font-family="DM Mono">FLOOD</text>
+            <!-- Rider A (already past) -->
+            <circle cx="160" cy="170" r="10" fill="rgba(255,107,53,0.2)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <text x="160" y="174" text-anchor="middle" font-size="8" fill="var(--accent2)" font-family="DM Mono">A</text>
+            <text x="185" y="174" font-size="8" fill="rgba(255,107,53,0.6)" font-family="DM Mono">Detected!</text>
+            <!-- Signal wave -->
+            <circle cx="160" cy="140" r="55" fill="none" stroke="rgba(0,229,184,0.1)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="160" cy="140" r="75" fill="none" stroke="rgba(0,229,184,0.06)" stroke-width="1" stroke-dasharray="4 3"/>
+            <!-- Rider B (approaching) -->
+            <circle cx="160" cy="60" r="10" fill="rgba(0,229,184,0.15)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="160" y="64" text-anchor="middle" font-size="8" fill="var(--accent)" font-family="DM Mono">B</text>
+            <text x="185" y="64" font-size="8" fill="rgba(0,229,184,0.6)" font-family="DM Mono">Alerted!</text>
+            <!-- Arrow -->
+            <line x1="160" y1="80" x2="160" y2="112" stroke="rgba(255,71,87,0.3)" stroke-width="1" stroke-dasharray="3 2"/>
+            <!-- Server -->
+            <rect x="10" y="90" width="60" height="28" rx="5" fill="rgba(0,229,184,0.06)" stroke="rgba(0,229,184,0.25)" stroke-width="1"/>
+            <text x="40" y="108" text-anchor="middle" font-size="8" fill="var(--accent)" font-family="DM Mono">BACKEND</text>
+            <line x1="70" y1="104" x2="150" y2="165" stroke="rgba(255,107,53,0.3)" stroke-width="1" stroke-dasharray="3 2"/>
+            <line x1="70" y1="104" x2="150" y2="65" stroke="rgba(0,229,184,0.4)" stroke-width="1.5"/>
+            <!-- Labels -->
+            <text x="160" y="18" text-anchor="middle" font-size="9" fill="var(--muted)" font-family="DM Mono">DIRECTION OF TRAVEL</text>
+            <text x="40" y="130" text-anchor="middle" font-size="8" fill="var(--muted)" font-family="DM Mono">GP Surface</text>
+            <text x="40" y="140" text-anchor="middle" font-size="8" fill="var(--muted)" font-family="DM Mono">5s latency</text>
+          </svg>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
+          <div class="feat-tag orange">Rider A detects hazard</div>
+          <div class="feat-tag green">Backend updates GP surface</div>
+          <div class="feat-tag blue">Rider B gets voice alert</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key stats comparison -->
+  <div class="section-head"><div class="accent-line"></div><h2>RiderShield vs Existing Systems</h2></div>
+  <div class="card" style="margin-bottom:32px;">
+    <div style="overflow-x:auto;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>Zomato / Swiggy</th>
+          <th>IMD / Google Maps</th>
+          <th>Waze</th>
+          <th class="us">RiderShield AI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Spatial flood resolution</td><td class="cross">None</td><td class="partial">3 km</td><td class="partial">Road-level</td><td class="check">50 metres</td></tr>
+        <tr><td>Flood lead time</td><td class="cross">45–90 min lag</td><td class="cross">6-hour lag</td><td class="partial">15–20 min lag</td><td class="check">15–20 min ahead</td></tr>
+        <tr><td>Peer hazard alert</td><td class="cross">None</td><td class="cross">None</td><td class="partial">Manual tap</td><td class="check">Automatic, 5s latency</td></tr>
+        <tr><td>Pothole mapping</td><td class="cross">None</td><td class="cross">None</td><td class="partial">Manual report</td><td class="check">Automatic via IMU jerk</td></tr>
+        <tr><td>Rider fatigue detection</td><td class="cross">None</td><td class="cross">None</td><td class="cross">None</td><td class="check">4-level index, 50 Hz</td></tr>
+        <tr><td>AI helmet surround view</td><td class="cross">None</td><td class="cross">None</td><td class="cross">None</td><td class="check">360° threat detection</td></tr>
+        <tr><td>Voice navigation (hands-free)</td><td class="partial">Phone GPS only</td><td class="partial">Phone GPS only</td><td class="partial">Phone GPS only</td><td class="check">Bone-conduction, helmet</td></tr>
+        <tr><td>DIGIPIN precision delivery</td><td class="cross">None</td><td class="cross">None</td><td class="cross">None</td><td class="check">3.8m accuracy</td></tr>
+        <tr><td>Rider compliance monitoring</td><td class="partial">App ping</td><td class="cross">None</td><td class="cross">None</td><td class="check">GPS + cam continuous log</td></tr>
+        <tr><td>Hardware cost / rider</td><td class="cross">₹0 (no hardware)</td><td class="cross">N/A</td><td class="cross">N/A</td><td class="check">₹850 prototype</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- System Architecture -->
+  <div class="section-head"><div class="accent-line"></div><h2>3-Layer System Architecture</h2></div>
+  <div class="card">
+    <div class="grid-3">
+      <div style="border-right:1px solid var(--border);padding-right:20px;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent2);margin-bottom:14px;">Layer 1 — Edge Hardware (ECE)</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.8;">
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Bike Sensor Node (ESP32)</div>
+          Rain + ultrasonic depth + GPS + IMU accelerometer. TFLite anomaly fires on hazard. Hazard Feature Vector transmitted.<br><br>
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Smart Helmet (Raspberry Pi Zero 2W)</div>
+          Pi cam module + bone-conduction speaker + BLE. 24/7 AI threat detection, pothole logging, voice nav, dashcam.<br><br>
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Fatigue Handlebar Unit (ESP32)</div>
+          FSR grip array + triaxial accelerometer. 50 Hz. BLE relay to rider app.
+        </div>
+      </div>
+      <div style="border-right:1px solid var(--border);padding:0 20px;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:14px;">Layer 2 — Intelligence Engine (CSE)</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.8;">
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Flood Surface Model</div>
+          Gaussian Process spatial interpolation. 50m resolution, 30s update. 15–20 min impassability forecast.<br><br>
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Hazard Peer Mesh</div>
+          Pothole + flood events from riders aggregated and redistributed. Sub-5s alert propagation to approaching riders.<br><br>
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Helmet AI Pipeline</div>
+          MobileNet-based threat detection, pothole classifier, fatigue LSTM, DIGIPIN resolver.
+        </div>
+      </div>
+      <div style="padding-left:20px;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent3);margin-bottom:14px;">Layer 3 — Decision Outputs (CSE)</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.8;">
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Rider App (React Native)</div>
+          Live flood risk, predictive rerouting, voice alerts, DIGIPIN, fatigue status, peer hazard feed.<br><br>
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Ops Dashboard (React + Mapbox)</div>
+          Real-time flood heatmap, fleet fatigue overview, helmet cam feed, rider compliance log, NGO food redirect.<br><br>
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Municipal Open API</div>
+          Anonymised 50m flood + pothole tiles. BMC/BBMP/GCC subscription. Civic data revenue.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ DELTA — WHAT CHANGED ═══ -->
+<div id="section-delta" class="section">
+<div class="section-inner">
+  <div class="section-head">
+    <div class="accent-line"></div>
+    <h2>What We Kept, What We Removed, What We Added</h2>
+    <p>A clear diff between the original proposal and this startup-optimised, hackathon-ready version.</p>
+  </div>
+
+  <div class="grid-3" style="margin-bottom:32px;">
+    <!-- KEPT -->
+    <div class="delta-card kept">
+      <div style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:6px;">✅ Kept from Original</div>
+      <div class="delta-item">
+        <div class="delta-badge kept">✓</div>
+        <div><div class="delta-text">Federated ESP32 flood detection</div><div class="delta-sub">YL-83 + JSN-SR04T + MPU-6050 + TFLite Micro anomaly model — unchanged</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge kept">✓</div>
+        <div><div class="delta-text">Gaussian Process flood surface</div><div class="delta-sub">50m spatial resolution, 30s update, 15-min lead time — unchanged</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge kept">✓</div>
+        <div><div class="delta-text">Fatigue handlebar unit</div><div class="delta-sub">FSR grip asymmetry + tremor detection + LSTM — unchanged</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge kept">✓</div>
+        <div><div class="delta-text">DIGIPIN integration</div><div class="delta-sub">3.8m delivery precision — unchanged</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge kept">✓</div>
+        <div><div class="delta-text">React Native rider app</div><div class="delta-sub">Voice alerts, flood map, fatigue score — unchanged</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge kept">✓</div>
+        <div><div class="delta-text">FastAPI + MongoDB + Redis backend</div><div class="delta-sub">Real-time WebSocket, GP surface API — unchanged</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge kept">✓</div>
+        <div><div class="delta-text">Mapbox ops dashboard</div><div class="delta-sub">Fleet overview, heatmap tiles, NGO redirect — unchanged</div></div>
+      </div>
+    </div>
+
+    <!-- REMOVED -->
+    <div class="removed-card">
+      <div style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--red);margin-bottom:14px;display:flex;align-items:center;gap:6px;">🗑️ Removed</div>
+      <div class="removed-item">
+        <div class="removed-badge">✗</div>
+        <div><div class="delta-text" style="font-size:13px;">HAR Cryptographic Compensation USP</div><div class="delta-sub">Compensation is pre-defined in company terms — no need for a standalone system. Removed entirely from product scope.</div></div>
+      </div>
+      <div class="removed-item">
+        <div class="removed-badge">✗</div>
+        <div><div class="delta-text" style="font-size:13px;">OAK-D Lite VPU camera (₹4,200)</div><div class="delta-sub">Replaced by Raspberry Pi Zero 2W + Pi Cam module at a fraction of the cost. Same AI capability via MobileNetV2.</div></div>
+      </div>
+      <div class="removed-item">
+        <div class="removed-badge">✗</div>
+        <div><div class="delta-text" style="font-size:13px;">OV5640 / OV2640 multi-camera array</div><div class="delta-sub">Simplified to single wide-angle Pi Cam with 160° FOV for prototype demo. Sufficient for judge wow factor.</div></div>
+      </div>
+      <div class="removed-item">
+        <div class="removed-badge">✗</div>
+        <div><div class="delta-text" style="font-size:13px;">HMAC-SHA256 eFuse attestation</div><div class="delta-sub">Compensation module removed — eFuse attestation no longer needed. Standard data signing retained for logging.</div></div>
+      </div>
+      <div class="removed-item">
+        <div class="removed-badge">✗</div>
+        <div><div class="delta-text" style="font-size:13px;">ESP32-S3 as helmet MCU</div><div class="delta-sub">Replaced by Raspberry Pi Zero 2W which runs full Linux + Python AI stack with far more capability.</div></div>
+      </div>
+    </div>
+
+    <!-- ADDED -->
+    <div class="delta-card added">
+      <div style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--accent3);margin-bottom:14px;display:flex;align-items:center;gap:6px;">⚡ Added / New</div>
+      <div class="delta-item">
+        <div class="delta-badge added">+</div>
+        <div><div class="delta-text">Raspberry Pi Zero 2W helmet unit</div><div class="delta-sub">Full Linux AI node on helmet — 24/7 threat detection, dashcam, voice nav at ₹650 (vs ₹4,200 OAK-D)</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge added">+</div>
+        <div><div class="delta-text">Peer hazard mesh system</div><div class="delta-sub">Riders share pothole + flood data in real-time. New riders get pre-warned. Core "wow" differentiator.</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge added">+</div>
+        <div><div class="delta-text">360° AI surround threat detection</div><div class="delta-sub">MobileNetV2 + Pi Cam detects vehicles, potholes, obstacles. Voice alert via bone-conduction speaker.</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge added">+</div>
+        <div><div class="delta-text">Accident prevention system</div><div class="delta-sub">TTC (time-to-collision) computation. Combines helmet cam + IMU jerk + GP flood surface to predict danger zones.</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge added">+</div>
+        <div><div class="delta-text">Rider discrepancy monitoring</div><div class="delta-sub">Companies can verify deliveries via GPS log + helmet cam timestamps. Detects fake completions and route deviations.</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge added">+</div>
+        <div><div class="delta-text">Full demo script + rider journey</div><div class="delta-sub">Step-by-step 90-second demo flow for judges + complete live ride simulation.</div></div>
+      </div>
+      <div class="delta-item">
+        <div class="delta-badge added">+</div>
+        <div><div class="delta-text">60-hour implementation plan</div><div class="delta-sub">Per-member hour-by-hour Gantt for 3 ECE + 2 CSE over the hackathon period.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Special Note -->
+  <div class="special-note" style="margin-bottom:32px;">
+    <div class="special-note-header">📌 Special Note — Helmet Compliance as Platform Advantage</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:10px;">Every rider already wears a helmet — it is mandated and monitored by Zomato, Swiggy, and traffic enforcement. RiderShield converts this non-negotiable compliance into a sensing asset.</p>
+    <div class="grid-2" style="margin-top:12px;">
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;">For Riders</div>
+        <div style="font-size:13px;color:var(--muted);">The helmet becomes their guardian — proactively warning them about threats they cannot see (vehicle approaching from rear, pothole 50m ahead detected by a previous rider, flood zone on their route).</div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;">For Companies</div>
+        <div style="font-size:13px;color:var(--muted);">The helmet provides a continuous verified log of delivery activity. Companies can detect discrepancies — a rider who "completed" a delivery but the GPS shows they never reached the DIGIPIN. Reduces fraud and enables fair performance monitoring.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cost diff -->
+  <div class="section-head"><div class="accent-line"></div><h2>Cost Reduction Summary</h2></div>
+  <div class="card">
+    <div style="overflow-x:auto;">
+    <table class="hw-table">
+      <thead><tr><th>Component</th><th>Original Plan</th><th>Revised Prototype</th><th>Savings</th></tr></thead>
+      <tbody>
+        <tr><td>Helmet vision compute</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--red);">OAK-D Lite ₹4,200</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--green);">Pi Zero 2W + Pi Cam ₹650</td><td>₹3,550</td></tr>
+        <tr><td>Side cameras</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--red);">OV2640 ×2 ₹280</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--green);">Removed (single wide-angle)</td><td>₹280</td></tr>
+        <tr><td>Rear camera</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--red);">OV5640 ₹380</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--green);">Included in Pi Cam kit</td><td>₹380</td></tr>
+        <tr><td>Helmet MCU</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--red);">ESP32-S3 ₹380</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--green);">Replaced by Pi Zero 2W</td><td>₹380</td></tr>
+        <tr><td>MEMS mic array</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--red);">ICS-43434 ×2 ₹240</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--green);">USB mini mic ₹80</td><td>₹160</td></tr>
+        <tr><td>HAR attestation module</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--red);">Removed USP entirely</td><td style="font-family:var(--font-mono);font-size:12px;color:var(--green);">N/A</td><td>Dev time saved</td></tr>
+        <tr style="background:rgba(0,229,184,0.04);"><td colspan="2" style="font-weight:700;color:var(--text);">Original helmet unit total</td><td style="font-weight:700;color:var(--red);">₹7,850</td><td style="font-weight:700;font-size:13px;"></td></tr>
+        <tr style="background:rgba(0,229,184,0.06);"><td colspan="2" style="font-weight:700;color:var(--text);">Revised prototype helmet total</td><td style="font-weight:700;color:var(--green);">₹1,550</td><td style="color:var(--accent4);font-weight:700;">80% reduction</td></tr>
+        <tr style="background:rgba(255,210,77,0.04);"><td colspan="2" style="font-weight:800;color:var(--accent4);">Total per-rider prototype cost</td><td style="font-weight:800;color:var(--accent4);">₹850</td><td style="color:var(--green);font-weight:700;">Was ₹10,345</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div style="margin-top:14px;padding:12px;background:rgba(0,229,184,0.04);border-radius:8px;font-size:13px;color:var(--muted);">
+      <strong style="color:var(--accent);">Prototype note:</strong> These costs are for a functional hackathon prototype — not production-grade hardware. The Pi Zero 2W provides sufficient compute for demo-worthy AI inference. Production would use a more ruggedized compute module, but the software architecture is identical.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ HARDWARE ═══ -->
+<div id="section-hardware" class="section">
+<div class="section-inner">
+  <div class="section-head">
+    <div class="accent-line"></div>
+    <h2>Hardware — Minimal Yet Functional</h2>
+    <p>Three units. Total ₹850 per rider prototype. Functionality identical to a ₹10,000 production system.</p>
+  </div>
+
+  <!-- Helmet diagram -->
+  <div style="background:linear-gradient(135deg,#09152a,#0f1c30);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:28px;display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
+    <div>
+      <svg width="200" height="240" viewBox="0 0 200 240">
+        <ellipse cx="100" cy="110" rx="82" ry="92" fill="#162030" stroke="#243348" stroke-width="2"/>
+        <ellipse cx="100" cy="120" rx="82" ry="74" fill="#111e2c" stroke="#243348" stroke-width="1.5"/>
+        <path d="M30 130 Q100 165 170 130 L170 154 Q100 188 30 154 Z" fill="rgba(77,166,255,0.12)" stroke="rgba(77,166,255,0.35)" stroke-width="1.5"/>
+        <!-- Pi Cam -->
+        <rect x="72" y="38" width="56" height="24" rx="6" fill="#0c1926" stroke="rgba(0,229,184,0.5)" stroke-width="1.5"/>
+        <circle cx="100" cy="50" r="7" fill="#1a2a38" stroke="rgba(0,229,184,0.7)" stroke-width="1.2"/>
+        <circle cx="100" cy="50" r="4" fill="rgba(0,229,184,0.25)"/>
+        <!-- Speaker -->
+        <ellipse cx="45" cy="148" rx="11" ry="7" fill="#0c1926" stroke="rgba(124,111,255,0.45)" stroke-width="1.5"/>
+        <ellipse cx="155" cy="148" rx="11" ry="7" fill="#0c1926" stroke="rgba(124,111,255,0.45)" stroke-width="1.5"/>
+        <!-- Pi Zero indicator -->
+        <rect x="76" y="80" width="48" height="20" rx="4" fill="#0c1926" stroke="rgba(255,107,53,0.4)" stroke-width="1.5"/>
+        <text x="100" y="93" text-anchor="middle" font-size="7" fill="rgba(255,107,53,0.7)" font-family="DM Mono">Pi Zero 2W</text>
+        <!-- Labels -->
+        <text x="148" y="46" font-size="8" fill="rgba(0,229,184,0.7)" font-family="DM Mono">Pi Cam</text>
+        <text x="148" y="56" font-size="7" fill="rgba(0,229,184,0.5)" font-family="DM Mono">160° wide</text>
+        <text x="0" y="152" font-size="7" fill="rgba(124,111,255,0.7)" font-family="DM Mono">bone-cond</text>
+        <text x="155" y="172" font-size="7" fill="rgba(124,111,255,0.7)" font-family="DM Mono">speaker</text>
+        <text x="148" y="87" font-size="7" fill="rgba(255,107,53,0.6)" font-family="DM Mono">AI compute</text>
+      </svg>
+    </div>
+    <div style="flex:1;min-width:260px;">
+      <div style="font-size:14px;font-weight:700;color:var(--accent);margin-bottom:14px;">Smart Helmet — Raspberry Pi Zero 2W</div>
+      <div class="sensor-row">
+        <div class="sensor-icon">🧠</div>
+        <div><div class="sensor-name">Raspberry Pi Zero 2W</div><div class="sensor-spec">Quad-core 1GHz · 512MB RAM · BLE · Linux + Python · ₹650</div></div>
+      </div>
+      <div class="sensor-row">
+        <div class="sensor-icon">📷</div>
+        <div><div class="sensor-name">Pi Camera Module 3 Wide</div><div class="sensor-spec">12MP · 120° FOV · 1080p30 · CSI interface · ₹800</div></div>
+      </div>
+      <div class="sensor-row">
+        <div class="sensor-icon">🔊</div>
+        <div><div class="sensor-name">Bone-conduction transducer</div><div class="sensor-spec">USB audio · Hands-free · 40 dB ambient rejection · ₹350</div></div>
+      </div>
+      <div class="sensor-row">
+        <div class="sensor-icon">🔋</div>
+        <div><div class="sensor-name">5000 mAh USB-C power bank</div><div class="sensor-spec">8hr runtime · standard · ₹400</div></div>
+      </div>
+      <div class="sensor-row">
+        <div class="sensor-icon">⛑️</div>
+        <div><div class="sensor-name">Standard ISI helmet shell</div><div class="sensor-spec">3D-printed rear housing · zip-tie + velcro mount (prototype) · ₹350</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full BOM -->
+  <div class="card" style="margin-bottom:24px;">
+    <h3 style="margin-bottom:18px;">Full Bill of Materials — Prototype Edition</h3>
+    <div style="overflow-x:auto;">
+    <table class="hw-table">
+      <thead><tr><th>Component</th><th>Part</th><th>Function</th><th>Prototype Cost</th></tr></thead>
+      <tbody>
+        <tr class="hw-group-header"><td colspan="4">UNIT A — Bike Sensor Node (ECE: E1 + E2)</td></tr>
+        <tr><td>ESP32-S3 WROOM-2</td><td>ESP32-S3</td><td>Main MCU · dual-core 240 MHz · BLE + WiFi · TFLite Micro</td><td>₹380</td></tr>
+        <tr><td>YL-83 rain sensor</td><td>YL-83</td><td>Analog rain intensity detection</td><td>₹45</td></tr>
+        <tr><td>JSN-SR04T ultrasonic</td><td>JSN-SR04T</td><td>Waterproof depth sensing · 20–600cm · IP67</td><td>₹180</td></tr>
+        <tr><td>MPU-6050 IMU</td><td>GY-521</td><td>6-axis accel + gyro · pothole jerk detection</td><td>₹85</td></tr>
+        <tr><td>u-blox NEO-6M GPS</td><td>NEO-6M</td><td>GPS location · 5Hz · NMEA output</td><td>₹280</td></tr>
+        <tr><td>Zip-tie + foam mount</td><td>Prototype</td><td>Bike mounting (prototype grade)</td><td>₹30</td></tr>
+        <tr><td>18650 battery + holder</td><td>18650</td><td>6hr operational · standard · no BMS needed for prototype</td><td>₹120</td></tr>
+        <tr style="background:rgba(0,229,184,0.03);"><td colspan="3" style="font-weight:700;color:var(--text);">Unit A Subtotal</td><td style="color:var(--accent);font-weight:700;">₹1,120</td></tr>
+
+        <tr class="hw-group-header"><td colspan="4">UNIT B — Fatigue Handlebar Unit (ECE: E3)</td></tr>
+        <tr><td>FSR 402 (×2)</td><td>Interlink-402</td><td>Left + right grip force · analog</td><td>₹260</td></tr>
+        <tr><td>MPU-6050 (handlebar)</td><td>GY-521</td><td>Micro-tremor 50 Hz</td><td>₹85</td></tr>
+        <tr><td>ESP32 WROOM-32</td><td>ESP32-D0</td><td>BLE relay to rider phone</td><td>₹220</td></tr>
+        <tr><td>3D-printed grip mount</td><td>PLA print</td><td>Handlebar attachment</td><td>₹60</td></tr>
+        <tr style="background:rgba(0,229,184,0.03);"><td colspan="3" style="font-weight:700;color:var(--text);">Unit B Subtotal</td><td style="color:var(--accent);font-weight:700;">₹625</td></tr>
+
+        <tr class="hw-group-header"><td colspan="4">UNIT C — Smart Helmet (ECE: E3 + CSE assist)</td></tr>
+        <tr><td>Raspberry Pi Zero 2W</td><td>Pi-Zero-2W</td><td>Full Linux AI node · quad-core · BLE · Python/TFLite</td><td>₹650</td></tr>
+        <tr><td>Pi Camera Module 3 Wide</td><td>SC0872</td><td>120° FOV · 12MP · 1080p30 · CSI</td><td>₹800</td></tr>
+        <tr><td>Bone-conduction speaker</td><td>Generic USB</td><td>Voice alerts · hands-free</td><td>₹350</td></tr>
+        <tr><td>USB mini microphone</td><td>Generic</td><td>Voice command input</td><td>₹80</td></tr>
+        <tr><td>5000 mAh USB-C powerbank</td><td>Standard</td><td>8hr runtime · standard off-shelf</td><td>₹400</td></tr>
+        <tr><td>ISI helmet shell</td><td>Standard</td><td>Base helmet · 3D-printed rear housing</td><td>₹350</td></tr>
+        <tr><td>3D-printed cam housing</td><td>PLA print</td><td>Camera mount · rear-clip style</td><td>₹80</td></tr>
+        <tr style="background:rgba(0,229,184,0.03);"><td colspan="3" style="font-weight:700;color:var(--text);">Unit C Subtotal</td><td style="color:var(--accent);font-weight:700;">₹2,710</td></tr>
+
+        <tr style="background:rgba(255,210,77,0.05);"><td colspan="3" style="font-weight:800;color:var(--accent4);font-size:14px;">TOTAL PER RIDER (prototype)</td><td style="color:var(--accent4);font-weight:800;font-size:14px;">₹4,455</td></tr>
+        <tr style="background:rgba(0,229,184,0.04);"><td colspan="3" style="font-weight:600;color:var(--muted);">Unit A + B only (MVP without helmet)</td><td style="color:var(--accent);font-weight:700;">₹1,745</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div style="margin-top:14px;padding:12px;background:rgba(255,210,77,0.04);border-radius:8px;font-size:13px;color:var(--muted);">
+      <strong style="color:var(--accent4);">Hackathon note:</strong> All components are standard, off-shelf parts available on Amazon/Robu.in. No custom PCBs needed. The prototype uses 3D-printed mounts and zip-tie housings — functional and demo-ready in 60 hours.
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card card-accent">
+      <h3>Why Raspberry Pi over OAK-D Lite</h3>
+      <p>The OAK-D Lite costs ₹4,200 and requires OpenCV AI Kit SDK. The Pi Zero 2W costs ₹650 and runs standard Python + TFLite — the same stack the team already knows. For a prototype demo, the Pi Cam with MobileNetV2 at 15 fps is entirely sufficient to detect vehicles, potholes, and raise voice alerts. Production can upgrade to a Jetson Nano or dedicated NPU module.</p>
+    </div>
+    <div class="card card-accent3">
+      <h3>Prototype vs Production Grade</h3>
+      <p>This is a hackathon prototype — not a production unit. IP65 weatherproofing, PCB integration, and ISI helmet compliance are post-hackathon Phase 1 work. For the demo: zip-ties, 3D-printed mounts, and a powerbank are perfectly sufficient to show judges every core function live. Functionality = 100%. Build quality = prototype.</p>
+      <div style="margin-top:10px;">
+        <div class="feat-tag green">✓ All AI runs live</div>
+        <div class="feat-tag green">✓ All sensors active</div>
+        <div class="feat-tag orange">⬡ Prototype mount</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ SOFTWARE ═══ -->
+<div id="section-software" class="section">
+<div class="section-inner">
+  <div class="section-head">
+    <div class="accent-line"></div>
+    <h2>Software Architecture — Full Stack</h2>
+    <p>Every component, what it does, and how AI is woven through the entire system from helmet edge to cloud to app.</p>
+  </div>
+
+  <!-- Software Stack Table -->
+  <div class="card" style="margin-bottom:28px;">
+    <h3 style="margin-bottom:18px;">Minimal Software Stack — Same Power, Lower Complexity</h3>
+    <div style="overflow-x:auto;">
+    <table class="hw-table">
+      <thead><tr><th>Layer</th><th>Technology</th><th>What It Does</th><th>Why This Choice</th></tr></thead>
+      <tbody>
+        <tr class="hw-group-header"><td colspan="4">FIRMWARE — Bike Node (ESP32)</td></tr>
+        <tr><td>TFLite Micro</td><td>tflite-micro</td><td>On-device anomaly detection: rain + depth + jerk → hazard classification</td><td>50KB model, runs in 256KB RAM on ESP32. No cloud needed.</td></tr>
+        <tr><td>Arduino + ESP-IDF</td><td>Arduino Core</td><td>Sensor drivers, BLE stack, HFV packet transmission</td><td>Fastest dev cycle for ESP32. FreeRTOS multitasking.</td></tr>
+        <tr><td>MQTT over WiFi</td><td>PubSubClient</td><td>Hazard Feature Vector upload to backend on hazard detection</td><td>Lightweight, reliable. Falls back to BLE relay via phone.</td></tr>
+
+        <tr class="hw-group-header"><td colspan="4">HELMET AI — Raspberry Pi Zero 2W</td></tr>
+        <tr><td>Python 3 + TFLite Runtime</td><td>tflite-runtime</td><td>MobileNetV2 inference on Pi Cam frames — threat detection, pothole classification</td><td>Full Python on Linux. No custom SDK. Team already knows it.</td></tr>
+        <tr><td>OpenCV</td><td>opencv-python</td><td>Camera capture, frame preprocessing, TTC estimation, dashcam loop buffer</td><td>Standard. Fast. Headless mode on Pi Zero.</td></tr>
+        <tr><td>pyttsx3 + aplay</td><td>TTS + audio</td><td>Voice alert synthesis and output to bone-conduction speaker</td><td>Offline TTS, no API key, works without internet.</td></tr>
+        <tr><td>BLE via BlueZ</td><td>bluepy</td><td>Transmit helmet events (threats, potholes) to bike node → backend</td><td>Native Linux BLE stack. Reliable at 5m range.</td></tr>
+        <tr><td>DIGIPIN resolver</td><td>REST API call</td><td>Resolve delivery address to 3.8m precision pinpoint</td><td>Free IIT-India Post open API. No auth needed.</td></tr>
+
+        <tr class="hw-group-header"><td colspan="4">BACKEND — FastAPI Server</td></tr>
+        <tr><td>FastAPI</td><td>fastapi</td><td>REST + WebSocket API. Hazard ingestion, GP surface serving, peer alert broadcast</td><td>Async Python — handles WebSocket real-time + REST together.</td></tr>
+        <tr><td>Scikit-learn GP</td><td>GaussianProcessRegressor</td><td>Spatial interpolation of HFVs into 50m flood probability surface</td><td>3-line fit+predict. No separate ML framework needed.</td></tr>
+        <tr><td>MongoDB</td><td>pymongo</td><td>Time-series hazard telemetry, rider GPS logs, helmet cam events</td><td>Flexible schema for mixed sensor data. Native geospatial index.</td></tr>
+        <tr><td>Redis</td><td>redis-py</td><td>Cache live GP surface tiles for sub-100ms dashboard reads</td><td>In-memory. Trivial setup. Critical for 30s update cycle.</td></tr>
+        <tr><td>WebSocket broadcast</td><td>fastapi WS</td><td>Push peer hazard alerts to all riders in a 500m radius instantly</td><td>Native FastAPI feature. No Kafka/RabbitMQ needed for prototype.</td></tr>
+
+        <tr class="hw-group-header"><td colspan="4">MOBILE — React Native App</td></tr>
+        <tr><td>React Native</td><td>Expo</td><td>Rider app: flood map, risk score, voice alerts, DIGIPIN, fatigue score, peer hazard feed</td><td>Single codebase Android + iOS. Expo for fast builds.</td></tr>
+        <tr><td>React Native Maps</td><td>MapLibre</td><td>Flood probability heatmap overlay on rider route</td><td>Open-source, free. No Mapbox token needed for prototype.</td></tr>
+        <tr><td>Expo Speech</td><td>expo-speech</td><td>Voice navigation and hazard alerts via phone speaker</td><td>One-line TTS. Works offline.</td></tr>
+        <tr><td>BLE manager</td><td>react-native-ble</td><td>Receive fatigue data from handlebar unit</td><td>Direct BLE — no internet hop for latency-critical fatigue data.</td></tr>
+
+        <tr class="hw-group-header"><td colspan="4">DASHBOARD — React Admin</td></tr>
+        <tr><td>React + Vite</td><td>React 18</td><td>Admin ops dashboard: fleet map, fatigue monitor, helmet events, hazard log</td><td>Fast dev. No framework overhead.</td></tr>
+        <tr><td>Leaflet.js</td><td>react-leaflet</td><td>Real-time flood heatmap, rider dots, hazard markers</td><td>Free. No API key. Sufficient for prototype heatmap tiles.</td></tr>
+
+        <tr class="hw-group-header"><td colspan="4">INFRASTRUCTURE</td></tr>
+        <tr><td>Docker Compose</td><td>docker-compose</td><td>FastAPI + MongoDB + Redis in one-command local deploy</td><td>Zero infra setup for hackathon. Deploy on any laptop.</td></tr>
+        <tr><td>Cloudflare Tunnel</td><td>cloudflared</td><td>Expose local backend to internet for mobile app during demo</td><td>Free, instant — no cloud VM needed for prototype.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- Data flow diagram -->
+  <div class="section-head"><div class="accent-line"></div><h2>AI Integration Flow</h2></div>
+  <div class="card" style="margin-bottom:28px;">
+    <div class="grid-3" style="gap:10px;">
+      <!-- Bike Node -->
+      <div style="background:#0a1520;border-radius:10px;padding:16px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:10px;">Bike Node — ESP32</div>
+        <div class="sw-node" style="margin-bottom:8px;">
+          <div class="sw-node-title">Sensor sampling loop</div>
+          <div class="sw-node-sub">YL-83 + JSN-SR04T + MPU-6050 at 10Hz</div>
+        </div>
+        <div class="sw-arrow">↓</div>
+        <div class="sw-node" style="margin-bottom:8px;">
+          <div class="sw-node-title">TFLite Micro inference</div>
+          <div class="sw-node-sub">3-feature anomaly model · 50KB · fires on hazard</div>
+        </div>
+        <div class="sw-arrow">↓</div>
+        <div class="sw-node" style="margin-bottom:8px;">
+          <div class="sw-node-title">Hazard Feature Vector</div>
+          <div class="sw-node-sub">GPS + sensor readings + timestamp → MQTT publish</div>
+        </div>
+        <div class="sw-arrow">↓ WiFi / BLE</div>
+      </div>
+
+      <!-- Backend -->
+      <div style="background:#0a1520;border-radius:10px;padding:16px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:10px;">Backend — FastAPI + GP Model</div>
+        <div class="sw-node" style="margin-bottom:8px;">
+          <div class="sw-node-title">HFV ingestion endpoint</div>
+          <div class="sw-node-sub">Validates · stores in MongoDB · updates Redis queue</div>
+        </div>
+        <div class="sw-arrow">↓</div>
+        <div class="sw-node" style="margin-bottom:8px;">
+          <div class="sw-node-title">Gaussian Process fit</div>
+          <div class="sw-node-sub">5–8 riders in 500m → flood probability surface · 30s cycle</div>
+        </div>
+        <div class="sw-arrow">↓</div>
+        <div class="sw-node" style="margin-bottom:8px;">
+          <div class="sw-node-title">Peer hazard broadcast</div>
+          <div class="sw-node-sub">WebSocket push to all riders within 500m radius · &lt;5s</div>
+        </div>
+        <div class="sw-arrow">↓ WebSocket / REST</div>
+      </div>
+
+      <!-- Helmet + App -->
+      <div style="background:#0a1520;border-radius:10px;padding:16px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent3);margin-bottom:10px;">Helmet Pi + Rider App</div>
+        <div class="sw-node" style="margin-bottom:8px;">
+          <div class="sw-node-title">MobileNetV2 inference</div>
+          <div class="sw-node-sub">Pi Cam frames → threat/pothole/safe at 15fps</div>
+        </div>
+        <div class="sw-arrow">↓</div>
+        <div class="sw-node" style="margin-bottom:8px;">
+          <div class="sw-node-title">TTC computation</div>
+          <div class="sw-node-sub">Bounding box delta → time-to-collision → voice alert</div>
+        </div>
+        <div class="sw-arrow">↓</div>
+        <div class="sw-node" style="margin-bottom:8px;">
+          <div class="sw-node-title">Rider App receives</div>
+          <div class="sw-node-sub">Peer flood/pothole alerts + voice nav + fatigue index + DIGIPIN</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App screens description -->
+  <div class="section-head"><div class="accent-line"></div><h2>What the Rider App Shows</h2></div>
+  <div class="grid-2" style="margin-bottom:28px;">
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
+      <!-- Phone mockup 1 -->
+      <div style="width:200px;background:#0d1117;border:1px solid var(--border2);border-radius:24px;padding:18px 14px;">
+        <div style="text-align:center;font-size:9px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em;">RIDERSHIELD</div>
+        <div style="background:rgba(0,229,184,0.07);border:1px solid rgba(0,229,184,0.2);border-radius:10px;padding:10px;margin-bottom:8px;">
+          <div style="font-size:9px;color:var(--muted);">Route risk</div>
+          <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--accent);">LOW</div>
+          <div style="font-size:9px;color:var(--muted);">No hazards on path</div>
+        </div>
+        <div style="background:rgba(255,71,87,0.07);border:1px solid rgba(255,71,87,0.2);border-radius:10px;padding:10px;margin-bottom:8px;">
+          <div style="font-size:9px;color:var(--red);font-weight:700;">⚠ PEER ALERT</div>
+          <div style="font-size:10px;color:var(--muted);">Pothole · 140m ahead · detected by Rider #R211</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:8px;">
+          <div style="font-size:9px;color:var(--muted);">Delivery pinpoint</div>
+          <div style="font-size:11px;font-weight:700;">5F3-KJ2-9P4Q</div>
+          <div style="font-size:9px;color:var(--accent);">DIGIPIN · 3.8m · 2nd entrance</div>
+        </div>
+        <div style="background:rgba(0,212,170,0.07);border:1px solid rgba(0,212,170,0.2);border-radius:10px;padding:8px;text-align:center;">
+          <div style="font-size:9px;color:var(--green);font-weight:700;">🔊 VOICE NAV</div>
+          <div style="font-size:8px;color:var(--muted);">"In 200m turn left"</div>
+        </div>
+      </div>
+      <!-- Phone mockup 2 -->
+      <div style="width:200px;background:#0d1117;border:1px solid var(--border2);border-radius:24px;padding:18px 14px;">
+        <div style="text-align:center;font-size:9px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em;">SAFETY STATUS</div>
+        <div style="background:rgba(124,111,255,0.07);border:1px solid rgba(124,111,255,0.2);border-radius:10px;padding:10px;margin-bottom:8px;">
+          <div style="font-size:9px;color:var(--accent3);">Helmet AI</div>
+          <div style="font-size:10px;font-weight:700;color:var(--green);">✓ ACTIVE · 15 fps</div>
+          <div style="font-size:9px;color:var(--muted);">No threats detected</div>
+        </div>
+        <div style="background:rgba(255,210,77,0.07);border:1px solid rgba(255,210,77,0.2);border-radius:10px;padding:10px;margin-bottom:8px;">
+          <div style="font-size:9px;color:var(--accent4);">Fatigue Level</div>
+          <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--green);">1</div>
+          <div style="font-size:9px;color:var(--muted);">GAI: 0.08 · TFD: 0.3 Hz</div>
+        </div>
+        <div style="background:rgba(0,229,184,0.07);border:1px solid rgba(0,229,184,0.2);border-radius:10px;padding:10px;margin-bottom:8px;">
+          <div style="font-size:9px;color:var(--accent);">Flood surface</div>
+          <div style="height:50px;background:#0a1828;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:4px;">
+            <div style="font-size:8px;color:var(--muted);">Heatmap · No flood zones</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,71,87,0.05);border:1px solid rgba(255,71,87,0.15);border-radius:10px;padding:8px;text-align:center;">
+          <div style="font-size:9px;color:var(--red);">Potholes nearby</div>
+          <div style="font-size:11px;font-weight:700;color:var(--accent4);">3 mapped</div>
+          <div style="font-size:8px;color:var(--muted);">by peer riders</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;">App Feature List</div>
+      <div class="alert-item ok" style="margin-bottom:8px;"><div class="alert-icon">🗺️</div><div class="alert-text"><div class="alert-title">Live flood risk score + heatmap</div><div class="alert-sub">GP surface rendered as heatmap on route. Colour-coded LOW/MODERATE/HIGH risk.</div></div></div>
+      <div class="alert-item warning" style="margin-bottom:8px;"><div class="alert-icon">⚠️</div><div class="alert-text"><div class="alert-title">Peer hazard alerts</div><div class="alert-sub">Pothole and flood alerts from riders ahead — auto-triggered, &lt;5s. No manual reporting.</div></div></div>
+      <div class="alert-item info" style="margin-bottom:8px;"><div class="alert-icon">📍</div><div class="alert-text"><div class="alert-title">DIGIPIN delivery pinpoint</div><div class="alert-sub">3.8m precision. Shows exact building entrance. Integrates with flood zone check.</div></div></div>
+      <div class="alert-item ok" style="margin-bottom:8px;"><div class="alert-icon">🔊</div><div class="alert-text"><div class="alert-title">Voice navigation (hands-free)</div><div class="alert-sub">Turn-by-turn + hazard alerts spoken via phone speaker or helmet bone-conduction.</div></div></div>
+      <div class="alert-item info" style="margin-bottom:8px;"><div class="alert-icon">💪</div><div class="alert-text"><div class="alert-title">Fatigue level display</div><div class="alert-sub">Live 4-level index. Level 3 = rest suggestion popup. Level 4 = order gating triggered.</div></div></div>
+      <div class="alert-item warning" style="margin-bottom:8px;"><div class="alert-icon">🪖</div><div class="alert-text"><div class="alert-title">Helmet AI status</div><div class="alert-sub">Threat detection feed from helmet. Inference fps, battery, BLE link strength.</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ HELMET AI ═══ -->
+<div id="section-helmet" class="section">
+<div class="section-inner">
+  <div class="section-head">
+    <div class="accent-line"></div>
+    <h2>Helmet AI — 24/7 Edge Intelligence</h2>
+    <p>The Raspberry Pi Zero 2W turns a standard ISI helmet into a full-time AI safety system. No phone needed. No cloud latency.</p>
+  </div>
+
+  <div class="special-note" style="margin-bottom:28px;">
+    <div class="special-note-header">🪖 Why the Helmet is the Perfect Node</div>
+    <p style="font-size:13px;color:var(--muted);">The helmet is always on the rider's head. It faces forward, backward, and sideways. It is always powered (we add a powerbank). It has a microphone and speaker position that's ideal for voice interaction. And most importantly — it is <strong style="color:var(--text);">already worn by every rider</strong>. This is not an additional device to adopt. It is upgrading something that already exists.</p>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:28px;">
+    <div>
+      <div class="section-head" style="margin-bottom:16px;"><h2 style="font-size:22px;">What the Helmet AI Does</h2></div>
+
+      <div class="card" style="margin-bottom:12px;border:1px solid rgba(255,71,87,0.2);">
+        <h3 style="color:var(--accent2);">🚗 Threat Detection</h3>
+        <p>Pi Camera captures frames at 15 fps. MobileNetV2 (TFLite) classifies each frame: vehicle-approaching, pedestrian, obstacle, or safe. When a vehicle is detected within the danger zone, time-to-collision (TTC) is estimated from bounding box growth rate. If TTC &lt; 3 seconds → bone-conduction speaker fires: <em style="color:var(--accent);">"Warning — vehicle approaching from rear."</em></p>
+        <div style="margin-top:10px;"><div class="feat-tag red">Rear camera view</div><div class="feat-tag orange">TTC &lt; 3s = alert</div><div class="feat-tag green">15 fps on Pi Zero</div></div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px;border:1px solid rgba(0,229,184,0.2);">
+        <h3 style="color:var(--accent);">🕳️ Pothole Detection + Peer Sharing</h3>
+        <p>The IMU on the bike node detects a jerk event (acceleration spike > threshold). The helmet cam simultaneously captures the road surface frame. The backend combines both signals: IMU jerk + visual pothole classification = high-confidence pothole event. This is published to the peer hazard mesh — all riders within 500m receive a voice alert within 5 seconds.</p>
+        <div style="margin-top:10px;"><div class="feat-tag green">IMU + camera fusion</div><div class="feat-tag blue">Peer broadcast 5s</div></div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px;border:1px solid rgba(77,166,255,0.2);">
+        <h3 style="color:var(--blue);">🔊 Voice Navigation</h3>
+        <p>The rider's active delivery is loaded from the app. Turn-by-turn instructions are synthesised using pyttsx3 (offline TTS) and played through the bone-conduction speaker. Hands remain on the handlebar. Eyes remain on the road. Hazard alerts interrupt navigation with priority audio.</p>
+        <div style="margin-top:10px;"><div class="feat-tag blue">Offline TTS</div><div class="feat-tag green">Bone conduction</div><div class="feat-tag orange">Priority interrupt</div></div>
+      </div>
+
+      <div class="card" style="border:1px solid rgba(255,210,77,0.2);">
+        <h3 style="color:var(--accent4);">🎥 Continuous Dashcam</h3>
+        <p>Pi Cam records a rolling 2-minute buffer. When a hazard or delivery event occurs, the preceding 30 seconds are saved with GPS + DIGIPIN metadata. Companies can review dashcam clips to verify delivery completion, detect route deviations, and investigate incidents. This is the compliance monitoring layer.</p>
+        <div style="margin-top:10px;"><div class="feat-tag yellow">2-min rolling buffer</div><div class="feat-tag blue">GPS + DIGIPIN tagged</div><div class="feat-tag green">Company viewable</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-head" style="margin-bottom:16px;"><h2 style="font-size:22px;">AI Model Specs</h2></div>
+      <div class="card" style="margin-bottom:16px;">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--accent3);margin-bottom:4px;">Model: MobileNetV2 (TFLite Int8 Quantised)</div>
+            <div style="font-size:12px;color:var(--muted);">Classes: vehicle-approaching · pedestrian · pothole · obstacle · safe-road</div>
+            <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+              <div><div class="card-label">Model size</div><div style="font-family:var(--font-mono);font-size:14px;color:var(--accent);">~3.4 MB</div></div>
+              <div><div class="card-label">Inference time (Pi Zero)</div><div style="font-family:var(--font-mono);font-size:14px;color:var(--green);">65ms</div></div>
+              <div><div class="card-label">Effective FPS</div><div style="font-family:var(--font-mono);font-size:14px;color:var(--accent4);">15 fps</div></div>
+              <div><div class="card-label">RAM usage</div><div style="font-family:var(--font-mono);font-size:14px;color:var(--blue);">~180MB</div></div>
+            </div>
+          </div>
+          <div style="border-top:1px solid var(--border);padding-top:12px;">
+            <div style="font-size:12px;font-weight:700;color:var(--accent3);margin-bottom:4px;">Training: Transfer learning on custom dataset</div>
+            <div style="font-size:12px;color:var(--muted);">Base: ImageNet MobileNetV2. Fine-tuned on Indian road footage (collected during pilot). 2000 frames classified manually per class.</div>
+          </div>
+          <div style="border-top:1px solid var(--border);padding-top:12px;">
+            <div style="font-size:12px;font-weight:700;color:var(--accent3);margin-bottom:4px;">TTC Computation</div>
+            <div style="font-size:12px;color:var(--muted);">Time-to-collision = object_size_px / (delta_size_px_per_frame × fps). No stereo depth required. Monocular estimate with 15–20% accuracy at 5–10m range — sufficient for alert trigger.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;margin-bottom:12px;">Accident Prevention Flow</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:rgba(255,71,87,0.06);border:1px solid rgba(255,71,87,0.18);border-radius:8px;padding:10px;font-size:12px;">
+            <strong style="color:var(--red);">Threat detected</strong> — Vehicle in rear FOV, bounding box growing
+          </div>
+          <div style="text-align:center;color:var(--muted);font-size:12px;">↓ TTC computation (65ms)</div>
+          <div style="background:rgba(255,210,77,0.06);border:1px solid rgba(255,210,77,0.18);border-radius:8px;padding:10px;font-size:12px;">
+            <strong style="color:var(--accent4);">TTC &lt; 3s</strong> — Voice alert triggered immediately
+          </div>
+          <div style="text-align:center;color:var(--muted);font-size:12px;">↓ Simultaneous</div>
+          <div style="background:rgba(0,229,184,0.05);border:1px solid rgba(0,229,184,0.18);border-radius:8px;padding:10px;font-size:12px;">
+            <strong style="color:var(--accent);">Dashcam clip saved</strong> — 30s before + 30s after, GPS tagged
+          </div>
+          <div style="text-align:center;color:var(--muted);font-size:12px;">↓ Backend receives</div>
+          <div style="background:rgba(77,166,255,0.05);border:1px solid rgba(77,166,255,0.18);border-radius:8px;padding:10px;font-size:12px;">
+            <strong style="color:var(--blue);">Event logged</strong> — Company dashboard shows incident. Rider safe.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ DASHBOARD ═══ -->
+<div id="section-dashboard" class="section">
+<div class="section-inner">
+  <div class="section-head">
+    <div class="accent-line"></div>
+    <h2>Live Ops Dashboard</h2>
+    <p>Real-time fleet view, flood surface, helmet cam events, fatigue monitor, and peer hazard log.</p>
+  </div>
+
+  <div class="dash-tab-nav">
+    <button class="dash-tab-btn active" onclick="switchDashTab('flood')">🌊 Flood Surface</button>
+    <button class="dash-tab-btn" onclick="switchDashTab('fatigue')">💪 Fatigue Monitor</button>
+    <button class="dash-tab-btn" onclick="switchDashTab('helmet-events')">🪖 Helmet Events</button>
+    <button class="dash-tab-btn" onclick="switchDashTab('peer')">📡 Peer Hazard Mesh</button>
+    <button class="dash-tab-btn" onclick="switchDashTab('digipin')">📍 DIGIPIN</button>
+  </div>
+
+  <!-- FLOOD TAB -->
+  <div id="dash-flood" class="dash-tab active">
+    <div class="dash-header">
+      <div class="dash-title">Hyperlocal Flood Surface — Chennai</div>
+      <div class="live-badge"><div class="live-dot"></div>GP surface age: <span id="map-age" style="margin-left:4px;font-family:var(--font-mono);">12s</span></div>
+    </div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:20px;">
+      <div class="map-container" style="flex:1;min-width:300px;">
+        <div class="map-grid"></div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 600 360">
+          <line x1="0" y1="180" x2="600" y2="180" stroke="rgba(77,166,255,0.07)" stroke-width="20"/>
+          <line x1="300" y1="0" x2="300" y2="360" stroke="rgba(77,166,255,0.06)" stroke-width="14"/>
+          <line x1="100" y1="60" x2="500" y2="300" stroke="rgba(77,166,255,0.04)" stroke-width="8"/>
+          <text x="20" y="290" font-size="10" fill="rgba(77,166,255,0.3)" font-family="DM Mono">Anna Nagar</text>
+          <text x="380" y="80" font-size="10" fill="rgba(77,166,255,0.3)" font-family="DM Mono">T.Nagar</text>
+          <text x="250" y="200" font-size="10" fill="rgba(77,166,255,0.3)" font-family="DM Mono">Saidapet</text>
+        </svg>
+        <div class="flood-zone" style="width:110px;height:85px;background:radial-gradient(circle,rgba(255,71,87,0.5),transparent 70%);left:16%;top:52%;"></div>
+        <div class="flood-zone" style="width:75px;height:55px;background:radial-gradient(circle,rgba(255,210,77,0.45),transparent 70%);left:58%;top:28%;animation-delay:1s;"></div>
+        <div class="rider-dot" style="background:var(--accent);border-color:var(--accent);left:25%;top:40%;" title="R-112 · Safe"></div>
+        <div class="rider-dot" style="background:var(--accent4);border-color:var(--accent4);left:62%;top:55%;" title="R-447 · Warning"></div>
+        <div class="rider-dot" style="background:var(--green);border-color:var(--green);left:45%;top:22%;" title="R-891 · Safe"></div>
+        <div class="rider-dot" style="background:var(--red);border-color:var(--red);left:18%;top:68%;" title="R-334 · Rerouting"></div>
+        <div class="map-stats">
+          <div class="map-stat"><div class="ms-val" style="color:var(--accent);" id="stat-riders">4</div><div class="ms-lbl">Active riders</div></div>
+          <div class="map-stat"><div class="ms-val" style="color:var(--red);">2</div><div class="ms-lbl">Flood zones</div></div>
+          <div class="map-stat"><div class="ms-val" style="color:var(--accent4);" id="stat-rerouted">1</div><div class="ms-lbl">Rerouted</div></div>
+        </div>
+        <div class="map-legend">
+          <div><div class="legend-dot" style="background:var(--red);"></div>Flood detected</div>
+          <div><div class="legend-dot" style="background:var(--accent4);"></div>Caution zone</div>
+          <div><div class="legend-dot" style="background:var(--accent);"></div>Rider safe</div>
+          <div><div class="legend-dot" style="background:var(--red);"></div>Rider rerouting</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;min-width:200px;">
+        <div class="card-sm"><div class="card-label">GP surface resolution</div><div class="card-value" style="color:var(--accent);">50m</div><div class="card-sub">vs 3km IMD</div></div>
+        <div class="card-sm"><div class="card-label">Update cycle</div><div class="card-value" style="color:var(--green);">30s</div><div class="card-sub">vs 6-hour IMD</div></div>
+        <div class="card-sm"><div class="card-label">Lead time</div><div class="card-value" style="color:var(--accent4);">18min</div><div class="card-sub">Before impassable</div></div>
+        <button onclick="triggerFlood()" style="background:rgba(255,71,87,0.12);border:1px solid rgba(255,71,87,0.3);color:var(--red);border-radius:8px;padding:10px;cursor:pointer;font-family:var(--font-body);font-size:13px;font-weight:600;">⚡ Simulate flood event</button>
+      </div>
+    </div>
+    <div id="alerts-panel">
+      <div class="alert-item warning"><div class="alert-icon">🌊</div><div class="alert-text"><div class="alert-title">Flood zone — Saidapet underpass</div><div class="alert-sub">GP confidence 87% · 1 rider rerouted · Depth: 18cm · 3 sensor nodes reporting</div></div><div class="alert-time">4m ago</div></div>
+      <div class="alert-item warning"><div class="alert-icon">🕳️</div><div class="alert-text"><div class="alert-title">Pothole cluster — Anna Nagar W Main Rd</div><div class="alert-sub">3 jerk events · Severity: HIGH · Peer alerts sent to 2 approaching riders</div></div><div class="alert-time">11m ago</div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Route cleared — T.Nagar R.K.Mutt Rd</div><div class="alert-sub">Flood receded. GP surface updated. 4 riders rerouted back to primary path.</div></div><div class="alert-time">22m ago</div></div>
+    </div>
+  </div>
+
+  <!-- FATIGUE TAB -->
+  <div id="dash-fatigue" class="dash-tab">
+    <div class="dash-header"><div class="dash-title">Two-Wheeler Fatigue Monitor</div><div class="live-badge"><div class="live-dot"></div>50 Hz sampling</div></div>
+    <div class="grid-3" style="margin-bottom:20px;">
+      <div class="card" style="text-align:center;">
+        <div class="card-label">Rider #R-112 · 4h 22m active</div>
+        <div class="fatigue-gauge"><svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="var(--green)" stroke-width="9" stroke-dasharray="144 144" stroke-dashoffset="46" stroke-linecap="round"/></svg><div class="gauge-label"><div class="gauge-val" style="color:var(--green);">1</div><div class="gauge-unit">LEVEL</div></div></div>
+        <div style="font-size:12px;color:var(--green);font-weight:700;">SAFE</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">GAI: 0.08 · TFD: 0.3Hz</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="card-label">Rider #R-447 · 9h 14m active</div>
+        <div class="fatigue-gauge"><svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="var(--accent2)" stroke-width="9" stroke-dasharray="215 144" stroke-dashoffset="46" stroke-linecap="round"/></svg><div class="gauge-label"><div class="gauge-val" style="color:var(--accent2);">3</div><div class="gauge-unit">LEVEL</div></div></div>
+        <div style="font-size:12px;color:var(--accent2);font-weight:700;">REST SUGGESTED</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">GAI: 0.42 · TFD: 3.1Hz</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="card-label">Rider #R-891 · 13h 07m active</div>
+        <div class="fatigue-gauge"><svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="var(--red)" stroke-width="9" stroke-dasharray="270 144" stroke-dashoffset="46" stroke-linecap="round"/></svg><div class="gauge-label"><div class="gauge-val" style="color:var(--red);">4</div><div class="gauge-unit">LEVEL</div></div></div>
+        <div style="font-size:12px;color:var(--red);font-weight:700;">ORDERS GATED</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">GAI: 0.78 · TFD: 6.2Hz</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HELMET EVENTS TAB -->
+  <div id="dash-helmet-events" class="dash-tab">
+    <div class="dash-header"><div class="dash-title">Helmet AI Event Log</div><div class="live-badge"><div class="live-dot"></div>15 fps inference</div></div>
+    <div class="grid-2">
+      <div>
+        <div class="alert-item critical" style="margin-bottom:8px;"><div class="alert-icon">🚗</div><div class="alert-text"><div class="alert-title">Threat: Vehicle — rear-right · R-112</div><div class="alert-sub">Speed 67 km/h · TTC 2.8s · Alert fired · Dashcam clip saved</div></div><div class="alert-time">NOW</div></div>
+        <div class="alert-item warning" style="margin-bottom:8px;"><div class="alert-icon">🕳️</div><div class="alert-text"><div class="alert-title">Pothole confirmed — Anna Nagar · R-447</div><div class="alert-sub">IMU jerk + cam visual confirmed · Peer alert sent to 3 riders</div></div><div class="alert-time">3m ago</div></div>
+        <div class="alert-item ok" style="margin-bottom:8px;"><div class="alert-icon">🎥</div><div class="alert-text"><div class="alert-title">Delivery verified — R-334 · 5F3-KJ2-9P4Q</div><div class="alert-sub">Dashcam + GPS match DIGIPIN · Delivery confirmed genuine</div></div><div class="alert-time">6m ago</div></div>
+        <div class="alert-item info" style="margin-bottom:8px;"><div class="alert-icon">🔊</div><div class="alert-text"><div class="alert-title">Voice nav active — R-891</div><div class="alert-sub">Turn-by-turn route loaded · Bone-conduction output · Hands-free</div></div><div class="alert-time">Active</div></div>
+      </div>
+      <div class="card-sm">
+        <div style="font-size:12px;font-weight:700;margin-bottom:12px;">Fleet Helmet Status</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;padding:8px;background:rgba(0,229,184,0.05);border-radius:7px;"><span style="font-size:12px;">R-112</span><span class="feat-tag green">ACTIVE · 74% bat</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px;background:rgba(255,210,77,0.05);border-radius:7px;"><span style="font-size:12px;">R-447</span><span class="feat-tag yellow">ACTIVE · 48% bat</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px;background:rgba(255,71,87,0.05);border-radius:7px;"><span style="font-size:12px;">R-891</span><span class="feat-tag red">LOW BAT · 12%</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px;background:rgba(0,229,184,0.05);border-radius:7px;"><span style="font-size:12px;">R-334</span><span class="feat-tag green">ACTIVE · 91% bat</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PEER HAZARD TAB -->
+  <div id="dash-peer" class="dash-tab">
+    <div class="dash-header"><div class="dash-title">Peer Hazard Mesh — Live Feed</div><div class="live-badge"><div class="live-dot"></div>&lt;5s latency</div></div>
+    <div class="card" style="margin-bottom:16px;border:1px solid rgba(0,229,184,0.2);">
+      <h3 style="margin-bottom:12px;">How Peer Hazard Sharing Works</h3>
+      <div class="grid-3">
+        <div style="text-align:center;padding:16px;background:rgba(255,107,53,0.05);border-radius:10px;">
+          <div style="font-size:24px;margin-bottom:8px;">1️⃣</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Rider A Detects</div>
+          <div style="font-size:12px;color:var(--muted);">IMU jerk spike or rain + depth threshold → TFLite fires → HFV published to backend</div>
+        </div>
+        <div style="text-align:center;padding:16px;background:rgba(0,229,184,0.04);border-radius:10px;">
+          <div style="font-size:24px;margin-bottom:8px;">2️⃣</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:4px;">GP Surface Updates</div>
+          <div style="font-size:12px;color:var(--muted);">Backend runs GP fit in &lt;2s. Hazard zone marked. Redis cache updated.</div>
+        </div>
+        <div style="text-align:center;padding:16px;background:rgba(77,166,255,0.04);border-radius:10px;">
+          <div style="font-size:24px;margin-bottom:8px;">3️⃣</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Rider B Warned</div>
+          <div style="font-size:12px;color:var(--muted);">All riders within 500m receive WebSocket push. App + helmet voice alert fires.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="alert-item warning" style="margin-bottom:8px;"><div class="alert-icon">🕳️</div><div class="alert-text"><div class="alert-title">Pothole · 13.0512°N 80.2445°E · Detected by R-334</div><div class="alert-sub">Alert sent to: R-112, R-891 · 240m and 390m away · Voice alert fired</div></div><div class="alert-time">2m ago</div></div>
+      <div class="alert-item critical" style="margin-bottom:8px;"><div class="alert-icon">🌊</div><div class="alert-text"><div class="alert-title">Flood · 13.0640°N 80.2350°E · Detected by R-447 + R-112 (2 nodes)</div><div class="alert-sub">GP confidence 91% · Alert sent to: R-891 · 800m away · Rerouting active</div></div><div class="alert-time">8m ago</div></div>
+      <div class="alert-item ok" style="margin-bottom:8px;"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Pothole · Saidapet Main Rd · Cleared (3 riders passed safely)</div><div class="alert-sub">Hazard score decayed to 0.1. Removed from active mesh.</div></div><div class="alert-time">25m ago</div></div>
+    </div>
+  </div>
+
+  <!-- DIGIPIN TAB -->
+  <div id="dash-digipin" class="dash-tab">
+    <div class="dash-header"><div class="dash-title">DIGIPIN — Precision Delivery</div></div>
+    <div class="grid-2">
+      <div class="digipin-box">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Resolve GPS to DIGIPIN</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">3.8m accuracy · India Post + IIT open standard</div>
+        <div class="digipin-field">
+          <input class="digipin-input" id="lat-input" placeholder="Latitude (e.g. 13.0827)" type="number" step="0.0001" value="13.0827"/>
+          <input class="digipin-input" id="lng-input" placeholder="Longitude (e.g. 80.2707)" type="number" step="0.0001" value="80.2707"/>
+        </div>
+        <button class="digipin-btn" style="margin-top:8px;width:100%;" onclick="resolveDigipin()">Resolve DIGIPIN</button>
+        <div class="digipin-code" id="digipin-display">5F3-KJ2-9P4Q</div>
+        <div style="font-size:12px;color:var(--muted);">Accuracy: 3.8m · Cross-references GP flood surface on resolve</div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:12px;">Why DIGIPIN Matters</h3>
+        <p style="margin-bottom:10px;">Standard Swiggy/Zomato drop pins are often 50–100m off. Riders waste time searching for building entrances. DIGIPIN encodes a 3.8m cell — pointing to the exact gate, side entrance, or back lane.</p>
+        <div class="alert-item ok" style="margin-bottom:8px;"><div class="alert-icon">📍</div><div class="alert-text"><div class="alert-title">Standard pin: 80m from actual entrance</div><div class="alert-sub">Rider spends 4 minutes searching. Customer rates 3 stars. Earnings docked.</div></div></div>
+        <div class="alert-item ok"><div class="alert-icon">📍</div><div class="alert-text"><div class="alert-title">DIGIPIN: 3.8m from actual entrance</div><div class="alert-sub">Rider walks directly to door. 0 minutes searching. 5-star delivery.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ RIDER JOURNEY ═══ -->
+<div id="section-journey" class="section">
+<div class="section-inner">
+  <div class="section-head">
+    <div class="accent-line"></div>
+    <h2>Complete Rider Journey — From Accept to Delivered</h2>
+    <p>Every sensor, every AI model, every data event — exactly what happens from the moment a rider accepts an order to final delivery.</p>
+  </div>
+
+  <div style="display:flex;gap:28px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:300px;">
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="journey-step" style="flex-direction:column;">
+            <div class="journey-time">T+0:00 — Order Accepted</div>
+            <div class="journey-title">Rider taps "Accept" on app</div>
+            <div class="journey-detail">
+              App loads delivery DIGIPIN, checks GP flood surface for route hazards, pre-fetches peer hazard mesh alerts on the route corridor. Voice nav route is pre-computed.
+            </div>
+            <div class="journey-sensors">
+              <div class="feat-tag green">App: DIGIPIN resolve</div>
+              <div class="feat-tag blue">Backend: GP surface query</div>
+              <div class="feat-tag purple">Backend: peer hazard fetch</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--accent3);"></div>
+          <div class="journey-step" style="flex-direction:column;">
+            <div class="journey-time">T+0:15 — Helmet + Bike Node Power On</div>
+            <div class="journey-title">Rider puts on helmet. Bike key turns.</div>
+            <div class="journey-detail">
+              Pi Zero 2W boots (15s boot time, pre-warmed). Pi Cam starts capturing at 15fps. MobileNetV2 begins inference. Bone-conduction speaker plays: <em style="color:var(--accent);">"RiderShield active. Route loaded. No hazards on path."</em>
+              <br><br>
+              Bike node ESP32 powers up via bike DC tap. Sensors initialize. BLE connection to phone established. IMU calibration completes.
+            </div>
+            <div class="journey-sensors">
+              <div class="feat-tag orange">Helmet: Pi Cam → MobileNetV2</div>
+              <div class="feat-tag green">Bike: YL-83 + JSN-SR04T + IMU init</div>
+              <div class="feat-tag blue">BLE: bike ↔ phone link</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--blue);"></div>
+          <div class="journey-step" style="flex-direction:column;">
+            <div class="journey-time">T+0:30 — En Route — Normal Conditions</div>
+            <div class="journey-title">Rider moving. All systems nominal.</div>
+            <div class="journey-detail">
+              <strong style="color:var(--text);">Helmet (every 65ms):</strong> Pi Cam frame → MobileNetV2 → class: "safe-road". No alert. Dashcam rolling buffer active.
+              <br><br>
+              <strong style="color:var(--text);">Bike node (every 100ms):</strong> Rain sensor = 0, depth sensor = dry, IMU = smooth ride. No HFV triggered.
+              <br><br>
+              <strong style="color:var(--text);">Handlebar (every 20ms):</strong> FSR left+right balanced. GAI = 0.08. TFD = 0.3Hz. Fatigue Level 1. No alert.
+              <br><br>
+              <strong style="color:var(--text);">Voice nav:</strong> "In 400m, turn left at the signal."
+            </div>
+            <div class="journey-sensors">
+              <div class="feat-tag green">Helmet: 15fps inference</div>
+              <div class="feat-tag blue">Bike: sensor polling</div>
+              <div class="feat-tag yellow">Handlebar: fatigue 50Hz</div>
+              <div class="feat-tag purple">App: voice nav active</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--accent4);"></div>
+          <div class="journey-step" style="flex-direction:column;">
+            <div class="journey-time">T+2:45 — Pothole Hit (Peer Rider Ahead)</div>
+            <div class="journey-title">Rider receives peer alert — pothole ahead</div>
+            <div class="journey-detail">
+              A rider 300m ahead hit a pothole. Their IMU fired a jerk event. Helmet cam confirmed visual. Backend received the HFV within 2s, ran GP update, and broadcast via WebSocket.
+              <br><br>
+              This rider's app pops: "⚠ Pothole — 180m ahead. Slow to 20 km/h." Voice fires through bone-conduction: <em style="color:var(--accent);">"Caution — pothole ahead. Slow down."</em>
+              <br><br>
+              Rider slows. Passes pothole safely. IMU on their bike also detects the jerk — corroborates the peer report, raising GP confidence to 96%.
+            </div>
+            <div class="journey-sensors">
+              <div class="feat-tag orange">Peer: IMU jerk + cam visual</div>
+              <div class="feat-tag blue">Backend: GP update in 2s</div>
+              <div class="feat-tag green">Alert: voice + app popup</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--red);"></div>
+          <div class="journey-step" style="flex-direction:column;">
+            <div class="journey-time">T+5:10 — Threat Detected (Helmet AI)</div>
+            <div class="journey-title">Fast vehicle approaching from rear</div>
+            <div class="journey-detail">
+              Pi Cam detects a vehicle bounding box in the rear-view FOV. Box is growing at 12 px/frame. TTC computed: 2.4 seconds. Threshold &lt; 3s → alert fires immediately.
+              <br><br>
+              Bone-conduction: <em style="color:var(--accent);">"Warning — fast vehicle approaching from behind. Move left."</em>
+              <br><br>
+              Dashcam saves 30s clip (before + after). Event logged to backend. Company dashboard shows incident. Rider was not hit — accident prevented.
+            </div>
+            <div class="journey-sensors">
+              <div class="feat-tag red">Helmet: TTC 2.4s detected</div>
+              <div class="feat-tag orange">Alert: bone-conduction voice</div>
+              <div class="feat-tag yellow">Dashcam: 30s clip saved</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--accent);"></div>
+          <div class="journey-step" style="flex-direction:column;">
+            <div class="journey-time">T+8:30 — Arrival at Delivery Location</div>
+            <div class="journey-title">DIGIPIN guides rider to exact entrance</div>
+            <div class="journey-detail">
+              App shows DIGIPIN 5F3-KJ2-9P4Q with building overlay. Voice: <em style="color:var(--accent);">"You have arrived. Destination is the second entrance on the left."</em>
+              <br><br>
+              GPS log + dashcam frame timestamp confirm the rider reached the correct DIGIPIN cell. Delivery is logged as genuinely completed — no discrepancy flag.
+            </div>
+            <div class="journey-sensors">
+              <div class="feat-tag green">App: DIGIPIN pinpoint</div>
+              <div class="feat-tag blue">GPS: delivery logged</div>
+              <div class="feat-tag yellow">Dashcam: arrival frame saved</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item" style="margin-bottom:0;">
+          <div class="tl-dot" style="background:var(--green);"></div>
+          <div class="journey-step" style="flex-direction:column;">
+            <div class="journey-time">T+8:45 — Order Delivered ✓</div>
+            <div class="journey-title">Ride complete. All data committed.</div>
+            <div class="journey-detail">
+              Rider marks delivery complete. App shows: Fatigue Level 1 (safe), 0 hazard incidents, 1 pothole warned, 1 threat avoided. Route data feeds into the peer hazard mesh for future riders.
+              <br><br>
+              Company dashboard: GPS log + dashcam confirm genuine delivery. No discrepancy. 
+            </div>
+            <div class="journey-sensors">
+              <div class="feat-tag green">Delivery: verified genuine</div>
+              <div class="feat-tag blue">Mesh: route data published</div>
+              <div class="feat-tag purple">Company: compliance log updated</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right panel: real-time state -->
+    <div style="width:280px;flex-shrink:0;">
+      <div style="position:sticky;top:70px;">
+        <div class="card" style="margin-bottom:12px;">
+          <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Live Sensor State</div>
+          <div class="har-field"><span class="har-key">Helmet AI</span><span class="har-val" style="color:var(--green);">ACTIVE</span></div>
+          <div class="har-field"><span class="har-key">Inference FPS</span><span class="har-val">15 fps</span></div>
+          <div class="har-field"><span class="har-key">Rain sensor</span><span class="har-val" style="color:var(--green);">DRY</span></div>
+          <div class="har-field"><span class="har-key">Road depth</span><span class="har-val" style="color:var(--green);">CLEAR</span></div>
+          <div class="har-field"><span class="har-key">IMU jerk</span><span class="har-val" style="color:var(--green);">0.04g</span></div>
+          <div class="har-field"><span class="har-key">Fatigue level</span><span class="har-val" style="color:var(--green);">1 / 4</span></div>
+          <div class="har-field"><span class="har-key">GAI index</span><span class="har-val">0.08</span></div>
+          <div class="har-field"><span class="har-key">BLE link</span><span class="har-val" style="color:var(--green);">STRONG</span></div>
+          <div class="har-field"><span class="har-key">GPS accuracy</span><span class="har-val">±2.8m</span></div>
+          <div class="har-field"><span class="har-key">GP surface age</span><span class="har-val" id="journey-surface-age">18s</span></div>
+          <div class="har-field"><span class="har-key">Peers in 500m</span><span class="har-val">3</span></div>
+          <div class="har-field" style="border:none;"><span class="har-key">Hazards ahead</span><span class="har-val" style="color:var(--green);">NONE</span></div>
+        </div>
+        <div class="card" style="margin-bottom:12px;border:1px solid rgba(0,229,184,0.18);">
+          <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">DIGIPIN Active</div>
+          <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--accent);letter-spacing:3px;">5F3-KJ2-9P4Q</div>
+          <div style="font-size:11px;color:var(--muted);">Flat 4B · 2nd entrance · 3.8m precision</div>
+          <div style="margin-top:6px;font-size:11px;color:var(--green);">✓ No flood zone on destination</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ DEMO SCRIPT ═══ -->
+<div id="section-demo" class="section">
+<div class="section-inner">
+  <div class="section-head">
+    <div class="accent-line"></div>
+    <h2>Live Demo Script — 90 Seconds</h2>
+    <p>No slides. No video. Everything happens live on hardware and screen. Judges remember what they see move.</p>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,rgba(0,229,184,0.05),rgba(0,0,0,0));border:1px solid rgba(0,229,184,0.2);margin-bottom:28px;">
+    <div style="font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:6px;">Opening Line (say this before anything else)</div>
+    <div style="font-family:var(--font-mono);font-size:16px;color:var(--accent);padding:14px;background:rgba(0,229,184,0.05);border-radius:8px;border-left:2px solid var(--accent);">"Every delivery rider wears a helmet. No platform uses it. We do."</div>
+  </div>
+
+  <div class="demo-step">
+    <div class="demo-step-num">1</div>
+    <div class="demo-step-body">
+      <div class="demo-step-title">⛑️ Hold up the helmet — 15 seconds (ECE)</div>
+      <div class="demo-step-sub">
+        Pick up the prototype helmet. Show the 3D-printed camera housing on the back. Show the Pi Zero 2W board mounted inside. Show the bone-conduction speaker on the sides. Power it on — Pi Zero boots in ~15s. LED flickers as it starts inference.
+        <br>Wave your hand in front of the camera. Show the terminal: class = "obstacle" → alert fires from speaker.
+      </div>
+      <div class="demo-quote">"This helmet — ₹2,710 prototype — runs a full AI model at 15 frames per second. Detecting threats. Recording everything. Navigating by voice. No phone, no cloud."</div>
+    </div>
+  </div>
+
+  <div class="demo-step">
+    <div class="demo-step-num">2</div>
+    <div class="demo-step-body">
+      <div class="demo-step-title">🌊 Flood appears on the map — 20 seconds (CSE)</div>
+      <div class="demo-step-sub">
+        Open the admin dashboard on laptop. Drop 3 simulated HFVs for the same GPS zone (simulate 3 riders detecting water). Watch the Gaussian Process flood probability heatmap update in real-time on the Leaflet map — a red zone spreads outward. The GP surface age timer resets to 0s.
+        <br><br>
+        Simultaneously, the rider app on phone shows a popup: "⚠ Flood zone ahead. Rerouting."
+      </div>
+      <div class="demo-quote">"Three riders. One flooded underpass. Detected in 30 seconds. Zero municipal sensors. Zero human reporting."</div>
+    </div>
+  </div>
+
+  <div class="demo-step">
+    <div class="demo-step-num">3</div>
+    <div class="demo-step-body">
+      <div class="demo-step-title">📡 Peer pothole alert fires — 15 seconds (CSE + ECE)</div>
+      <div class="demo-step-sub">
+        On the live ESP32 demo board: tilt or shake it sharply (simulate a pothole jerk). Show the serial monitor — IMU jerk detected, HFV published via MQTT. Within 3–4 seconds, the rider app on the second phone shows: "⚠ Pothole — 140m ahead. Detected by Rider R-211." Speaker plays: <em>"Caution — pothole ahead."</em>
+      </div>
+      <div class="demo-quote">"That rider never had to report anything. The sensor did it automatically. The next rider was warned before they got there."</div>
+    </div>
+  </div>
+
+  <div class="demo-step">
+    <div class="demo-step-num">4</div>
+    <div class="demo-step-body">
+      <div class="demo-step-title">🔊 Voice navigation + DIGIPIN — 15 seconds (CSE)</div>
+      <div class="demo-step-sub">
+        On the rider app, show the current delivery screen. Point to the DIGIPIN code displayed. Tap "Navigate" — the app speaks: <em>"Route loaded. In 400 metres, turn left at the signal."</em>
+        <br><br>
+        Then show the DIGIPIN resolver tool: enter coordinates. The 10-character code appears instantly. "That's 3.8 metres accuracy. A standard Swiggy pin is 80 metres off."
+      </div>
+      <div class="demo-quote">"Hands on the handlebar. Eyes on the road. The helmet tells you where to go."</div>
+    </div>
+  </div>
+
+  <div class="demo-step">
+    <div class="demo-step-num">5</div>
+    <div class="demo-step-body">
+      <div class="demo-step-title">💪 Fatigue — orders gated — 10 seconds (ECE + CSE)</div>
+      <div class="demo-step-sub">
+        Show the admin dashboard fatigue tab. Rider R-891 — 13 hours active, Fatigue Level 4, gauge showing red. Orders tab shows this rider has no new orders assigned — gated by the system automatically. No manager intervention.
+      </div>
+      <div class="demo-quote">"This rider has been working 13 hours. The system already knows. No manager needed to notice."</div>
+    </div>
+  </div>
+
+  <div class="demo-step">
+    <div class="demo-step-num">6</div>
+    <div class="demo-step-body">
+      <div class="demo-step-title">🎯 Closing — 5 seconds</div>
+      <div class="demo-step-sub">
+        Stand back. Let the dashboard run. Speak slowly and clearly.
+      </div>
+      <div class="demo-quote">"We did not build a safer app. We built the sensing infrastructure Indian cities are missing — paid for by delivery logistics. Three patents. Five students. Zero existing systems doing this."</div>
+    </div>
+  </div>
+
+  <!-- Judge Q&A -->
+  <div class="section-head" style="margin-top:32px;"><div class="accent-line"></div><h2>Top 5 Judge Questions — Prepared Answers</h2></div>
+  <div class="grid-2">
+    <div class="card card-accent" style="margin-bottom:12px;">
+      <h3>Q: Won't Zomato just build this?</h3>
+      <p>Zomato's incentive is delivery completion, not urban infrastructure. They have no revenue model for selling flood data to municipalities. We do. Their hardware budget per rider is zero. Ours is ₹1,745 for the MVP bike node — amortised over 200 deliveries. They also have no incentive to gate orders based on fatigue — that reduces revenue per rider.</p>
+    </div>
+    <div class="card card-accent2" style="margin-bottom:12px;">
+      <h3>Q: Isn't this just Waze with sensors?</h3>
+      <p>Waze requires a driver to manually tap a button — subjective, delayed, sparse in Indian delivery lanes. RiderShield uses passive sensors. No rider action. The IMU detects the pothole automatically. The rain sensor detects the flood automatically. No human judgment, no delay, no missed events.</p>
+    </div>
+    <div class="card card-accent3" style="margin-bottom:12px;">
+      <h3>Q: Can a Pi Zero really run AI at 15 fps?</h3>
+      <p>MobileNetV2 Int8-quantised on Pi Zero 2W runs at 15fps — we demonstrated this live 60 seconds ago. It's not a GPU, it's a tiny ARM cluster. For threat detection at 5–10m range, 15fps with 65ms latency is more than sufficient. We showed you the terminal output.</p>
+    </div>
+    <div class="card" style="margin-bottom:12px;">
+      <h3>Q: How does peer sharing not create false alarms?</h3>
+      <p>Single-rider events have a confidence score of 60%. Two independent riders reporting the same GPS segment push confidence to 85%+. The Gaussian Process model also provides an uncertainty estimate — high-uncertainty zones are shown as caution rather than alerts. False alarms decay from the mesh after 15 minutes without corroboration.</p>
+    </div>
+    <div class="card" style="grid-column:1/-1;">
+      <h3>Q: What is the startup revenue model (now without compensation)?</h3>
+      <p>Three B2B streams remain: (1) <strong style="color:var(--accent);">Rider Safety API</strong> — licensed to Zomato/Swiggy per month per active helmet node for fleet safety dashboard access, (2) <strong style="color:var(--accent);">FSSAI Compliance Data</strong> — flood-zone restaurant risk data sold to food safety regulators, (3) <strong style="color:var(--accent);">Municipal Flood Intelligence</strong> — anonymised 50m flood + pothole tile feed licensed to BMC/BBMP/GCC. Riders and customers pay nothing.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ IMPLEMENTATION ═══ -->
+<div id="section-impl" class="section">
+<div class="section-inner">
+  <div class="section-head">
+    <div class="accent-line"></div>
+    <h2>60-Hour Implementation Plan — 3 ECE + 2 CSE</h2>
+    <p>Hour-by-hour Gantt for 5 team members. Every milestone is demo-deliverable. No parallelism assumed — conflicts are resolved.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:24px;background:linear-gradient(135deg,rgba(0,229,184,0.04),rgba(0,0,0,0));border:1px solid rgba(0,229,184,0.2);">
+    <h3 style="margin-bottom:12px;">Team Roles</h3>
+    <div class="grid-3" style="gap:12px;">
+      <div><div class="feat-tag orange">E1</div> <strong>ESP32 bike sensor node</strong> — hardware build, waterproofing, sensor wiring, BOM procurement</div>
+      <div><div class="feat-tag orange">E2</div> <strong>ESP32 firmware + TFLite Micro</strong> — anomaly model flash, MQTT publish, HFV packet format</div>
+      <div><div class="feat-tag orange">E3</div> <strong>Helmet unit + fatigue handlebar</strong> — Pi Zero mount, cam housing, FSR wiring, BLE relay</div>
+      <div><div class="feat-tag green">C1</div> <strong>AI/ML pipeline</strong> — GP model, MobileNetV2 training, TFLite export, LSTM fatigue</div>
+      <div><div class="feat-tag green">C2</div> <strong>Backend + React + App</strong> — FastAPI, MongoDB, WebSocket, React dashboard, React Native app</div>
+    </div>
+  </div>
+
+  <!-- Gantt Chart -->
+  <div style="overflow-x:auto;margin-bottom:24px;">
+    <div style="min-width:900px;">
+      <div class="gantt-header">
+        <div class="gantt-header-cell" style="border-right:1px solid var(--border);">Member</div>
+        <div class="gantt-header-cell">H0–5</div>
+        <div class="gantt-header-cell">H5–10</div>
+        <div class="gantt-header-cell">H10–15</div>
+        <div class="gantt-header-cell">H15–20</div>
+        <div class="gantt-header-cell">H20–25</div>
+        <div class="gantt-header-cell">H25–30</div>
+        <div class="gantt-header-cell">H30–35</div>
+        <div class="gantt-header-cell">H35–40</div>
+        <div class="gantt-header-cell">H40–45</div>
+        <div class="gantt-header-cell">H45–50</div>
+        <div class="gantt-header-cell">H50–55</div>
+        <div class="gantt-header-cell">H55–60</div>
+      </div>
+      <div class="gantt-rows">
+        <!-- E1 -->
+        <div class="gantt-row">
+          <div class="gantt-label"><span class="feat-tag orange">E1</span><br>Bike Hardware</div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">BOM + Procure</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Sensor wiring</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">PCB breadboard</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Power + mount</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.15);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Integration test</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.15);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Waterproof seal</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,210,77,0.1);border:1px solid rgba(255,210,77,0.3);color:var(--accent4);">End-to-end test</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,210,77,0.1);border:1px solid rgba(255,210,77,0.3);color:var(--accent4);">Bug fix</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);">Demo rehearsal</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);">Flood sim setup</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.15);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Final polish</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,71,87,0.1);border:1px solid rgba(255,71,87,0.3);color:var(--red);">DEMO READY</div></div>
+        </div>
+        <!-- E2 -->
+        <div class="gantt-row">
+          <div class="gantt-label"><span class="feat-tag orange">E2</span><br>Firmware</div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">ESP-IDF setup</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Sensor drivers</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">TFLite Micro flash</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">MQTT + HFV format</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">BLE to phone</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.15);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Firmware test</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.15);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">C1 handoff: model</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,210,77,0.1);border:1px solid rgba(255,210,77,0.3);color:var(--accent4);">Serial monitor UI</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);">Demo rehearsal</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);">Jerk threshold tune</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.15);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Bug fix</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,71,87,0.1);border:1px solid rgba(255,71,87,0.3);color:var(--red);">DEMO READY</div></div>
+        </div>
+        <!-- E3 -->
+        <div class="gantt-row">
+          <div class="gantt-label"><span class="feat-tag orange">E3</span><br>Helmet + Fatigue</div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Pi Zero setup + OS</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Pi Cam mount</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Speaker + mic wiring</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">FSR grip array</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Handlebar BLE unit</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.15);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Helmet assembly</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.15);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">C1 model install</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,210,77,0.1);border:1px solid rgba(255,210,77,0.3);color:var(--accent4);">Voice alert test</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);">TTC threshold tune</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);">Fatigue BLE verify</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.15);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Demo rehearsal</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,71,87,0.1);border:1px solid rgba(255,71,87,0.3);color:var(--red);">DEMO READY</div></div>
+        </div>
+        <!-- C1 -->
+        <div class="gantt-row">
+          <div class="gantt-label"><span class="feat-tag green">C1</span><br>AI / ML</div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">TFLite anomaly model</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Quantise + export</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">GP model (scikit)</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">MobileNetV2 finetune</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">TFLite Pi export</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">LSTM fatigue train</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,210,77,0.1);border:1px solid rgba(255,210,77,0.3);color:var(--accent4);">E2 handoff: ESP model</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,210,77,0.1);border:1px solid rgba(255,210,77,0.3);color:var(--accent4);">E3 handoff: Pi model</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);">Accuracy eval</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);">C2 GP API</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Demo sim data</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,71,87,0.1);border:1px solid rgba(255,71,87,0.3);color:var(--red);">DEMO READY</div></div>
+        </div>
+        <!-- C2 -->
+        <div class="gantt-row" style="border-bottom:none;">
+          <div class="gantt-label"><span class="feat-tag green">C2</span><br>Backend + App</div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">FastAPI scaffold</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">MQTT ingest + MongoDB</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">GP surface endpoint</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">WebSocket broadcast</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">React Native app</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Leaflet dashboard</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,210,77,0.1);border:1px solid rgba(255,210,77,0.3);color:var(--accent4);">DIGIPIN API</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,210,77,0.1);border:1px solid rgba(255,210,77,0.3);color:var(--accent4);">Voice alerts (expo)</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);">Peer mesh end-to-end</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);">Cloudflare tunnel</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Demo data scripts</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,71,87,0.1);border:1px solid rgba(255,71,87,0.3);color:var(--red);">DEMO READY</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Milestones -->
+  <div class="section-head"><div class="accent-line"></div><h2>Key Milestones</h2></div>
+  <div class="grid-3" style="margin-bottom:24px;">
+    <div class="card card-accent">
+      <div class="card-label">Hour 15 — Gate 1</div>
+      <h3>Bike node live</h3>
+      <p>ESP32 flashed, all sensors reading, TFLite anomaly model firing on water tray test. MQTT publishing to backend. HFV received.</p>
+      <div style="margin-top:10px;"><div class="feat-tag orange">E1</div><div class="feat-tag orange">E2</div><div class="feat-tag green">C2</div></div>
+    </div>
+    <div class="card card-accent2">
+      <div class="card-label">Hour 30 — Gate 2</div>
+      <h3>Full pipeline live</h3>
+      <p>HFV → FastAPI → GP model → Leaflet heatmap showing flood zone. Rider app receiving WebSocket alert. Voice nav working.</p>
+      <div style="margin-top:10px;"><div class="feat-tag green">C1</div><div class="feat-tag green">C2</div></div>
+    </div>
+    <div class="card card-accent3">
+      <div class="card-label">Hour 45 — Gate 3</div>
+      <h3>Helmet + peer mesh live</h3>
+      <p>Pi Zero detecting threats with voice alert. Pothole from ESP32 propagated to second phone as peer alert. Fatigue BLE reading.</p>
+      <div style="margin-top:10px;"><div class="feat-tag orange">E3</div><div class="feat-tag green">C1</div><div class="feat-tag green">C2</div></div>
+    </div>
+  </div>
+
+  <div class="phase-card">
+    <div class="phase-header"><div class="phase-num">Hour 45–60 — Integration + Demo Polish</div><div class="phase-duration">15 hours</div></div>
+    <div class="phase-features">
+      <div class="phase-feat">Full end-to-end run: water tray → flood map → rider app alert → voice nav → DIGIPIN</div>
+      <div class="phase-feat">Peer pothole test: ESP32 jerk → backend → second phone alert within 5s</div>
+      <div class="phase-feat">Helmet threat detection: wave hand → voice fires → dashcam clip saved</div>
+      <div class="phase-feat">Fatigue gauge live: squeeze FSR → handlebar reading → app shows fatigue level</div>
+      <div class="phase-feat">Demo script rehearsal × 3. All team members practice their segment independently.</div>
+      <div class="phase-feat">Cloudflare tunnel verified. Dashboard accessible on both phones during demo.</div>
+      <div class="phase-feat">Backup: if Pi Zero fails, use laptop webcam + same Python script. Same demo effect.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ STARTUP ═══ -->
+<div id="section-startup" class="section">
+<div class="section-inner">
+  <div class="section-head">
+    <div class="accent-line"></div>
+    <h2>Startup Blueprint</h2>
+    <p>Three B2B revenue streams. No compensation module needed. Revenue from safety data, not payment processing.</p>
+  </div>
+
+  <div class="grid-3" style="margin-bottom:28px;">
+    <div class="card" style="position:relative;overflow:hidden;border:1px solid rgba(0,229,184,0.2);">
+      <div style="font-family:var(--font-display);font-size:48px;font-weight:700;color:rgba(0,229,184,0.08);position:absolute;top:4px;right:12px;">1</div>
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:8px;">Stream 1</div>
+      <div style="font-weight:700;font-size:15px;margin-bottom:8px;">Rider Safety API</div>
+      <p style="font-size:13px;">Licensed to Zomato/Swiggy/Dunzo per active helmet node per month. Provides fleet safety dashboard, peer hazard mesh access, fatigue monitor. ₹200–500/rider/month.</p>
+      <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--accent4);margin-top:12px;">TAM: ₹500 Cr+</div>
+      <div style="font-size:12px;color:var(--muted);">12M gig riders in India</div>
+    </div>
+    <div class="card" style="position:relative;overflow:hidden;border:1px solid rgba(255,107,53,0.2);">
+      <div style="font-family:var(--font-display);font-size:48px;font-weight:700;color:rgba(255,107,53,0.08);position:absolute;top:4px;right:12px;">2</div>
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent2);margin-bottom:8px;">Stream 2</div>
+      <div style="font-weight:700;font-size:15px;margin-bottom:8px;">FSSAI Compliance Data</div>
+      <p style="font-size:13px;">Monthly subscription for real-time flood-zone restaurant risk data. Enables targeted food safety inspection scheduling. Government contract model.</p>
+      <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--accent4);margin-top:12px;">₹2–8 Cr/city/yr</div>
+      <div style="font-size:12px;color:var(--muted);">FSSAI + state regulators</div>
+    </div>
+    <div class="card" style="position:relative;overflow:hidden;border:1px solid rgba(124,111,255,0.2);">
+      <div style="font-family:var(--font-display);font-size:48px;font-weight:700;color:rgba(124,111,255,0.08);position:absolute;top:4px;right:12px;">3</div>
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent3);margin-bottom:8px;">Stream 3</div>
+      <div style="font-weight:700;font-size:15px;margin-bottom:8px;">Municipal Flood Intelligence</div>
+      <p style="font-size:13px;">Anonymised 50m flood + pothole tile feed licensed to BMC/BBMP/GCC as an open-data subscription. Positions RiderShield as urban infrastructure, not just an app.</p>
+      <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--accent4);margin-top:12px;">₹50L–2Cr/city/yr</div>
+      <div style="font-size:12px;color:var(--muted);">Municipal corporations</div>
+    </div>
+  </div>
+
+  <!-- Milestones -->
+  <div class="section-head"><div class="accent-line"></div><h2>Go-To-Market</h2></div>
+  <div class="grid-2">
+    <div>
+      <div class="rev-bar-row"><div class="rev-bar-label">Month 1–3 (pilot, 20 nodes)</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:5%;background:var(--accent);"></div></div><div class="rev-bar-val" style="color:var(--accent);">₹0</div></div>
+      <div class="rev-bar-row"><div class="rev-bar-label">Month 4–6 (Seed, 200 riders)</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:12%;background:var(--accent3);"></div></div><div class="rev-bar-val" style="color:var(--accent3);">₹8L/m</div></div>
+      <div class="rev-bar-row"><div class="rev-bar-label">Month 7–12 (city 1, 2000 riders)</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:28%;background:var(--accent4);"></div></div><div class="rev-bar-val" style="color:var(--accent4);">₹50L/m</div></div>
+      <div class="rev-bar-row"><div class="rev-bar-label">Year 2 (5 cities, 50k riders)</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:75%;background:var(--accent2);"></div></div><div class="rev-bar-val" style="color:var(--accent2);">₹3Cr/m</div></div>
+      <div class="rev-bar-row"><div class="rev-bar-label">Year 3 (15 cities)</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:100%;background:var(--red);"></div></div><div class="rev-bar-val" style="color:var(--red);">₹12Cr/m</div></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Month 1–3</div><div class="tl-title">Hackathon win + patent filing</div><div class="tl-body">20-node Chennai pilot · One restaurant cluster · FSSAI intro meeting</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Month 4–6</div><div class="tl-title">Seed Round ₹1.5–3 Cr</div><div class="tl-body">Swiggy/Zomato API talks · 200 riders · FSSAI MoU</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Month 7–12</div><div class="tl-title">City 1 municipal contract</div><div class="tl-body">2,000 riders · Safety API in production · Series A prep</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Year 2</div><div class="tl-title">Series A ₹15–25 Cr</div><div class="tl-body">5 cities · 50,000 riders · Patent grants · Market leader</div></div>
+    </div>
+  </div>
+
+  <!-- Why this wins -->
+  <div class="card" style="margin-top:28px;background:linear-gradient(135deg,rgba(0,229,184,0.05),rgba(124,111,255,0.03));border:1px solid rgba(0,229,184,0.2);">
+    <div style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:14px;">Why This Wins at National Level</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:14px;">Most hackathon projects are better apps. RiderShield AI is <strong style="color:var(--text);">new infrastructure</strong>. The peer hazard mesh does not exist. The AI helmet for delivery riders does not exist. The hyperlocal flood surface does not exist. You are not improving a product — you are creating the data layer that makes an entire category possible.</p>
+    <div style="padding:14px;background:rgba(0,0,0,0.3);border-radius:8px;font-family:var(--font-mono);font-size:13px;color:var(--accent);text-align:center;border:1px solid rgba(0,229,184,0.15);">"We did not build a safer app. We built the sensing infrastructure Indian cities are missing — funded entirely by delivery logistics. Three patents. Five students. Zero existing systems doing this."</div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ TEAM ═══ -->
+<div id="section-team" class="section">
+<div class="section-inner">
+  <div class="section-head">
+    <div class="accent-line"></div>
+    <h2>Team — 5 Members, 5 Independent Deliverables</h2>
+    <p>Every member owns a non-overlapping piece. Any judge can pull one person aside and have them demo their component independently.</p>
+  </div>
+
+  <div class="grid-3" style="margin-bottom:24px;">
+    <div class="team-card">
+      <div class="team-role ece">ECE — E1</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Bike Sensor Node — Hardware</div>
+      <ul class="team-owns">
+        <li>ESP32-S3 board assembly and sensor wiring</li>
+        <li>YL-83 + JSN-SR04T + MPU-6050 + GPS integration</li>
+        <li>Bike mount and power circuit (18650 + DC tap)</li>
+        <li>Weatherproof housing (prototype)</li>
+      </ul>
+      <div style="margin-top:10px;"><div class="feat-tag orange">Owns: Physical bike node</div></div>
+    </div>
+    <div class="team-card">
+      <div class="team-role ece">ECE — E2</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Firmware + Edge Inference</div>
+      <ul class="team-owns">
+        <li>ESP-IDF sensor drivers and sampling loop</li>
+        <li>TFLite Micro anomaly model flash and inference</li>
+        <li>HFV packet format and MQTT publish</li>
+        <li>BLE relay to rider app</li>
+      </ul>
+      <div style="margin-top:10px;"><div class="feat-tag orange">Owns: All firmware logic</div></div>
+    </div>
+    <div class="team-card">
+      <div class="team-role ece">ECE — E3</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Helmet Unit + Fatigue Handlebar</div>
+      <ul class="team-owns">
+        <li>Raspberry Pi Zero 2W OS setup + Pi Cam mount</li>
+        <li>Bone-conduction speaker and mic wiring</li>
+        <li>FSR grip array + MPU-6050 handlebar mount</li>
+        <li>3D-printed housing for all helmet components</li>
+      </ul>
+      <div style="margin-top:10px;"><div class="feat-tag orange">Owns: Helmet + fatigue hardware</div></div>
+    </div>
+    <div class="team-card">
+      <div class="team-role cse">CSE — C1</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">AI / ML Pipeline</div>
+      <ul class="team-owns">
+        <li>Gaussian Process flood surface model (scikit-learn)</li>
+        <li>MobileNetV2 finetuning + TFLite export for Pi Zero</li>
+        <li>TFLite Micro anomaly model for ESP32 (3-feature)</li>
+        <li>LSTM fatigue classifier (grip + tremor features)</li>
+        <li>TTC computation logic for threat detection</li>
+      </ul>
+      <div style="margin-top:10px;"><div class="feat-tag green">Owns: All AI models</div></div>
+    </div>
+    <div class="team-card">
+      <div class="team-role cse">CSE — C2</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Backend + App + Dashboard</div>
+      <ul class="team-owns">
+        <li>FastAPI server: MQTT ingest, GP surface API, WebSocket peer broadcast</li>
+        <li>MongoDB + Redis: telemetry store, surface cache</li>
+        <li>React Native rider app (all screens)</li>
+        <li>React + Leaflet admin dashboard</li>
+        <li>DIGIPIN API integration</li>
+        <li>Cloudflare tunnel for demo connectivity</li>
+      </ul>
+      <div style="margin-top:10px;"><div class="feat-tag green">Owns: All software</div></div>
+    </div>
+  </div>
+
+  <!-- Content checkup -->
+  <div class="card" style="background:linear-gradient(135deg,rgba(0,229,184,0.04),rgba(124,111,255,0.03));border:1px solid rgba(0,229,184,0.2);">
+    <div style="font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:16px;">✅ Requirements Checkup</div>
+    <div class="grid-2" style="gap:8px;">
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Cost reduced to minimum</div><div class="alert-sub">₹850 total prototype vs ₹10,345 original. 80% helmet cost reduction via Pi Zero 2W.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Compensation USP fully removed</div><div class="alert-sub">HAR, eFuse, HMAC attestation and compensation module removed entirely from scope.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Raspberry Pi helmet with cam</div><div class="alert-sub">Pi Zero 2W + Pi Camera Module 3 Wide. Full AI on helmet, 24/7.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">What was in doc + what was added</div><div class="alert-sub">Full "Delta" section covering kept / removed / added with cost breakdown.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Clear demo workflow</div><div class="alert-sub">6-step 90-second demo script with exact things to say and show. Prepared judge Q&A.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">24/7 full-time AI smart cam + security + voice nav + DIGIPIN + accident prevention</div><div class="alert-sub">Helmet AI section covers all: threat detection, TTC, dashcam, voice nav, pothole detection, peer sharing.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Software requirements minimal but functional</div><div class="alert-sub">Stack reduced to: ESP-IDF + TFLite Micro + FastAPI + Scikit GP + Expo React Native + Leaflet. No heavy infra.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Peer hazard mesh explained</div><div class="alert-sub">Rider A detects → GP update → Rider B warned. Core mechanic explained with diagram and demo.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Helmet compliance note</div><div class="alert-sub">Special note: all riders wear helmets; companies can verify rides and detect discrepancies via GPS + dashcam log.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Full rider journey</div><div class="alert-sub">Step-by-step from order accept to delivered: every sensor state, every AI event, every alert.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">60-hour Gantt plan, 5 members</div><div class="alert-sub">3 ECE + 2 CSE, 12 × 5-hour blocks, 3 gate milestones, integration + polish phase.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Prototype-grade hardware, not production</div><div class="alert-sub">Explicitly noted: zip-tie mounts, breadboards, powerbank — functional for demo, not production.</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+// ── SECTION NAV ──
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+  const sec = document.getElementById('section-' + id);
+  if (sec) sec.classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── DASH TABS ──
+function switchDashTab(id) {
+  document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.dash-tab-btn').forEach(b => b.classList.remove('active'));
+  const tab = document.getElementById('dash-' + id);
+  if (tab) tab.classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── NOTIFICATION ──
+function showNotification(icon, title, body) {
+  const n = document.getElementById('notif');
+  document.getElementById('notif-icon').textContent = icon;
+  document.getElementById('notif-title').textContent = title;
+  document.getElementById('notif-body').textContent = body;
+  n.classList.add('show');
+  setTimeout(() => n.classList.remove('show'), 4000);
+}
+
+// ── FLOOD SIMULATION ──
+function triggerFlood() {
+  const panel = document.getElementById('alerts-panel');
+  const p = document.createElement('div');
+  p.className = 'alert-item critical';
+  p.innerHTML = `<div class="alert-icon">🌊</div><div class="alert-text"><div class="alert-title">NEW: Flood zone — Anna Nagar West underpass</div><div class="alert-sub">GP confidence 91% · 3 riders in radius · Rerouting dispatched immediately</div></div><div class="alert-time">NOW</div>`;
+  panel.insertBefore(p, panel.firstChild);
+  const rr = document.getElementById('stat-rerouted');
+  if (rr) rr.textContent = parseInt(rr.textContent) + 3;
+  showNotification('🌊', 'New Flood Zone Detected', 'Anna Nagar West · GP 91% · 3 riders rerouted');
+}
+
+// ── DIGIPIN ──
+function resolveDigipin() {
+  const lat = parseFloat(document.getElementById('lat-input').value) || 13.0827;
+  const lng = parseFloat(document.getElementById('lng-input').value) || 80.2707;
+  const codes = ['5F3-KJ2-9P4Q','7G2-AM4-3B1R','4H8-CL6-7X2W','9J1-NP5-8Y3Z','2K4-QR7-1M6V'];
+  const idx = Math.abs(Math.floor((lat * 100 + lng * 100)) % codes.length);
+  document.getElementById('digipin-display').textContent = codes[idx];
+  showNotification('📍', 'DIGIPIN Resolved', `${lat.toFixed(4)}°N, ${lng.toFixed(4)}°E → ${codes[idx]} · 3.8m accuracy`);
+}
+
+// ── LIVE TIMERS ──
+let surfaceAge = 12;
+function updateSurface() {
+  surfaceAge++;
+  if (surfaceAge > 30) surfaceAge = 0;
+  const el = document.getElementById('map-age');
+  if (el) {
+    el.textContent = surfaceAge + 's';
+    el.style.color = surfaceAge < 28 ? 'var(--green)' : 'var(--accent4)';
+  }
+  const el2 = document.getElementById('journey-surface-age');
+  if (el2) el2.textContent = surfaceAge + 's';
+}
+
+function updateStats() {
+  const r = document.getElementById('stat-riders');
+  if (r && Math.random() > 0.9) r.textContent = parseInt(r.textContent) + (Math.random() > 0.5 ? 1 : -1);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setInterval(updateSurface, 1000);
+  setInterval(updateStats, 4000);
+  setTimeout(() => showNotification('🚀', 'RiderShield AI', 'Hackathon edition loaded. 5 members. 60 hours. Let\'s go.'), 1500);
+});
+</script>
+</body>
+</html>
