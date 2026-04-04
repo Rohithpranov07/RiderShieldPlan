@@ -408,7 +408,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     <span class="pill hot">DIGIPIN navigation</span>
     <span class="pill">Voice alerts hands-free</span>
     <span class="pill">Flood surface GP model</span>
-    <span class="pill">Fatigue detection</span>
+    <span class="pill">Basic fatigue awareness</span>
     <span class="pill">Accident prevention</span>
     <span class="pill">Rider compliance monitor</span>
   </div>
@@ -431,7 +431,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     <div class="card card-accent2">
       <div style="font-size:24px;margin-bottom:8px;">⛑️</div>
       <h3>Gap 2 — Rider Physical State Invisible</h3>
-      <p>A rider on hour 14 is assigned the same orders as a rested rider. No fatigue signal exists anywhere. No platform has pre-accident biomechanical data for two-wheelers. RiderShield adds a <strong style="color:var(--text);">4-level fatigue index</strong> via grip asymmetry and handlebar micro-tremor.</p>
+      <p>A rider on hour 14 is assigned the same orders as a rested rider. Most platforms miss simple rider-condition context. RiderShield adds <strong style="color:var(--text);">basic fatigue awareness</strong> using ride duration and motion patterns to support safer dispatch decisions.</p>
     </div>
     <div class="card card-accent3">
       <div style="font-size:24px;margin-bottom:8px;">🪖</div>
@@ -527,7 +527,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         <tr><td>Flood lead time</td><td class="cross">45–90 min lag</td><td class="cross">6-hour lag</td><td class="partial">15–20 min lag</td><td class="check">15–20 min ahead</td></tr>
         <tr><td>Peer hazard alert</td><td class="cross">None</td><td class="cross">None</td><td class="partial">Manual tap</td><td class="check">Automatic, 5s latency</td></tr>
         <tr><td>Pothole mapping</td><td class="cross">None</td><td class="cross">None</td><td class="partial">Manual report</td><td class="check">Automatic via IMU jerk</td></tr>
-        <tr><td>Rider fatigue detection</td><td class="cross">None</td><td class="cross">None</td><td class="cross">None</td><td class="check">4-level index, 50 Hz</td></tr>
+        <tr><td>Rider fatigue awareness</td><td class="cross">None</td><td class="cross">None</td><td class="cross">None</td><td class="check">Duration + motion based</td></tr>
         <tr><td>Helmet safety awareness</td><td class="cross">None</td><td class="cross">None</td><td class="cross">None</td><td class="check">Forward + rear alerts</td></tr>
         <tr><td>Voice navigation (hands-free)</td><td class="partial">Phone GPS only</td><td class="partial">Phone GPS only</td><td class="partial">Phone GPS only</td><td class="check">Bone-conduction, helmet</td></tr>
         <tr><td>DIGIPIN precision delivery</td><td class="cross">None</td><td class="cross">None</td><td class="cross">None</td><td class="check">3.8m accuracy</td></tr>
@@ -548,8 +548,8 @@ h1.hero-title .line2{display:block;color:var(--accent);}
           <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Smart Helmet (Raspberry Pi Zero 2W)</div>
           Pi cam module + bone-conduction speaker + BLE. Rear vehicle detection, forward collision alerts, voice navigation, and dashcam recording.<br><br>
           <div style="font-size:12px;color:var(--accent);font-weight:700;">The helmet protects the rider from dynamic threats — vehicles, collisions, and navigation overload.</div><br>
-          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Fatigue Handlebar Unit (ESP32)</div>
-          FSR grip array + triaxial accelerometer. 50 Hz. BLE relay to rider app.
+          <div style="color:var(--text);font-weight:600;margin-bottom:3px;">Rider State Awareness</div>
+          Basic fatigue awareness based on ride duration and motion patterns from app + bike telemetry.
         </div>
       </div>
       <div style="border-right:1px solid var(--border);padding:0 20px;">
@@ -602,7 +602,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       </div>
       <div class="delta-item">
         <div class="delta-badge kept">✓</div>
-        <div><div class="delta-text">Fatigue handlebar unit</div><div class="delta-sub">FSR grip asymmetry + tremor detection + LSTM — unchanged</div></div>
+        <div><div class="delta-text">Basic rider-state awareness</div><div class="delta-sub">Duration + motion-pattern awareness integrated into app and dashboard</div></div>
       </div>
       <div class="delta-item">
         <div class="delta-badge kept">✓</div>
@@ -610,7 +610,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       </div>
       <div class="delta-item">
         <div class="delta-badge kept">✓</div>
-        <div><div class="delta-text">React Native rider app</div><div class="delta-sub">Voice alerts, flood map, fatigue score — unchanged</div></div>
+        <div><div class="delta-text">React Native rider app</div><div class="delta-sub">Voice alerts, flood map, rider-state awareness — unchanged</div></div>
       </div>
       <div class="delta-item">
         <div class="delta-badge kept">✓</div>
@@ -799,14 +799,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         <tr><td>18650 battery + holder</td><td>18650</td><td>6hr operational · standard · no BMS needed for prototype</td><td>₹120</td></tr>
         <tr style="background:rgba(0,229,184,0.03);"><td colspan="3" style="font-weight:700;color:var(--text);">Unit A Subtotal</td><td style="color:var(--accent);font-weight:700;">₹1,120</td></tr>
 
-        <tr class="hw-group-header"><td colspan="4">UNIT B — Fatigue Handlebar Unit (ECE: E3)</td></tr>
-        <tr><td>FSR 402 (×2)</td><td>Interlink-402</td><td>Left + right grip force · analog</td><td>₹260</td></tr>
-        <tr><td>MPU-6050 (handlebar)</td><td>GY-521</td><td>Micro-tremor 50 Hz</td><td>₹85</td></tr>
-        <tr><td>ESP32 WROOM-32</td><td>ESP32-D0</td><td>BLE relay to rider phone</td><td>₹220</td></tr>
-        <tr><td>3D-printed grip mount</td><td>PLA print</td><td>Handlebar attachment</td><td>₹60</td></tr>
-        <tr style="background:rgba(0,229,184,0.03);"><td colspan="3" style="font-weight:700;color:var(--text);">Unit B Subtotal</td><td style="color:var(--accent);font-weight:700;">₹625</td></tr>
-
-        <tr class="hw-group-header"><td colspan="4">UNIT C — Smart Helmet (ECE: E3 + CSE assist)</td></tr>
+        <tr class="hw-group-header"><td colspan="4">UNIT B — Smart Helmet (ECE: E3 + CSE assist)</td></tr>
         <tr><td>Raspberry Pi Zero 2W</td><td>Pi-Zero-2W</td><td>Full Linux AI node · quad-core · BLE · Python/TFLite</td><td>₹650</td></tr>
         <tr><td>Pi Camera Module 3 Wide</td><td>SC0872</td><td>120° FOV · 12MP · 1080p30 · CSI</td><td>₹800</td></tr>
         <tr><td>Bone-conduction speaker</td><td>Generic USB</td><td>Voice alerts · hands-free</td><td>₹350</td></tr>
@@ -816,8 +809,8 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         <tr><td>3D-printed cam housing</td><td>PLA print</td><td>Camera mount · rear-clip style</td><td>₹80</td></tr>
         <tr style="background:rgba(0,229,184,0.03);"><td colspan="3" style="font-weight:700;color:var(--text);">Unit C Subtotal</td><td style="color:var(--accent);font-weight:700;">₹2,710</td></tr>
 
-        <tr style="background:rgba(255,210,77,0.05);"><td colspan="3" style="font-weight:800;color:var(--accent4);font-size:14px;">TOTAL PER RIDER (prototype)</td><td style="color:var(--accent4);font-weight:800;font-size:14px;">₹4,455</td></tr>
-        <tr style="background:rgba(0,229,184,0.04);"><td colspan="3" style="font-weight:600;color:var(--muted);">Unit A + B only (MVP without helmet)</td><td style="color:var(--accent);font-weight:700;">₹1,745</td></tr>
+        <tr style="background:rgba(255,210,77,0.05);"><td colspan="3" style="font-weight:800;color:var(--accent4);font-size:14px;">TOTAL PER RIDER (prototype)</td><td style="color:var(--accent4);font-weight:800;font-size:14px;">₹3,830</td></tr>
+        <tr style="background:rgba(0,229,184,0.04);"><td colspan="3" style="font-weight:600;color:var(--muted);">Unit A only (MVP without helmet)</td><td style="color:var(--accent);font-weight:700;">₹1,120</td></tr>
       </tbody>
     </table>
     </div>
@@ -880,13 +873,13 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         <tr><td>WebSocket broadcast</td><td>fastapi WS</td><td>Push peer hazard alerts to all riders in a 500m radius instantly</td><td>Native FastAPI feature. No Kafka/RabbitMQ needed for prototype.</td></tr>
 
         <tr class="hw-group-header"><td colspan="4">MOBILE — React Native App</td></tr>
-        <tr><td>React Native</td><td>Expo</td><td>Rider app: flood map, risk score, voice alerts, DIGIPIN, fatigue score, peer hazard feed</td><td>Single codebase Android + iOS. Expo for fast builds.</td></tr>
+        <tr><td>React Native</td><td>Expo</td><td>Rider app: flood map, risk score, voice alerts, DIGIPIN, basic rider-state awareness, peer hazard feed</td><td>Single codebase Android + iOS. Expo for fast builds.</td></tr>
         <tr><td>React Native Maps</td><td>MapLibre</td><td>Flood probability heatmap overlay on rider route</td><td>Open-source, free. No Mapbox token needed for prototype.</td></tr>
         <tr><td>Expo Speech</td><td>expo-speech</td><td>Voice navigation and hazard alerts via phone speaker</td><td>One-line TTS. Works offline.</td></tr>
-        <tr><td>BLE manager</td><td>react-native-ble</td><td>Receive fatigue data from handlebar unit</td><td>Direct BLE — no internet hop for latency-critical fatigue data.</td></tr>
+        <tr><td>BLE manager</td><td>react-native-ble</td><td>Receive helmet status and bike-node telemetry</td><td>Direct BLE for low-latency rider safety telemetry.</td></tr>
 
         <tr class="hw-group-header"><td colspan="4">DASHBOARD — React Admin</td></tr>
-        <tr><td>React + Vite</td><td>React 18</td><td>Admin ops dashboard: fleet map, fatigue monitor, helmet events, hazard log</td><td>Fast dev. No framework overhead.</td></tr>
+        <tr><td>React + Vite</td><td>React 18</td><td>Admin ops dashboard: fleet map, rider-state monitor, helmet events, hazard log</td><td>Fast dev. No framework overhead.</td></tr>
         <tr><td>Leaflet.js</td><td>react-leaflet</td><td>Real-time flood heatmap, rider dots, hazard markers</td><td>Free. No API key. Sufficient for prototype heatmap tiles.</td></tr>
 
         <tr class="hw-group-header"><td colspan="4">INFRASTRUCTURE</td></tr>
@@ -946,7 +939,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent3);margin-bottom:10px;">Helmet Pi + Rider App</div>
         <div class="sw-node" style="margin-bottom:8px;">
           <div class="sw-node-title">MobileNetV2 inference</div>
-          <div class="sw-node-sub">Pi Cam frames → threat/pothole/safe at 15fps</div>
+          <div class="sw-node-sub">Pi Cam frames → threat/obstacle/safe at 15fps</div>
         </div>
         <div class="sw-arrow">↓</div>
         <div class="sw-node" style="margin-bottom:8px;">
@@ -956,7 +949,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         <div class="sw-arrow">↓</div>
         <div class="sw-node" style="margin-bottom:8px;">
           <div class="sw-node-title">Rider App receives</div>
-          <div class="sw-node-sub">Peer flood/pothole alerts + voice nav + fatigue index + DIGIPIN</div>
+          <div class="sw-node-sub">Peer flood/pothole alerts + voice nav + rider-state awareness + DIGIPIN</div>
         </div>
       </div>
     </div>
@@ -997,9 +990,9 @@ h1.hero-title .line2{display:block;color:var(--accent);}
           <div style="font-size:9px;color:var(--muted);">No threats detected</div>
         </div>
         <div style="background:rgba(255,210,77,0.07);border:1px solid rgba(255,210,77,0.2);border-radius:10px;padding:10px;margin-bottom:8px;">
-          <div style="font-size:9px;color:var(--accent4);">Fatigue Level</div>
+          <div style="font-size:9px;color:var(--accent4);">Rider State</div>
           <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--green);">1</div>
-          <div style="font-size:9px;color:var(--muted);">GAI: 0.08 · TFD: 0.3 Hz</div>
+          <div style="font-size:9px;color:var(--muted);">Duration + motion: Stable</div>
         </div>
         <div style="background:rgba(0,229,184,0.07);border:1px solid rgba(0,229,184,0.2);border-radius:10px;padding:10px;margin-bottom:8px;">
           <div style="font-size:9px;color:var(--accent);">Flood surface</div>
@@ -1020,7 +1013,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       <div class="alert-item warning" style="margin-bottom:8px;"><div class="alert-icon">⚠️</div><div class="alert-text"><div class="alert-title">Peer hazard alerts</div><div class="alert-sub">Pothole and flood alerts from riders ahead — auto-triggered, &lt;5s. No manual reporting.</div></div></div>
       <div class="alert-item info" style="margin-bottom:8px;"><div class="alert-icon">📍</div><div class="alert-text"><div class="alert-title">DIGIPIN delivery pinpoint</div><div class="alert-sub">3.8m precision. Shows exact building entrance. Integrates with flood zone check.</div></div></div>
       <div class="alert-item ok" style="margin-bottom:8px;"><div class="alert-icon">🔊</div><div class="alert-text"><div class="alert-title">Voice navigation (hands-free)</div><div class="alert-sub">Turn-by-turn + hazard alerts spoken via phone speaker or helmet bone-conduction.</div></div></div>
-      <div class="alert-item info" style="margin-bottom:8px;"><div class="alert-icon">💪</div><div class="alert-text"><div class="alert-title">Fatigue level display</div><div class="alert-sub">Live 4-level index. Level 3 = rest suggestion popup. Level 4 = order gating triggered.</div></div></div>
+      <div class="alert-item info" style="margin-bottom:8px;"><div class="alert-icon">💪</div><div class="alert-text"><div class="alert-title">Basic rider-state awareness</div><div class="alert-sub">Duration + motion patterns indicate safe/caution state for dispatch support.</div></div></div>
       <div class="alert-item warning" style="margin-bottom:8px;"><div class="alert-icon">🪖</div><div class="alert-text"><div class="alert-title">Helmet AI status</div><div class="alert-sub">Threat detection feed from helmet. Inference fps, battery, BLE link strength.</div></div></div>
     </div>
   </div>
@@ -1059,7 +1052,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
 
       <div class="card" style="margin-bottom:12px;border:1px solid rgba(77,166,255,0.2);">
         <h3 style="color:var(--blue);">🔊 Voice Navigation</h3>
-        <p>The rider's active delivery is loaded from the app. Turn-by-turn instructions are synthesised using pyttsx3 (offline TTS) and played through the bone-conduction speaker. Hands remain on the handlebar. Eyes remain on the road. Hazard alerts interrupt navigation with priority audio.</p>
+        <p>The rider's active delivery is loaded from the app. Turn-by-turn instructions are synthesised using pyttsx3 (offline TTS) and played through the bone-conduction speaker. Hands stay steady. Eyes stay on the road. Hazard alerts interrupt navigation with priority audio.</p>
         <div style="margin-top:10px;"><div class="feat-tag blue">Offline TTS</div><div class="feat-tag green">Bone conduction</div><div class="feat-tag orange">Priority interrupt</div></div>
       </div>
 
@@ -1127,12 +1120,12 @@ h1.hero-title .line2{display:block;color:var(--accent);}
   <div class="section-head">
     <div class="accent-line"></div>
     <h2>Live Ops Dashboard</h2>
-    <p>Real-time fleet view, flood surface, helmet cam events, fatigue monitor, and peer hazard log.</p>
+    <p>Real-time fleet view, flood surface, helmet cam events, rider-state awareness, and peer hazard log.</p>
   </div>
 
   <div class="dash-tab-nav">
     <button class="dash-tab-btn active" onclick="switchDashTab('flood', this)">🌊 Flood Surface</button>
-    <button class="dash-tab-btn" onclick="switchDashTab('fatigue', this)">💪 Fatigue Monitor</button>
+    <button class="dash-tab-btn" onclick="switchDashTab('fatigue', this)">💪 Rider State</button>
     <button class="dash-tab-btn" onclick="switchDashTab('helmet-events', this)">🪖 Helmet Events</button>
     <button class="dash-tab-btn" onclick="switchDashTab('peer', this)">📡 Peer Hazard Mesh</button>
     <button class="dash-tab-btn" onclick="switchDashTab('digipin', this)">📍 DIGIPIN</button>
@@ -1187,27 +1180,27 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     </div>
   </div>
 
-  <!-- FATIGUE TAB -->
+  <!-- RIDER STATE TAB -->
   <div id="dash-fatigue" class="dash-tab">
-    <div class="dash-header"><div class="dash-title">Two-Wheeler Fatigue Monitor</div><div class="live-badge"><div class="live-dot"></div>50 Hz sampling</div></div>
+    <div class="dash-header"><div class="dash-title">Basic Rider-State Awareness</div><div class="live-badge"><div class="live-dot"></div>Duration + motion patterns</div></div>
     <div class="grid-3" style="margin-bottom:20px;">
       <div class="card" style="text-align:center;">
         <div class="card-label">Rider #R-112 · 4h 22m active</div>
         <div class="fatigue-gauge"><svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="var(--green)" stroke-width="9" stroke-dasharray="144 144" stroke-dashoffset="46" stroke-linecap="round"/></svg><div class="gauge-label"><div class="gauge-val" style="color:var(--green);">1</div><div class="gauge-unit">LEVEL</div></div></div>
         <div style="font-size:12px;color:var(--green);font-weight:700;">SAFE</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:3px;">GAI: 0.08 · TFD: 0.3Hz</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">Short shift + smooth motion</div>
       </div>
       <div class="card" style="text-align:center;">
         <div class="card-label">Rider #R-447 · 9h 14m active</div>
         <div class="fatigue-gauge"><svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="var(--accent2)" stroke-width="9" stroke-dasharray="215 144" stroke-dashoffset="46" stroke-linecap="round"/></svg><div class="gauge-label"><div class="gauge-val" style="color:var(--accent2);">3</div><div class="gauge-unit">LEVEL</div></div></div>
-        <div style="font-size:12px;color:var(--accent2);font-weight:700;">REST SUGGESTED</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:3px;">GAI: 0.42 · TFD: 3.1Hz</div>
+        <div style="font-size:12px;color:var(--accent2);font-weight:700;">CAUTION</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">Long shift + rough segment exposure</div>
       </div>
       <div class="card" style="text-align:center;">
         <div class="card-label">Rider #R-891 · 13h 07m active</div>
         <div class="fatigue-gauge"><svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="var(--red)" stroke-width="9" stroke-dasharray="270 144" stroke-dashoffset="46" stroke-linecap="round"/></svg><div class="gauge-label"><div class="gauge-val" style="color:var(--red);">4</div><div class="gauge-unit">LEVEL</div></div></div>
-        <div style="font-size:12px;color:var(--red);font-weight:700;">ORDERS GATED</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:3px;">GAI: 0.78 · TFD: 6.2Hz</div>
+        <div style="font-size:12px;color:var(--red);font-weight:700;">REST RECOMMENDED</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">Extended shift + unstable motion trend</div>
       </div>
     </div>
   </div>
@@ -1347,14 +1340,14 @@ h1.hero-title .line2{display:block;color:var(--accent);}
               <br><br>
               <strong style="color:var(--text);">Bike node (every 100ms):</strong> Rain sensor = 0, depth sensor = dry, IMU = smooth ride. No HFV triggered.
               <br><br>
-              <strong style="color:var(--text);">Handlebar (every 20ms):</strong> FSR left+right balanced. GAI = 0.08. TFD = 0.3Hz. Fatigue Level 1. No alert.
+              <strong style="color:var(--text);">Rider-state model:</strong> Duration + motion pattern remains stable. Status: Safe.
               <br><br>
               <strong style="color:var(--text);">Voice nav:</strong> "In 400m, turn left at the signal."
             </div>
             <div class="journey-sensors">
               <div class="feat-tag green">Helmet: 15fps inference</div>
               <div class="feat-tag blue">Bike: sensor polling</div>
-              <div class="feat-tag yellow">Handlebar: fatigue 50Hz</div>
+              <div class="feat-tag yellow">Rider state: stable</div>
               <div class="feat-tag purple">App: voice nav active</div>
             </div>
           </div>
@@ -1424,7 +1417,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
             <div class="journey-time">T+8:45 — Order Delivered ✓</div>
             <div class="journey-title">Ride complete. All data committed.</div>
             <div class="journey-detail">
-              Rider marks delivery complete. App shows: Fatigue Level 1 (safe), 0 hazard incidents, 1 pothole warned, 1 threat avoided. Route data feeds into the peer hazard mesh for future riders.
+              Rider marks delivery complete. App shows: Rider state safe, 0 hazard incidents, 1 pothole warned, 1 threat avoided. Route data feeds into the peer hazard mesh for future riders.
               <br><br>
               Company dashboard: GPS log + dashcam confirm genuine delivery. No discrepancy. 
             </div>
@@ -1449,8 +1442,8 @@ h1.hero-title .line2{display:block;color:var(--accent);}
           <div class="har-field"><span class="har-key">Rain sensor</span><span class="har-val" style="color:var(--green);">DRY</span></div>
           <div class="har-field"><span class="har-key">Road depth</span><span class="har-val" style="color:var(--green);">CLEAR</span></div>
           <div class="har-field"><span class="har-key">IMU jerk</span><span class="har-val" style="color:var(--green);">0.04g</span></div>
-          <div class="har-field"><span class="har-key">Fatigue level</span><span class="har-val" style="color:var(--green);">1 / 4</span></div>
-          <div class="har-field"><span class="har-key">GAI index</span><span class="har-val">0.08</span></div>
+          <div class="har-field"><span class="har-key">Rider state</span><span class="har-val" style="color:var(--green);">SAFE</span></div>
+          <div class="har-field"><span class="har-key">Shift duration</span><span class="har-val">4h 22m</span></div>
           <div class="har-field"><span class="har-key">BLE link</span><span class="har-val" style="color:var(--green);">STRONG</span></div>
           <div class="har-field"><span class="har-key">GPS accuracy</span><span class="har-val">±2.8m</span></div>
           <div class="har-field"><span class="har-key">GP surface age</span><span class="har-val" id="journey-surface-age">18s</span></div>
@@ -1555,7 +1548,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
   <div class="grid-2">
     <div class="card card-accent" style="margin-bottom:12px;">
       <h3>Q: Won't Zomato just build this?</h3>
-      <p>Zomato's incentive is delivery completion, not urban infrastructure. They have no revenue model for selling flood data to municipalities. We do. Their hardware budget per rider is zero. Ours is ₹1,745 for the MVP bike node — amortised over 200 deliveries. They also have no incentive to gate orders based on fatigue — that reduces revenue per rider.</p>
+      <p>Zomato's incentive is delivery completion, not urban infrastructure. They have no revenue model for selling flood data to municipalities. We do. Their hardware budget per rider is zero. Ours is ₹1,120 for the MVP bike node — amortised over deliveries. They optimize dispatch speed first, while we optimize verified road safety intelligence.</p>
     </div>
     <div class="card card-accent2" style="margin-bottom:12px;">
       <h3>Q: Isn't this just Waze with sensors?</h3>
@@ -1591,8 +1584,8 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     <div class="grid-3" style="gap:12px;">
       <div><div class="feat-tag orange">E1</div> <strong>ESP32 bike sensor node</strong> — hardware build, waterproofing, sensor wiring, BOM procurement</div>
       <div><div class="feat-tag orange">E2</div> <strong>ESP32 firmware + TFLite Micro</strong> — anomaly model flash, MQTT publish, HFV packet format</div>
-      <div><div class="feat-tag orange">E3</div> <strong>Helmet unit + fatigue handlebar</strong> — Pi Zero mount, cam housing, FSR wiring, BLE relay</div>
-      <div><div class="feat-tag green">C1</div> <strong>AI/ML pipeline</strong> — GP model, MobileNetV2 training, TFLite export, LSTM fatigue</div>
+      <div><div class="feat-tag orange">E3</div> <strong>Helmet unit integration</strong> — Pi Zero mount, cam housing, speaker/mic wiring, BLE relay</div>
+      <div><div class="feat-tag green">C1</div> <strong>AI/ML pipeline</strong> — GP model, MobileNetV2 training, TFLite export, collision-risk inference</div>
       <div><div class="feat-tag green">C2</div> <strong>Backend + React + App</strong> — FastAPI, MongoDB, WebSocket, React dashboard, React Native app</div>
     </div>
   </div>
@@ -1650,12 +1643,12 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         </div>
         <!-- E3 -->
         <div class="gantt-row">
-          <div class="gantt-label"><span class="feat-tag orange">E3</span><br>Helmet + Fatigue</div>
+          <div class="gantt-label"><span class="feat-tag orange">E3</span><br>Helmet Integration</div>
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Pi Zero setup + OS</div></div>
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Pi Cam mount</div></div>
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Speaker + mic wiring</div></div>
-          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">FSR grip array</div></div>
-          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Handlebar BLE unit</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">BLE telemetry link</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,107,53,0.2);border:1px solid rgba(255,107,53,0.4);color:var(--accent2);">Helmet power setup</div></div>
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.15);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Helmet assembly</div></div>
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.15);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">C1 model install</div></div>
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,210,77,0.1);border:1px solid rgba(255,210,77,0.3);color:var(--accent4);">Voice alert test</div></div>
@@ -1672,7 +1665,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">GP model (scikit)</div></div>
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">MobileNetV2 finetune</div></div>
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">TFLite Pi export</div></div>
-          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">LSTM fatigue train</div></div>
+          <div class="gantt-cell"><div class="gantt-block" style="background:rgba(0,229,184,0.12);border:1px solid rgba(0,229,184,0.3);color:var(--accent);">Collision-risk tuning</div></div>
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,210,77,0.1);border:1px solid rgba(255,210,77,0.3);color:var(--accent4);">E2 handoff: ESP model</div></div>
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(255,210,77,0.1);border:1px solid rgba(255,210,77,0.3);color:var(--accent4);">E3 handoff: Pi model</div></div>
           <div class="gantt-cell"><div class="gantt-block" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);">Accuracy eval</div></div>
@@ -1718,7 +1711,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     <div class="card card-accent3">
       <div class="card-label">Hour 45 — Gate 3</div>
       <h3>Helmet + peer mesh live</h3>
-      <p>Pi Zero detecting threats with voice alert. Pothole from ESP32 propagated to second phone as peer alert. Fatigue BLE reading.</p>
+      <p>Pi Zero detecting threats with voice alert. Pothole from ESP32 propagated to second phone as peer alert. End-to-end rider warning flow verified.</p>
       <div style="margin-top:10px;"><div class="feat-tag orange">E3</div><div class="feat-tag green">C1</div><div class="feat-tag green">C2</div></div>
     </div>
   </div>
@@ -1729,7 +1722,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       <div class="phase-feat">Full end-to-end run: water tray → flood map → rider app alert → voice nav → DIGIPIN</div>
       <div class="phase-feat">Peer pothole test: ESP32 jerk → backend → second phone alert within 5s</div>
       <div class="phase-feat">Helmet threat detection: wave hand → voice fires → dashcam clip saved</div>
-      <div class="phase-feat">Fatigue gauge live: squeeze FSR → handlebar reading → app shows fatigue level</div>
+      <div class="phase-feat">Rider-state panel live: duration + motion patterns update safe/caution status</div>
       <div class="phase-feat">Demo script rehearsal × 3. All team members practice their segment independently.</div>
       <div class="phase-feat">Cloudflare tunnel verified. Dashboard accessible on both phones during demo.</div>
       <div class="phase-feat">Backup: if Pi Zero fails, use laptop webcam + same Python script. Same demo effect.</div>
@@ -1752,7 +1745,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       <div style="font-family:var(--font-display);font-size:48px;font-weight:700;color:rgba(0,229,184,0.08);position:absolute;top:4px;right:12px;">1</div>
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:8px;">Stream 1</div>
       <div style="font-weight:700;font-size:15px;margin-bottom:8px;">Rider Safety API</div>
-      <p style="font-size:13px;">Licensed to Zomato/Swiggy/Dunzo per active helmet node per month. Provides fleet safety dashboard, peer hazard mesh access, fatigue monitor. ₹200–500/rider/month.</p>
+      <p style="font-size:13px;">Licensed to Zomato/Swiggy/Dunzo per active helmet node per month. Provides fleet safety dashboard, peer hazard mesh access, and verified hazard intelligence. ₹200–500/rider/month.</p>
       <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--accent4);margin-top:12px;">TAM: ₹500 Cr+</div>
       <div style="font-size:12px;color:var(--muted);">12M gig riders in India</div>
     </div>
@@ -1835,14 +1828,14 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     </div>
     <div class="team-card">
       <div class="team-role ece">ECE — E3</div>
-      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Helmet Unit + Fatigue Handlebar</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Helmet Unit Integration</div>
       <ul class="team-owns">
         <li>Raspberry Pi Zero 2W OS setup + Pi Cam mount</li>
         <li>Bone-conduction speaker and mic wiring</li>
-        <li>FSR grip array + MPU-6050 handlebar mount</li>
+        <li>Helmet telemetry relay and event tagging integration</li>
         <li>3D-printed housing for all helmet components</li>
       </ul>
-      <div style="margin-top:10px;"><div class="feat-tag orange">Owns: Helmet + fatigue hardware</div></div>
+      <div style="margin-top:10px;"><div class="feat-tag orange">Owns: Helmet hardware</div></div>
     </div>
     <div class="team-card">
       <div class="team-role cse">CSE — C1</div>
@@ -1851,7 +1844,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         <li>Gaussian Process flood surface model (scikit-learn)</li>
         <li>MobileNetV2 finetuning + TFLite export for Pi Zero</li>
         <li>TFLite Micro anomaly model for ESP32 (3-feature)</li>
-        <li>LSTM fatigue classifier (grip + tremor features)</li>
+        <li>Basic rider-state model (duration + motion patterns)</li>
         <li>TTC computation logic for threat detection</li>
       </ul>
       <div style="margin-top:10px;"><div class="feat-tag green">Owns: All AI models</div></div>
