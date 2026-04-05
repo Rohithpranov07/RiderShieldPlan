@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RiderShield AI — Startup Hackathon Edition v2</title>
+<title>RiderShield AI — System Presentation v2</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -261,10 +261,9 @@ h1.hero-title .line2{display:block;color:var(--accent);}
 .chart-labels{display:flex;gap:4px;padding:0 4px;}
 .chart-label{flex:1;text-align:center;font-size:9px;color:var(--dim);overflow:hidden;}
 
-/* DEMO SCRIPT */
+/* DEMO */
 .demo-step{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:14px;display:flex;gap:16px;align-items:flex-start;}
 .demo-step-num{width:36px;height:36px;border-radius:9px;background:rgba(0,229,184,0.1);border:1px solid rgba(0,229,184,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--accent);flex-shrink:0;}
-.demo-step-body{}
 .demo-step-title{font-weight:700;margin-bottom:4px;font-size:14px;}
 .demo-step-sub{font-size:12px;color:var(--muted);line-height:1.7;}
 .demo-quote{font-family:var(--font-mono);font-size:12px;color:var(--accent);background:rgba(0,229,184,0.06);border-left:2px solid var(--accent);padding:8px 12px;border-radius:0 6px 6px 0;margin-top:8px;}
@@ -371,14 +370,14 @@ h1.hero-title .line2{display:block;color:var(--accent);}
   <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">☰</button>
   <div class="nav-links">
     <button class="nav-link active" onclick="showSection('overview', this)">Overview</button>
-    <button class="nav-link" onclick="showSection('delta', this)">What Changed<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('delta', this)">Cost Efficiency</button>
     <button class="nav-link" onclick="showSection('hardware', this)">Hardware</button>
     <button class="nav-link" onclick="showSection('software', this)">Software</button>
-    <button class="nav-link" onclick="showSection('helmet', this)">Helmet AI<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('helmet', this)">Helmet AI</button>
     <button class="nav-link" onclick="showSection('dashboard', this)">Dashboard</button>
-    <button class="nav-link" onclick="showSection('journey', this)">Rider Journey<span class="nav-badge">NEW</span></button>
-    <button class="nav-link" onclick="showSection('demo', this)">Demo Script<span class="nav-badge">NEW</span></button>
-    <button class="nav-link" onclick="showSection('impl', this)">60hr Plan<span class="nav-badge">NEW</span></button>
+    <button class="nav-link" onclick="showSection('journey', this)">Rider Journey</button>
+    <button class="nav-link" onclick="showSection('demo', this)">Demo</button>
+    <button class="nav-link" onclick="showSection('impl', this)">60hr Plan</button>
     <button class="nav-link" onclick="showSection('startup', this)">Startup</button>
     <button class="nav-link" onclick="showSection('team', this)">Team</button>
   </div>
@@ -389,7 +388,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
 <div class="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
-  <div class="hero-tag">National Hackathon · Patent-Ready · Startup Blueprint</div>
+  <div class="hero-tag">Real-Time Safety Infrastructure · Patent-Ready · Startup Blueprint</div>
   <h1 class="hero-title">
     <span class="line1">RIDERSHIELD</span>
     <span class="line2">AI</span>
@@ -579,120 +578,26 @@ h1.hero-title .line2{display:block;color:var(--accent);}
 </div>
 </div>
 
-<!-- ═══ DELTA — WHAT CHANGED ═══ -->
+<!-- ═══ COST EFFICIENCY ═══ -->
 <div id="section-delta" class="section">
 <div class="section-inner">
   <div class="section-head">
     <div class="accent-line"></div>
-    <h2>What We Kept, What We Removed, What We Added</h2>
-    <p>A clear diff between the original proposal and this startup-optimised, hackathon-ready version.</p>
+    <h2>Cost Efficiency</h2>
+    <p>We optimized prototype cost while preserving the same core system architecture and engineering logic.</p>
   </div>
-
-  <div class="grid-3" style="margin-bottom:32px;">
-    <!-- KEPT -->
-    <div class="delta-card kept">
-      <div style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:6px;">✅ Kept from Original</div>
-      <div class="delta-item">
-        <div class="delta-badge kept">✓</div>
-        <div><div class="delta-text">Federated ESP32 flood detection</div><div class="delta-sub">YL-83 + JSN-SR04T + MPU-6050 + TFLite Micro anomaly model — unchanged</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge kept">✓</div>
-        <div><div class="delta-text">Gaussian Process flood surface</div><div class="delta-sub">50m spatial resolution, 30s update, 15-min lead time — unchanged</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge kept">✓</div>
-        <div><div class="delta-text">Basic rider-state awareness</div><div class="delta-sub">Duration + motion-pattern awareness integrated into app and dashboard</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge kept">✓</div>
-        <div><div class="delta-text">DIGIPIN integration</div><div class="delta-sub">3.8m delivery precision — unchanged</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge kept">✓</div>
-        <div><div class="delta-text">React Native rider app</div><div class="delta-sub">Voice alerts, flood map, rider-state awareness — unchanged</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge kept">✓</div>
-        <div><div class="delta-text">FastAPI + MongoDB + Redis backend</div><div class="delta-sub">Real-time WebSocket, GP surface API — unchanged</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge kept">✓</div>
-        <div><div class="delta-text">Mapbox ops dashboard</div><div class="delta-sub">Fleet overview, heatmap tiles, NGO redirect — unchanged</div></div>
-      </div>
-    </div>
-
-    <!-- REMOVED -->
-    <div class="removed-card">
-      <div style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--red);margin-bottom:14px;display:flex;align-items:center;gap:6px;">🗑️ Removed</div>
-      <div class="removed-item">
-        <div class="removed-badge">✗</div>
-        <div><div class="delta-text" style="font-size:13px;">HAR Cryptographic Compensation USP</div><div class="delta-sub">Compensation is pre-defined in company terms — no need for a standalone system. Removed entirely from product scope.</div></div>
-      </div>
-      <div class="removed-item">
-        <div class="removed-badge">✗</div>
-        <div><div class="delta-text" style="font-size:13px;">OAK-D Lite VPU camera (₹4,200)</div><div class="delta-sub">Replaced by Raspberry Pi Zero 2W + Pi Cam module at a fraction of the cost. Same AI capability via MobileNetV2.</div></div>
-      </div>
-      <div class="removed-item">
-        <div class="removed-badge">✗</div>
-        <div><div class="delta-text" style="font-size:13px;">OV5640 / OV2640 multi-camera array</div><div class="delta-sub">Simplified to single wide-angle Pi Cam with 160° FOV for prototype demo. Sufficient for judge wow factor.</div></div>
-      </div>
-      <div class="removed-item">
-        <div class="removed-badge">✗</div>
-        <div><div class="delta-text" style="font-size:13px;">HMAC-SHA256 eFuse attestation</div><div class="delta-sub">Compensation module removed — eFuse attestation no longer needed. Standard data signing retained for logging.</div></div>
-      </div>
-      <div class="removed-item">
-        <div class="removed-badge">✗</div>
-        <div><div class="delta-text" style="font-size:13px;">ESP32-S3 as helmet MCU</div><div class="delta-sub">Replaced by Raspberry Pi Zero 2W which runs full Linux + Python AI stack with far more capability.</div></div>
-      </div>
-    </div>
-
-    <!-- ADDED -->
-    <div class="delta-card added">
-      <div style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--accent3);margin-bottom:14px;display:flex;align-items:center;gap:6px;">⚡ Added / New</div>
-      <div class="delta-item">
-        <div class="delta-badge added">+</div>
-        <div><div class="delta-text">Raspberry Pi Zero 2W helmet unit</div><div class="delta-sub">Full Linux AI node on helmet — 24/7 threat detection, dashcam, voice nav at ₹650 (vs ₹4,200 OAK-D)</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge added">+</div>
-        <div><div class="delta-text">Peer hazard mesh system</div><div class="delta-sub">Riders share pothole + flood data in real-time. New riders get pre-warned. Core "wow" differentiator.</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge added">+</div>
-        <div><div class="delta-text">AI-assisted rider awareness</div><div class="delta-sub">MobileNetV2 + Pi Cam detects dynamic traffic threats and triggers low-latency voice alerts via bone-conduction speaker.</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge added">+</div>
-        <div><div class="delta-text">Accident prevention system</div><div class="delta-sub">TTC (time-to-collision) computation. Combines helmet cam + IMU jerk + GP flood surface to predict danger zones.</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge added">+</div>
-        <div><div class="delta-text">Rider discrepancy monitoring</div><div class="delta-sub">Companies can verify deliveries via GPS log + helmet cam timestamps. Detects fake completions and route deviations.</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge added">+</div>
-        <div><div class="delta-text">Full demo script + rider journey</div><div class="delta-sub">Step-by-step 90-second demo flow for judges + complete live ride simulation.</div></div>
-      </div>
-      <div class="delta-item">
-        <div class="delta-badge added">+</div>
-        <div><div class="delta-text">60-hour implementation plan</div><div class="delta-sub">Per-member hour-by-hour Gantt for 3 ECE + 2 CSE over the hackathon period.</div></div>
-      </div>
-    </div>
-  </div>
-
   <!-- Special Note -->
   <div class="special-note" style="margin-bottom:32px;">
     <div class="special-note-header">📌 Special Note — Helmet Compliance as Platform Advantage</div>
-    <p style="font-size:14px;color:var(--muted);margin-bottom:10px;">Every rider already wears a helmet — it is mandated and monitored by Zomato, Swiggy, and traffic enforcement. RiderShield converts this non-negotiable compliance into a sensing asset.</p>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:10px;">Every rider already wears a helmet — it is mandated and monitored by Zomato, Swiggy, and traffic enforcement. We convert this non-negotiable compliance into a sensing asset.</p>
     <div class="grid-2" style="margin-top:12px;">
       <div>
         <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;">For Riders</div>
-        <div style="font-size:13px;color:var(--muted);">The helmet becomes their guardian — proactively warning them about threats they cannot see (vehicle approaching from rear, pothole 50m ahead detected by a previous rider, flood zone on their route).</div>
+        <div style="font-size:13px;color:var(--muted);">The helmet proactively warns riders about threats they cannot see yet: rear-approach vehicles, a pothole 50m ahead detected by a previous rider, or a flood zone on route.</div>
       </div>
       <div>
         <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;">For Companies</div>
-        <div style="font-size:13px;color:var(--muted);">The helmet provides a continuous verified log of delivery activity. Companies can detect discrepancies — a rider who "completed" a delivery but the GPS shows they never reached the DIGIPIN. Reduces fraud and enables fair performance monitoring.</div>
+        <div style="font-size:13px;color:var(--muted);">The helmet provides a continuous verified log of delivery activity. Companies can detect discrepancies, such as a delivery marked completed when GPS never entered the DIGIPIN cell. This reduces fraud and supports fair performance monitoring.</div>
       </div>
     </div>
   </div>
@@ -717,7 +622,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     </table>
     </div>
     <div style="margin-top:14px;padding:12px;background:rgba(0,229,184,0.04);border-radius:8px;font-size:13px;color:var(--muted);">
-      <strong style="color:var(--accent);">Prototype note:</strong> These costs are for a functional hackathon prototype — not production-grade hardware. The Pi Zero 2W provides sufficient compute for demo-worthy AI inference. Production would use a more ruggedized compute module, but the software architecture is identical.
+      <strong style="color:var(--accent);">Prototype note:</strong> These costs are for a functional prototype — not production-grade hardware. The Pi Zero 2W provides sufficient compute for live AI inference. Production would use a more ruggedized compute module, but the software architecture remains identical.
     </div>
   </div>
 </div>
@@ -815,7 +720,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     </table>
     </div>
     <div style="margin-top:14px;padding:12px;background:rgba(255,210,77,0.04);border-radius:8px;font-size:13px;color:var(--muted);">
-      <strong style="color:var(--accent4);">Hackathon note:</strong> All components are standard, off-shelf parts available on Amazon/Robu.in. No custom PCBs needed. The prototype uses 3D-printed mounts and zip-tie housings — functional and demo-ready in 60 hours.
+      <strong style="color:var(--accent4);">Prototype note:</strong> All components are standard, off-shelf parts available on Amazon/Robu.in. No custom PCBs are needed. The prototype uses 3D-printed mounts and zip-tie housings — functional and demo-ready in 60 hours.
     </div>
   </div>
 
@@ -826,7 +731,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     </div>
     <div class="card card-accent3">
       <h3>Prototype vs Production Grade</h3>
-      <p>This is a hackathon prototype — not a production unit. IP65 weatherproofing, PCB integration, and ISI helmet compliance are post-hackathon Phase 1 work. For the demo: zip-ties, 3D-printed mounts, and a powerbank are perfectly sufficient to show judges every core function live. Functionality = 100%. Build quality = prototype.</p>
+      <p>This is a prototype build, not a production unit. IP65 weatherproofing, PCB integration, and ISI helmet compliance are Phase 1 follow-on work. For this live demonstration, zip-ties, 3D-printed mounts, and a powerbank are sufficient to run every core function. Functionality = 100%. Build quality = prototype.</p>
       <div style="margin-top:10px;">
         <div class="feat-tag green">✓ All AI runs live</div>
         <div class="feat-tag green">✓ All sensors active</div>
@@ -883,7 +788,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
         <tr><td>Leaflet.js</td><td>react-leaflet</td><td>Real-time flood heatmap, rider dots, hazard markers</td><td>Free. No API key. Sufficient for prototype heatmap tiles.</td></tr>
 
         <tr class="hw-group-header"><td colspan="4">INFRASTRUCTURE</td></tr>
-        <tr><td>Docker Compose</td><td>docker-compose</td><td>FastAPI + MongoDB + Redis in one-command local deploy</td><td>Zero infra setup for hackathon. Deploy on any laptop.</td></tr>
+        <tr><td>Docker Compose</td><td>docker-compose</td><td>FastAPI + MongoDB + Redis in one-command local deploy</td><td>Zero infra setup for prototype phase. Deploy on any laptop.</td></tr>
         <tr><td>Cloudflare Tunnel</td><td>cloudflared</td><td>Expose local backend to internet for mobile app during demo</td><td>Free, instant — no cloud VM needed for prototype.</td></tr>
       </tbody>
     </table>
@@ -1462,40 +1367,39 @@ h1.hero-title .line2{display:block;color:var(--accent);}
 </div>
 </div>
 
-<!-- ═══ DEMO SCRIPT ═══ -->
+<!-- ═══ DEMO ═══ -->
 <div id="section-demo" class="section">
 <div class="section-inner">
   <div class="section-head">
     <div class="accent-line"></div>
-    <h2>Live Demo Script — 90 Seconds</h2>
-    <p>No slides. No video. Everything happens live on hardware and screen. Judges remember what they see move.</p>
+    <h2>Demo — 90 Seconds</h2>
+    <p>Everything runs live on hardware and screen. The flow shows real-time hazard detection, validation, and preventive alerting.</p>
   </div>
 
   <div class="card" style="background:linear-gradient(135deg,rgba(0,229,184,0.05),rgba(0,0,0,0));border:1px solid rgba(0,229,184,0.2);margin-bottom:28px;">
-    <div style="font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:6px;">Opening Line (say this before anything else)</div>
-    <div style="font-family:var(--font-mono);font-size:16px;color:var(--accent);padding:14px;background:rgba(0,229,184,0.05);border-radius:8px;border-left:2px solid var(--accent);">"Every delivery rider wears a helmet. No platform uses it. We do."</div>
+    <div style="font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:6px;">Demo Context</div>
+    <div style="font-family:var(--font-mono);font-size:16px;color:var(--accent);padding:14px;background:rgba(0,229,184,0.05);border-radius:8px;border-left:2px solid var(--accent);">"Every delivery rider wears a helmet. We turn it into an active safety and verification node."</div>
   </div>
 
   <div class="demo-step">
     <div class="demo-step-num">1</div>
     <div class="demo-step-body">
-      <div class="demo-step-title">1) Rider A hits pothole (simulate bump) — 15 seconds</div>
+      <div class="demo-step-title">1) Rider A encounters a pothole — 15 seconds</div>
       <div class="demo-step-sub">
-        Simulate a road bump using the ESP32 demo board or mounted bike node. Trigger a sharp IMU jerk event to represent Rider A hitting a pothole.
-        <br>Call out the live timestamp so judges can track latency end to end.
+        Rider A's bike node captures a sharp IMU jerk event and tags the segment with GPS. The hazard feature vector is generated immediately and published to backend.
       </div>
-      <div class="demo-quote">"Rider A experienced the hazard first. The system noticed it immediately."</div>
+      <div class="demo-quote">"Rider A encounters the hazard first, and the system captures it immediately."</div>
     </div>
   </div>
 
   <div class="demo-step">
     <div class="demo-step-num">2</div>
     <div class="demo-step-body">
-      <div class="demo-step-title">2) Sensor detects spike — 15 seconds</div>
+      <div class="demo-step-title">2) Sensor event is validated — 15 seconds</div>
       <div class="demo-step-sub">
-        Show the serial monitor or event feed: IMU spike detected, GPS segment tagged, hazard packet published. Mention that confidence is enriched by road context and nearby rider signals.
+        The event feed shows IMU spike detection, GPS segment tagging, and hazard packet publication. Confidence is enriched using road context and nearby rider corroboration.
       </div>
-      <div class="demo-quote">"No manual reporting. The sensor created the hazard event."</div>
+      <div class="demo-quote">"No manual reporting is required. Sensors create the hazard event directly."</div>
     </div>
   </div>
 
@@ -1504,7 +1408,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     <div class="demo-step-body">
       <div class="demo-step-title">3) Hazard appears on dashboard — 15 seconds</div>
       <div class="demo-step-sub">
-        Open the ops dashboard and point to the new marker. Explain that the cloud validates this event using sensor confidence + nearby riders before marking it VERIFIED.
+        The ops dashboard receives the event and renders the new marker. The cloud validates it using sensor confidence plus nearby rider corroboration before marking it VERIFIED.
       </div>
       <div class="demo-quote">"Detected, validated, and now visible to the fleet."</div>
     </div>
@@ -1513,9 +1417,9 @@ h1.hero-title .line2{display:block;color:var(--accent);}
   <div class="demo-step">
     <div class="demo-step-num">4</div>
     <div class="demo-step-body">
-      <div class="demo-step-title">4) Rider B gets alert BEFORE reaching — 20 seconds</div>
+      <div class="demo-step-title">4) Rider B gets alert before reaching — 20 seconds</div>
       <div class="demo-step-sub">
-        On a second phone (Rider B), show the incoming warning: <em>"Caution: pothole ahead."</em> Make clear this rider has not reached the location yet. The network is preventative, not reactive.
+        Rider B receives the incoming warning on the second phone: <em>"Caution: pothole ahead."</em> At this point Rider B is still approaching the segment, so the network is preventive, not reactive.
       </div>
       <div class="demo-quote">"Rider B is warned before the impact point."</div>
     </div>
@@ -1526,7 +1430,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     <div class="demo-step-body">
       <div class="demo-step-title">5) Voice alert plays — 10 seconds</div>
       <div class="demo-step-sub">
-        Let the phone/helmet play the spoken warning. Pause briefly and deliver the final line clearly.
+        The phone or helmet plays the spoken warning through the active audio path, confirming hands-free preventive communication.
       </div>
       <div class="demo-quote">"The road learned from Rider A... and protected Rider B."</div>
     </div>
@@ -1537,14 +1441,14 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     <div class="demo-step-body">
       <div class="demo-step-title">🎯 Closing — 5 seconds</div>
       <div class="demo-step-sub">
-        Stand back. Let the dashboard run. Speak slowly and clearly.
+        The dashboard remains live with the verified event and propagated alert visible across the system.
       </div>
       <div class="demo-quote">"From isolated riders to a connected safety network."</div>
     </div>
   </div>
 
-  <!-- Judge Q&A -->
-  <div class="section-head" style="margin-top:32px;"><div class="accent-line"></div><h2>Top 5 Judge Questions — Prepared Answers</h2></div>
+  <!-- FAQ -->
+  <div class="section-head" style="margin-top:32px;"><div class="accent-line"></div><h2>FAQ</h2></div>
   <div class="grid-2">
     <div class="card card-accent" style="margin-bottom:12px;">
       <h3>Q: Won't Zomato just build this?</h3>
@@ -1556,7 +1460,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
     </div>
     <div class="card card-accent3" style="margin-bottom:12px;">
       <h3>Q: Can a Pi Zero really run AI at 15 fps?</h3>
-      <p>MobileNetV2 Int8-quantised on Pi Zero 2W runs at 15fps — we demonstrated this live 60 seconds ago. It's not a GPU, it's a tiny ARM cluster. For threat detection at 5–10m range, 15fps with 65ms latency is more than sufficient. We showed you the terminal output.</p>
+      <p>MobileNetV2 Int8-quantised on Pi Zero 2W runs at 15fps in this setup. It is not a GPU; it is a compact ARM cluster. For threat detection at 5–10m range, 15fps with 65ms latency is sufficient.</p>
     </div>
     <div class="card" style="margin-bottom:12px;">
       <h3>Q: How does peer sharing not create false alarms?</h3>
@@ -1723,7 +1627,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       <div class="phase-feat">Peer pothole test: ESP32 jerk → backend → second phone alert within 5s</div>
       <div class="phase-feat">Helmet threat detection: wave hand → voice fires → dashcam clip saved</div>
       <div class="phase-feat">Rider-state panel live: duration + motion patterns update safe/caution status</div>
-      <div class="phase-feat">Demo script rehearsal × 3. All team members practice their segment independently.</div>
+      <div class="phase-feat">Demo rehearsal × 3. All team members present their segment independently.</div>
       <div class="phase-feat">Cloudflare tunnel verified. Dashboard accessible on both phones during demo.</div>
       <div class="phase-feat">Backup: if Pi Zero fails, use laptop webcam + same Python script. Same demo effect.</div>
     </div>
@@ -1778,7 +1682,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       <div class="rev-bar-row"><div class="rev-bar-label">Year 3 (15 cities)</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:100%;background:var(--red);"></div></div><div class="rev-bar-val" style="color:var(--red);">₹12Cr/m</div></div>
     </div>
     <div class="timeline">
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Month 1–3</div><div class="tl-title">Hackathon win + patent filing</div><div class="tl-body">20-node Chennai pilot · One restaurant cluster · FSSAI intro meeting</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Month 1–3</div><div class="tl-title">Pilot launch + patent filing</div><div class="tl-body">20-node Chennai pilot · One restaurant cluster · FSSAI intro meeting</div></div>
       <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Month 4–6</div><div class="tl-title">Seed Round ₹1.5–3 Cr</div><div class="tl-body">Swiggy/Zomato API talks · 200 riders · FSSAI MoU</div></div>
       <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Month 7–12</div><div class="tl-title">City 1 municipal contract</div><div class="tl-body">2,000 riders · Safety API in production · Series A prep</div></div>
       <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Year 2</div><div class="tl-title">Series A ₹15–25 Cr</div><div class="tl-body">5 cities · 50,000 riders · Patent grants · Market leader</div></div>
@@ -1787,8 +1691,8 @@ h1.hero-title .line2{display:block;color:var(--accent);}
 
   <!-- Why this wins -->
   <div class="card" style="margin-top:28px;background:linear-gradient(135deg,rgba(0,229,184,0.05),rgba(124,111,255,0.03));border:1px solid rgba(0,229,184,0.2);">
-    <div style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:14px;">Why This Wins at National Level</div>
-    <p style="font-size:14px;color:var(--muted);margin-bottom:14px;">Most hackathon projects are better apps. RiderShield AI is <strong style="color:var(--text);">new infrastructure</strong>. The peer hazard mesh does not exist. The AI helmet for delivery riders does not exist. The hyperlocal flood surface does not exist. You are not improving a product — you are creating the data layer that makes an entire category possible.</p>
+    <div style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:14px;">Why This Matters at National Scale</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:14px;">RiderShield AI is <strong style="color:var(--text);">new infrastructure</strong>. Peer hazard mesh, AI helmet safety intelligence for delivery riders, and a hyperlocal flood surface are integrated in one system. This is not a feature layer on top of an app; it is a data layer for city-scale safety operations.</p>
     <div style="padding:14px;background:rgba(0,0,0,0.3);border-radius:8px;font-family:var(--font-mono);font-size:13px;color:var(--accent);text-align:center;border:1px solid rgba(0,229,184,0.15);">"We did not build a safer app. We built the sensing infrastructure Indian cities are missing — funded entirely by delivery logistics. Three patents. Five students. Zero existing systems doing this."</div>
   </div>
 </div>
@@ -1800,7 +1704,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
   <div class="section-head">
     <div class="accent-line"></div>
     <h2>Team — 5 Members, 5 Independent Deliverables</h2>
-    <p>Every member owns a non-overlapping piece. Any judge can pull one person aside and have them demo their component independently.</p>
+    <p>Every member owns a non-overlapping piece. Any evaluator can review one person independently and still see a complete component demonstration.</p>
   </div>
 
   <div class="grid-3" style="margin-bottom:24px;">
@@ -1872,7 +1776,7 @@ h1.hero-title .line2{display:block;color:var(--accent);}
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Compensation USP fully removed</div><div class="alert-sub">HAR, eFuse, HMAC attestation and compensation module removed entirely from scope.</div></div></div>
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Raspberry Pi helmet with cam</div><div class="alert-sub">Pi Zero 2W + Pi Camera Module 3 Wide. Full AI on helmet, 24/7.</div></div></div>
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">What was in doc + what was added</div><div class="alert-sub">Full "Delta" section covering kept / removed / added with cost breakdown.</div></div></div>
-      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Clear demo workflow</div><div class="alert-sub">6-step 90-second demo script with exact things to say and show. Prepared judge Q&A.</div></div></div>
+      <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Clear demo workflow</div><div class="alert-sub">6-step 90-second demo flow with observable system events and direct Q&A coverage.</div></div></div>
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">24/7 AI smart cam + voice nav + DIGIPIN + accident prevention</div><div class="alert-sub">Helmet AI section covers collision awareness, TTC alerts, dashcam event tagging, and voice guidance. Road hazards are validated by bike sensors + cloud.</div></div></div>
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Software requirements minimal but functional</div><div class="alert-sub">Stack reduced to: ESP-IDF + TFLite Micro + FastAPI + Scikit GP + Expo React Native + Leaflet. No heavy infra.</div></div></div>
       <div class="alert-item ok"><div class="alert-icon">✅</div><div class="alert-text"><div class="alert-title">Peer hazard mesh explained</div><div class="alert-sub">Rider A detects → GP update → Rider B warned. Core mechanic explained with diagram and demo.</div></div></div>
@@ -1924,11 +1828,11 @@ function triggerFlood() {
   const panel = document.getElementById('alerts-panel');
   const p = document.createElement('div');
   p.className = 'alert-item critical';
-  p.innerHTML = `<div class="alert-icon">🌊</div><div class="alert-text"><div class="alert-title">NEW: Flood zone — Anna Nagar West underpass</div><div class="alert-sub">GP confidence 91% · 3 riders in radius · Rerouting dispatched immediately</div></div><div class="alert-time">NOW</div>`;
+  p.innerHTML = `<div class="alert-icon">🌊</div><div class="alert-text"><div class="alert-title">Flood zone — Anna Nagar West underpass</div><div class="alert-sub">GP confidence 91% · 3 riders in radius · Rerouting dispatched immediately</div></div><div class="alert-time">NOW</div>`;
   panel.insertBefore(p, panel.firstChild);
   const rr = document.getElementById('stat-rerouted');
   if (rr) rr.textContent = parseInt(rr.textContent) + 3;
-  showNotification('🌊', 'New Flood Zone Detected', 'Anna Nagar West · GP 91% · 3 riders rerouted');
+  showNotification('🌊', 'Flood Zone Detected', 'Anna Nagar West · GP 91% · 3 riders rerouted');
 }
 
 // ── DIGIPIN ──
@@ -1968,7 +1872,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   setInterval(updateSurface, 1000);
   setInterval(updateStats, 4000);
-  setTimeout(() => showNotification('🚀', 'RiderShield AI', 'Hackathon edition loaded. 5 members. 60 hours. Let\'s go.'), 1500);
+  setTimeout(() => showNotification('🚀', 'RiderShield AI', 'Presentation mode loaded. 5 members. 60 hours.'), 1500);
 });
 </script>
 </body>
